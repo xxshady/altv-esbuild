@@ -3,7 +3,7 @@ import type { FilledPluginOptions } from "@/shared"
 export const OPTIONS_DEFAULTS: FilledPluginOptions = {
   mode: "client", // set by user anyway
   dev: {
-    enabled: false,
+    enabled: true,
 
     // with dev mode enabled values:
     hotReload: true,

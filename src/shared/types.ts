@@ -21,7 +21,7 @@ export type FilledPluginOptions = Readonly<DeepRequired<ConvertBoolsToObjects<IP
 
 export interface IPluginDevOption {
   /**
-   * `false` by default.
+   * `true` by default.
    */
   enabled?: boolean
 
