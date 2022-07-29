@@ -26,7 +26,8 @@
     "dev": "concurrently 'npm:dev-*' -c 'blue.bold,magenta.bold,cyan.bold'",
     "build": "concurrently 'npm:build-*' -c 'blue.bold,magenta.bold,cyan.bold'",
     "types": "dts-bundle-generator -o dist/plugin/main.d.ts --inline-declare-externals src/plugin/main.ts",
-    "publ": "yarn build && typedoc dist/plugin/main.d.ts && yarn publish"
+    "docs": "typedoc dist/plugin/main.d.ts",
+    "publ": "yarn build && yarn docs && yarn publish"
   },
   "name": "altv-esbuild",
   "version": "0.0.4",
