@@ -58,6 +58,59 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
+				<a href="#altv-esbuild" id="altv-esbuild" style="color: inherit; text-decoration: none;">
+					<h1>altv-esbuild</h1>
+				</a>
+				<p>A plugin that greatly simplifies server/client JS and TS development (as well as production) on the <a href="https://altv.mp">alt:V</a> platform.</p>
+				<p>(extended and improved version of the previous <a href="https://github.com/xxshady/esbuild-plugin-altv-dev-server">esbuild dev plugin</a>)</p>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h2>Features</h2>
+				</a>
+				<ul>
+					<li>Hot reload without server restart or client reconnect (using alt:V <a href="https://docs.altv.mp/articles/commandlineargs.html#server-commands">resource restart</a>)</li>
+					<li>Full client and server support</li>
+					<li>Restart console command for client and server (&quot;res&quot; by default)</li>
+					<li>Improved top-level exception output during development</li>
+				</ul>
+				<a href="#how-to-use" id="how-to-use" style="color: inherit; text-decoration: none;">
+					<h2>How to use?</h2>
+				</a>
+				<a href="#install-from-npm" id="install-from-npm" style="color: inherit; text-decoration: none;">
+					<h3>Install from npm</h3>
+				</a>
+				<pre><code><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">i</span><span style="color: #000000"> </span><span style="color: #001080">altv</span><span style="color: #000000">-</span><span style="color: #001080">esbuild</span>
+</code></pre>
+				<a href="#add-to-your-build-code-of-the-server-and-client" id="add-to-your-build-code-of-the-server-and-client" style="color: inherit; text-decoration: none;">
+					<h3>Add to your build code of the server and client</h3>
+				</a>
+				<p>Example of the build server code:</p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">esbuild</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;esbuild&quot;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">altvEsbuild</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;altv-esbuild&quot;</span>
+
+<span style="color: #008000">// change this depending on the build mode of the code</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">dev</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span>
+
+<span style="color: #001080">esbuild</span><span style="color: #000000">.</span><span style="color: #795E26">build</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">entryPoints:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;src/main.js&quot;</span><span style="color: #000000">],</span>
+<span style="color: #000000">  </span><span style="color: #001080">outfile:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;dist/bundle.js&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">bundle:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">watch:</span><span style="color: #000000"> </span><span style="color: #001080">dev</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">plugins:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">    </span><span style="color: #795E26">altvEsbuild</span><span style="color: #000000">({</span>
+<span style="color: #000000">      </span><span style="color: #001080">mode:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;server&quot;</span><span style="color: #000000">, </span><span style="color: #008000">// use &quot;server&quot; for server code, and &quot;client&quot; for client code</span>
+<span style="color: #000000">      </span><span style="color: #001080">dev</span><span style="color: #000000">,</span>
+<span style="color: #000000">    }),</span>
+<span style="color: #000000">  ],</span>
+<span style="color: #000000">  </span>
+<span style="color: #000000">  </span><span style="color: #001080">external:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">    </span><span style="color: #008000">// none of the following is required, the plugin handles all alt:V modules automatically</span>
+<span style="color: #000000">    </span><span style="color: #008000">// &quot;alt-server&quot;,</span>
+<span style="color: #000000">    </span><span style="color: #008000">// &quot;alt-client&quot;,</span>
+<span style="color: #000000">    </span><span style="color: #008000">// &quot;alt-shared&quot;,</span>
+<span style="color: #000000">    </span><span style="color: #008000">// &quot;natives&quot;</span>
+<span style="color: #000000">  ]</span>
+<span style="color: #000000">})</span>
+</code></pre>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
