@@ -8,7 +8,7 @@ import { nodeBuiltins } from "./nodeBuiltins"
 
 export class ServerSetup extends SharedSetup {
   private readonly hotReloadServer?: NetServer
-  private readonly log = new Logger("ServerSetup")
+  private readonly log = new Logger("server")
 
   private cachedBuildState: Record<PluginMode, BuildState> = {
     client: BuildState.None,
@@ -110,7 +110,7 @@ export class ServerSetup extends SharedSetup {
           }
           if (!server.sockets.server) return
 
-          this.log.info("send buildEnd")
+          this.log.debug("send buildEnd")
           this.sendBuildEnd("server")
         })
 

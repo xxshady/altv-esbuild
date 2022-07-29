@@ -21,7 +21,7 @@ export class ClientSetup extends SharedSetup {
     this.eventManager?.send("connect", "client")
   }
 
-  private readonly log = new Logger("ClientSetup")
+  private readonly log = new Logger("client")
 
   private socket?: net.Socket
   private eventManager?: EventManager<INetEvent, IFromNetEvent>

@@ -20,7 +20,7 @@ const altShared = ___altvEsbuild_altvInject_altShared___
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 class SharedSetup {
-  private readonly log = new Logger("SharedSetup")
+  private readonly log = new Logger("shared")
 
   private readonly resourceStopEvent = (): void => {
     this.log.debug("resourceStop")

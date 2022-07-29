@@ -28,7 +28,7 @@ export class NetServer {
 
           socketMode = mode
 
-          this.log.info(`connected mode: ${mode}`)
+          this.log.info(`connected socket mode: ${mode}`)
 
           this._sockets[mode] = { socket, eventManager }
           socket.on("close", this.onSocketClose.bind(this, mode))

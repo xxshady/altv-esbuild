@@ -16,7 +16,7 @@ export abstract class SharedSetup {
     protected readonly options: FilledPluginOptions,
     private readonly build: esbuild.PluginBuild,
   ) {
-    this._log = new Logger(`SharedSetup: ${options.mode}`)
+    this._log = new Logger(`shared: ${options.mode}`)
 
     this.addExternalImportHandling(build, "alt-shared", "altvInject_altShared")
     this.addExternalImportHandling(build, "alt", "altvInject_alt")
