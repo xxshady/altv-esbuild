@@ -54,3 +54,7 @@ esbuild.build({
   ]
 })
 ```
+
+## Contributions
+
+All contributions are greatly appreciated. If there are any questions or you would like to discuss a feature, you can always [open issue](https://github.com/xxshady/altv-esbuild/issues).
