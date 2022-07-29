@@ -50,7 +50,7 @@ export interface IPluginDevOption {
    * Milliseconds delay before connecting players for {@link playersReconnect}
    * (this value is ignored if `playersReconnect` is disabled).
    *
-   * `200` by default.
+   * `200` by default if `dev` enabled..
    */
   playersReconnectDelay?: number
 
@@ -84,7 +84,7 @@ export interface IPluginDevOption {
   /**
    * Enables handling of top level exceptions.
    *
-   * `true` by default.
+   * `true` by default if `dev` enabled..
    */
   topLevelExceptionHandling?: boolean
 

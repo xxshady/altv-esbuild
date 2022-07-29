@@ -6,7 +6,7 @@ import type { IPluginOptions } from "@/shared"
 import { PLUGIN_NAME } from "@/shared"
 import { Logger } from "./shared/util"
 
-export const altvEsbuild = (userOptions: Readonly<IPluginOptions>): esbuild.Plugin => {
+export const altvEsbuild = (userOptions: IPluginOptions): esbuild.Plugin => {
   const options = mergeOptions(userOptions)
 
   const log = new Logger("plugin")
