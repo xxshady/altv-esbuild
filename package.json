@@ -29,7 +29,7 @@
     "publ": "yarn build && typedoc dist/plugin/main.d.ts && yarn publish"
   },
   "name": "altv-esbuild",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "dist/plugin/main.js",
   "types": "dist/plugin/main.d.ts",
   "files": [
