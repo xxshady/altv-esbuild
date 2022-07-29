@@ -119,8 +119,11 @@ export interface IPluginOptions {
   mode: PluginMode
 
   /**
-   * Enables some cleaning stuff on resource stop,
-   * such as destroying vehicles or clearing all metadata set by resource.
+   * Enables dev mode and hot reload if not disabled.
+   *
+   * (some cleaning stuff on resource stop,
+   * such as destroying vehicles or clearing all metadata set by resource,
+   * players reconnect emulation, etc.).
    *
    * `false` by default.
    */
