@@ -16,6 +16,7 @@ A plugin that greatly simplifies server/client JS and TS development (as well as
 Docs web page: <https://xxshady.github.io/altv-esbuild>
 
 ## How to use?
+Example resource can be found [here](https://github.com/xxshady/altv-esbuild/tree/main/example)
 
 ### Install from npm
 
