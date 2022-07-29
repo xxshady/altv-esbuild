@@ -1,0 +1,128 @@
+import type { FilledPluginOptions } from "@/shared"
+import {
+  Logger,
+  sharedSetup,
+  CLIENT_EVENTS,
+  SERVER_EVENTS,
+} from "../shared"
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+import type alt from "alt-client"
+
+// eslint-disable-next-line camelcase
+const _alt = ___altvEsbuild_altvInject_alt___
+
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
+let native!: typeof import("natives")
+
+if (_alt.isClient) {
+  // eslint-disable-next-line camelcase
+  native = ___altvEsbuild_altvInject_native___
+}
+
+export class ClientSetup {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private readonly origAltOnServer?: (event: string, handler: (...args: any[]) => void) => void
+
+  private readonly log = new Logger("client")
+
+  constructor(options: FilledPluginOptions) {
+    const { bugFixes, dev } = options
+
+    if (bugFixes.webViewFlickering)
+      this.initWebViewFlickeringBugFix()
+
+    if (dev.enabled) {
+      this.origAltOnServer = sharedSetup.hookAltEventAdd("remote", "onServer")
+      sharedSetup.hookAltEventAdd("remote", "onceServer", true)
+      sharedSetup.hookAltEventRemove("remote", "offServer")
+
+      if (bugFixes.playerPrototype)
+        this.initPlayerPrototypeTempFix()
+
+      if (dev.restartCommand)
+        this.initRestartConsoleCommand(options)
+
+      if (dev.disconnectEvent)
+        this.initDisconnectEvent()
+
+      if (dev.connectionCompleteEvent) {
+        this.log.debug("dev.connectionCompleteEvent:", dev.connectionCompleteEvent)
+        this.initConnectionCompleteEvent()
+      }
+
+      this.initClientReady()
+    }
+  }
+
+  /**
+   * a temp fix for alt:V prototype bug https://github.com/altmp/altv-js-module/issues/106
+   */
+  private initPlayerPrototypeTempFix(): void {
+    // fix prototype of players objects in alt.Player.all after restart as close to resource start as possible
+    _alt.nextTick(() => {
+      for (const player of _alt.Player.all) {
+        if ((player as alt.Player | alt.LocalPlayer) !== _alt.Player.local)
+          sharedSetup.setPlayerObjectPrototype(player)
+        else {
+          this.log.debug("set local player prototype")
+          sharedSetup.setPlayerObjectPrototype(player, _alt.LocalPlayer)
+        }
+      }
+    })
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.origAltOnServer!(CLIENT_EVENTS.playerConnect, (player: alt.Player): void => {
+      sharedSetup.setPlayerObjectPrototype(player)
+    })
+  }
+
+  private initRestartConsoleCommand(options: FilledPluginOptions): void {
+    const restartCommand = options.dev.restartCommand === true ? "res" : options.dev.restartCommand as string
+
+    this.log.debug("initRestartConsoleCommand command:", restartCommand)
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    sharedSetup.origAltOn!("consoleCommand", (command) => {
+      if (command !== restartCommand) return
+
+      this.log.info("~gl~restarting resource")
+      _alt.emitServerRaw(SERVER_EVENTS.restartCommand)
+    })
+  }
+
+  private initWebViewFlickeringBugFix(): void {
+    _alt.everyTick(() => native.drawRect(0, 0, 0, 0, 0, 0, 0, 0, false))
+  }
+
+  private initDisconnectEvent(): void {
+    this.log.debug("initDisconnectEvent")
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    sharedSetup.origAltOn!(
+      "resourceStop",
+      () => sharedSetup.emitAltEvent("disconnect"),
+    )
+  }
+
+  private initConnectionCompleteEvent(): void {
+    this.log.debug("initConnectionCompleteEvent")
+
+    let connectionCompleteCalled = false
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    sharedSetup.origAltOn!("connectionComplete", () => {
+      connectionCompleteCalled = true
+    })
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.origAltOnServer!(CLIENT_EVENTS.connectionComplete, () => {
+      this.log.debug("received connectionComplete")
+      if (connectionCompleteCalled) return
+
+      sharedSetup.emitAltEvent("connectionComplete")
+    })
+  }
+
+  private initClientReady(): void {
+    _alt.emitServerRaw(SERVER_EVENTS.clientReady)
+  }
+}
