@@ -31,9 +31,6 @@ Example of the build server code:
 import esbuild from "esbuild"
 import { altvEsbuild } from "altv-esbuild"
 
-// change this depending on the build mode of the code
-const dev = true
-
 esbuild.build({
   entryPoints: ["src/main.js"],
   outfile: "dist/bundle.js",
@@ -42,7 +39,8 @@ esbuild.build({
   plugins: [
     altvEsbuild({
       mode: "server", // use "server" for server code, and "client" for client code
-      dev,
+
+      dev: true, // see docs for more info
     }),
   ],
   
