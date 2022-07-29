@@ -31,6 +31,9 @@
   "version": "0.0.1",
   "main": "dist/plugin/main.js",
   "types": "dist/plugin/main.d.ts",
+  "files": [
+    "dist/**/*"
+  ],
   "repository": "https://github.com/xxshady/altv-esbuild",
   "author": "xshady",
   "license": "MIT",
