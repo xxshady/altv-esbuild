@@ -4,7 +4,7 @@ import { PLUGIN_NAME } from "../../shared/constants"
 import type { IPatchedBuildOptions } from "./types"
 import { codeVarName, Logger } from "./util"
 import fs from "fs"
-import { ALT_SHARED_VAR } from "./constants"
+import { ALT_NATIVES_VAR, ALT_SHARED_VAR, ALT_VAR } from "./constants"
 
 export abstract class SharedSetup {
   private readonly _log: Logger
@@ -18,8 +18,8 @@ export abstract class SharedSetup {
   ) {
     this._log = new Logger(`shared: ${options.mode}`)
 
-    this.addExternalImportHandling(build, "alt-shared", "altvInject_altShared")
-    this.addExternalImportHandling(build, "alt", "altvInject_alt")
+    this.addExternalImportHandling(build, "alt-shared", ALT_SHARED_VAR)
+    this.addExternalImportHandling(build, "alt", ALT_VAR)
   }
 
   public handleBuildOptions(): IPatchedBuildOptions {
@@ -95,12 +95,38 @@ export abstract class SharedSetup {
 
     if (this.options.dev.topLevelExceptionHandling) {
       topLevelExceptionCode += `} catch (e) {
-        ${ALT_SHARED_VAR}.nextTick(() => {
-          ${ALT_SHARED_VAR}.logError(
+        const error = ${ALT_SHARED_VAR}.logError;
+
+        // hide all other user logs to show error at a glance
+        ${ALT_SHARED_VAR}.log = () => {};
+        ${ALT_SHARED_VAR}.logWarning = () => {};
+        ${ALT_SHARED_VAR}.logError = () => {};
+        ${ALT_VAR}.log = () => {};
+        ${ALT_VAR}.logWarning = () => {};
+        ${ALT_VAR}.logError = () => {};
+        console.log = () => {};
+        console.warn = () => {};
+        console.error = () => {};
+
+        ${ALT_SHARED_VAR}.setTimeout(() => {
+          error(
             "[${PLUGIN_NAME}] Top-level exception:\\n  ",
             e?.stack ?? e
-          )
-        })
+          );
+        }, 500);
+        if (${ALT_VAR}.isClient) {
+          drawError("TOP-LEVEL EXCEPTION", "see client console", "(it's message from altv-esbuild)");
+          function drawError(title,text,text2){
+            const alt = ${ALT_VAR};
+            alt.addGxtText("warning_error",title);
+            alt.addGxtText("warning_text",text);
+            alt.addGxtText("warning_text2",text2);
+            let state=!alt.isConsoleOpen();
+            const timeout=alt.setInterval(()=>{state=!alt.isConsoleOpen()},50);
+            const tick=alt.everyTick(()=>{if(state)${ALT_NATIVES_VAR}.setWarningMessageWithHeader("warning_error","warning_text",0,"warning_text2",!1,-1,0,0,!0,0)});
+            return()=>{alt.clearInterval(timeout);alt.clearEveryTick(tick)}
+          }
+        }
       }`
     }
 
@@ -113,8 +139,6 @@ export abstract class SharedSetup {
 
   protected addExternalImportHandling(build: esbuild.PluginBuild, moduleName: string, varName: string): void {
     const namespace = `${PLUGIN_NAME}:external-handling-${moduleName}`
-
-    varName = codeVarName(varName)
 
     if (!this.bannerImportsCode.includes(`import ${varName} from`))
       this.bannerImportsCode += `import ${varName} from \"${moduleName}\";\n`

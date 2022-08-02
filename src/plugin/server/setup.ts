@@ -1,6 +1,6 @@
 import type { FilledPluginOptions, PluginMode } from "@/shared"
 import type esbuild from "esbuild"
-import { SharedSetup, ALT_SHARED_VAR, BuildState } from "../shared"
+import { SharedSetup, ALT_SHARED_VAR, BuildState, ALT_VAR } from "../shared"
 import type { IPatchedBuildOptions } from "../shared"
 import { codeVarName, Logger } from "../shared/util"
 import { NetServer } from "./net-server"
@@ -127,7 +127,7 @@ export class ServerSetup extends SharedSetup {
       }
     }
 
-    this.addExternalImportHandling(build, "alt-server", "altvInject_alt")
+    this.addExternalImportHandling(build, "alt-server", ALT_VAR)
   }
 
   public handleBuildOptions(): IPatchedBuildOptions {

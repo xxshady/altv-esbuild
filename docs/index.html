@@ -79,6 +79,7 @@
 				<a href="#how-to-use" id="how-to-use" style="color: inherit; text-decoration: none;">
 					<h2>How to use?</h2>
 				</a>
+				<p>Example resource can be found <a href="https://github.com/xxshady/altv-esbuild/tree/main/example">here</a></p>
 				<a href="#install-from-npm" id="install-from-npm" style="color: inherit; text-decoration: none;">
 					<h3>Install from npm</h3>
 				</a>
@@ -91,9 +92,6 @@
 				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">esbuild</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;esbuild&quot;</span>
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">altvEsbuild</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;altv-esbuild&quot;</span>
 
-<span style="color: #008000">// change this depending on the build mode of the code</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">dev</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span>
-
 <span style="color: #001080">esbuild</span><span style="color: #000000">.</span><span style="color: #795E26">build</span><span style="color: #000000">({</span>
 <span style="color: #000000">  </span><span style="color: #001080">entryPoints:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;src/main.js&quot;</span><span style="color: #000000">],</span>
 <span style="color: #000000">  </span><span style="color: #001080">outfile:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;dist/bundle.js&quot;</span><span style="color: #000000">,</span>
@@ -102,7 +100,8 @@
 <span style="color: #000000">  </span><span style="color: #001080">plugins:</span><span style="color: #000000"> [</span>
 <span style="color: #000000">    </span><span style="color: #795E26">altvEsbuild</span><span style="color: #000000">({</span>
 <span style="color: #000000">      </span><span style="color: #001080">mode:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;server&quot;</span><span style="color: #000000">, </span><span style="color: #008000">// use &quot;server&quot; for server code, and &quot;client&quot; for client code</span>
-<span style="color: #000000">      </span><span style="color: #001080">dev</span><span style="color: #000000">,</span>
+
+<span style="color: #000000">      </span><span style="color: #001080">dev:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">, </span><span style="color: #008000">// see docs for more info</span>
 <span style="color: #000000">    }),</span>
 <span style="color: #000000">  ],</span>
 <span style="color: #000000">  </span>
@@ -115,6 +114,10 @@
 <span style="color: #000000">  ]</span>
 <span style="color: #000000">})</span>
 </code></pre>
+				<a href="#contributions" id="contributions" style="color: inherit; text-decoration: none;">
+					<h2>Contributions</h2>
+				</a>
+				<p>All contributions are greatly appreciated. If there are any questions or you would like to discuss a feature, you can always <a href="https://github.com/xxshady/altv-esbuild/issues">open issue</a>.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

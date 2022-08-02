@@ -134,9 +134,6 @@ export class ServerSetup {
   constructor(private readonly options: FilledPluginOptions) {
     const { dev, bugFixes } = options
 
-    // TEST
-    this.log.debug("constructor dev.enabled:", dev.enabled)
-
     if (dev.enabled) {
       this.origAltOnClient = sharedSetup.hookAltEventAdd("remote", "onClient")
       sharedSetup.hookAltEventAdd("remote", "onceClient", true)

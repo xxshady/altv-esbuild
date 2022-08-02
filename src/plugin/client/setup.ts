@@ -2,7 +2,7 @@ import type { FilledPluginOptions, IFromNetEvent, INetEvent } from "@/shared"
 import { EventManager } from "@/shared"
 import type esbuild from "esbuild"
 import type { IPatchedBuildOptions } from "../shared"
-import { SharedSetup } from "../shared"
+import { ALT_NATIVES_VAR, ALT_VAR, SharedSetup } from "../shared"
 import net from "net"
 import { Logger } from "../shared/util"
 import { SocketConnect } from "@/shared/util"
@@ -63,8 +63,8 @@ export class ClientSetup extends SharedSetup {
       })
     }
 
-    this.addExternalImportHandling(build, "alt-client", "altvInject_alt")
-    this.addExternalImportHandling(build, "natives", "altvInject_native")
+    this.addExternalImportHandling(build, "alt-client", ALT_VAR)
+    this.addExternalImportHandling(build, "natives", ALT_NATIVES_VAR)
   }
 
   public handleBuildOptions(): IPatchedBuildOptions {
