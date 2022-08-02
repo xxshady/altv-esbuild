@@ -51,6 +51,7 @@ export class ClientSetup {
       }
 
       this.initClientReady()
+      this.initGameCleanupOnRestart()
     }
   }
 
@@ -124,5 +125,22 @@ export class ClientSetup {
 
   private initClientReady(): void {
     _alt.emitServerRaw(SERVER_EVENTS.clientReady)
+  }
+
+  private initGameCleanupOnRestart(): void {
+    const player = _alt.Player.local
+    native.freezeEntityPosition(player, false)
+    native.setEntityVisible(player, true, false)
+
+    native.doScreenFadeIn(0)
+    native.triggerScreenblurFadeOut(0)
+    native.stopAudioScenes()
+    native.newLoadSceneStop()
+    native.destroyAllCams(false)
+    native.animpostfxStopAll()
+    native.setCamEffect(0)
+    native.displayHud(true)
+    native.displayRadar(true)
+    native.clearFocus()
   }
 }
