@@ -6,6 +6,7 @@ A plugin that greatly simplifies server/client JS and TS development (as well as
 
 ## Features
 
+- Write your scripts in JS/TS with enabled 5-million-polygon cars and mlo without client crashes
 - Hot reload without server restart or client reconnect (using alt:V [resource restart](https://docs.altv.mp/articles/commandlineargs.html#server-commands))
 - Full client and server support
 - Restart console command for client and server ("res" by default)
