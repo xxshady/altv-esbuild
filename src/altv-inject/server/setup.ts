@@ -17,7 +17,7 @@ import {
 } from "../shared"
 import type net from "net"
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import alt from "alt-server"
+import type alt from "alt-server"
 import { DEFAULT_JS_FUNC_PROPS } from "../shared/js-func"
 import { ControlledPromise, SocketConnect } from "@/shared/util"
 
@@ -203,10 +203,12 @@ export class ServerSetup {
     }
     this.restartInProgress = true
 
-    this.log.info("restarting resource...")
-
     this.clearCurrentBuild()
-    _alt.restartResource(_alt.resourceName)
+
+    const name = this.getFullResourceName()
+    this.log.info(`restarting resource ${name}...`)
+
+    _alt.restartResource(name)
   }
 
   private clearCurrentBuild(): void {
@@ -607,5 +609,16 @@ export class ServerSetup {
     }
 
     return await ready.promise
+  }
+
+  private getFullResourceName(): string {
+    // TODO: remove typecast after accepting altv types pr
+    const { path } = _alt.Resource.current as unknown as { path: string } // <server root>\resources\test\subfolder
+    const resourcesDir = `${_alt.rootDir}\\resources\\` // <server root>\resources
+
+    // returned path will be "test/subfolder"
+    return path
+      .slice(resourcesDir.length)
+      .replaceAll("\\", "/")
   }
 }
