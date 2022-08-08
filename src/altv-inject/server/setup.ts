@@ -612,7 +612,6 @@ export class ServerSetup {
   }
 
   private getFullResourceName(): string {
-    // TODO: remove typecast after accepting altv types pr
     const { path } = _alt.Resource.current as unknown as { path: string } // <server root>\resources\test\subfolder
     const resourcesDir = `${_alt.rootDir}\\resources\\` // <server root>\resources
 
