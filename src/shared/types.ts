@@ -12,7 +12,7 @@ export type DeepRequired<T> = {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ConvertBoolsToObjects<T extends SomeObject> = {
-  [K in keyof T]: T[K] extends boolean | SomeObject | undefined ? Extract<T[K], SomeObject> : T[K]
+  [K in keyof T]: (boolean | SomeObject | undefined) extends T[K] ? Extract<T[K], SomeObject> : T[K]
 }
 
 export type PluginMode = "client" | "server"
@@ -135,4 +135,26 @@ export interface IPluginOptions {
    * `true` by default.
    */
   bugFixes?: boolean | IPluginFixesOption
+
+  /**
+   * Enables built-in "altv-enums" module that exports enums from
+   * alt-shared, alt-server, alt-client.
+   *
+   * To use it, you first need to add altv-enums to tsconfig "typeRoots" as follows:
+   * ```json
+   * "typeRoots": [
+   *   "./node_modules/altv-esbuild/altv-enums",
+   * ],
+   * ```
+   *
+   * @example
+   * ```ts
+   * import alt from "alt-server"
+   * import { RadioStation } from "altv-enums"
+   *
+   * const vehicle = new alt.Vehicle(...)
+   * vehicle.activeRadioStation = RadioStation.Space // works without any TS errors
+   * ```
+   */
+  altvEnums?: boolean
 }

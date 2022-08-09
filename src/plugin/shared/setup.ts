@@ -20,6 +20,14 @@ export abstract class SharedSetup {
 
     this.addExternalImportHandling(build, "alt-shared", ALT_SHARED_VAR)
     this.addExternalImportHandling(build, "alt", ALT_VAR)
+
+    if (options.altvEnums) {
+      this.addCustomModule(
+        build,
+        "altv-enums",
+        fs.readFileSync(new URL("../../altv-enums/dist/enums.js", import.meta.url)).toString(),
+      )
+    }
   }
 
   public handleBuildOptions(): IPatchedBuildOptions {
@@ -150,6 +158,19 @@ export abstract class SharedSetup {
 
     build.onLoad({ filter: /.*/, namespace }, () => {
       return { contents: `module.exports = ${varName}` }
+    })
+  }
+
+  protected addCustomModule(build: esbuild.PluginBuild, moduleName: string, contents: string): void {
+    const namespace = `${PLUGIN_NAME}:custom-module-${moduleName}`
+
+    build.onResolve({ filter: new RegExp(`^${moduleName}$`) }, (args) => ({
+      path: args.path,
+      namespace,
+    }))
+
+    build.onLoad({ filter: /.*/, namespace }, () => {
+      return { contents, loader: "js" }
     })
   }
 

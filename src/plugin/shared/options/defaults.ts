@@ -20,4 +20,5 @@ export const OPTIONS_DEFAULTS: FilledPluginOptions = {
     webViewFlickering: true,
     playerPrototype: true,
   },
+  altvEnums: false,
 }

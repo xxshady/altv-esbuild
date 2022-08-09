@@ -14,6 +14,7 @@ build({
     altvEsbuild({
       mode: "server",
       dev: true, // enables hot reload automatically
+      altvEnums: true,
     })
   ],
 })

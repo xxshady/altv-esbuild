@@ -2,22 +2,19 @@
   "compilerOptions": {
     "module": "ESNext",
     "target": "ESNext",
-    "removeComments": true,
     "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true,
+    "noPropertyAccessFromIndexSignature": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
-    "declaration": false,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "typeRoots": [
-      "./node_modules/@altv",
-      "./node_modules/altv-esbuild/altv-enums",
+      "../node_modules/@types",
     ],
   },
-  "include": [
-    "./src/**/*",
-  ],
 }

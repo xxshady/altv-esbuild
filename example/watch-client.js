@@ -13,6 +13,7 @@ esbuild.build({
     altvEsbuild({
       mode: "client",
       dev: true, // enables hot reload automatically
+      altvEnums: true,
     })
   ],
 })

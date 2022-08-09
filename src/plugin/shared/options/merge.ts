@@ -5,6 +5,7 @@ export const mergeOptions = ({
   mode,
   dev,
   bugFixes,
+  altvEnums,
 }: Readonly<IPluginOptions>): FilledPluginOptions => {
   if (typeof mode == null)
     throw new Error("mode option must be provided: \"server\" or \"client\"")
@@ -33,5 +34,7 @@ export const mergeOptions = ({
     bugFixes: bugFixes === true
       ? OPTIONS_DEFAULTS.bugFixes
       : { ...OPTIONS_DEFAULTS.bugFixes, ...bugFixes },
+
+    altvEnums: altvEnums ?? OPTIONS_DEFAULTS.altvEnums,
   }
 }

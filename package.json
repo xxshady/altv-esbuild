@@ -1,8 +1,8 @@
 {
   "devDependencies": {
-    "@altv/types-client": "^2.2.6",
+    "@altv/types-client": "^2.2.9",
     "@altv/types-natives": "^1.4.4",
-    "@altv/types-server": "^2.4.1",
+    "@altv/types-server": "^2.4.2",
     "@altv/types-shared": "^1.2.6",
     "@types/node": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
@@ -25,6 +25,8 @@
     "dev-plugin": "node --es-module-specifier-resolution=node build-src/plugin.js -dev",
     "dev": "concurrently 'npm:dev-*' -c 'blue.bold,magenta.bold,cyan.bold'",
     "build": "concurrently 'npm:build-*' -c 'blue.bold,magenta.bold,cyan.bold'",
+    "dev-enums": "node --es-module-specifier-resolution=node altv-enums/build.js -dev",
+    "run-enums": "node --es-module-specifier-resolution=node --experimental-fetch altv-enums/dist/main.js",
     "types": "dts-bundle-generator -o dist/plugin/main.d.ts --inline-declare-externals src/plugin/main.ts",
     "docs": "typedoc dist/plugin/main.d.ts",
     "publ": "yarn build && yarn docs && yarn publish"
@@ -34,7 +36,9 @@
   "main": "dist/plugin/main.js",
   "types": "dist/plugin/main.d.ts",
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "altv-enums/dist/**/*",
+    "altv-enums/types/**/*"
   ],
   "repository": "https://github.com/xxshady/altv-esbuild",
   "author": "xshady",
