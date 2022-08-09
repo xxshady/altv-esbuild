@@ -37,7 +37,7 @@
   "types": "dist/plugin/main.d.ts",
   "files": [
     "dist/**/*",
-    "altv-enums/dist/**/*",
+    "altv-enums/dist/enums.js",
     "altv-enums/types/**/*"
   ],
   "repository": "https://github.com/xxshady/altv-esbuild",
