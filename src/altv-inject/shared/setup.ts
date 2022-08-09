@@ -42,6 +42,12 @@ class SharedSetup {
   // eslint-disable-next-line @typescript-eslint/ban-types
   private readonly baseObjects = new Set<{ destroy(): void }>()
   private readonly hookedAltEvents: Partial<Record<AltEventNames, true>> = {}
+  /* eslint-disable @typescript-eslint/indent */
+  private readonly eventHandlersWrappers = new Map<
+    string,
+    Map<(...args: unknown[]) => void, (...args: unknown[]) => void>
+  >()
+  /* eslint-enable @typescript-eslint/indent */
 
   constructor(options: FilledPluginOptions) {
     if (options.dev.enabled) {
@@ -123,10 +129,12 @@ class SharedSetup {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       ).add(handler!)
 
-      original(eventOrHandler, (...args: unknown[]) => {
+      const wrapper = (...args: unknown[]): void => {
         if (once) {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           eventHandlers[eventOrHandler]?.delete(handler!)
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          this.eventHandlersWrappers.get(eventOrHandler)?.delete(handler!)
         }
 
         if (this.hookedAltEvents[eventOrHandler as AltEventNames]) {
@@ -136,7 +144,14 @@ class SharedSetup {
 
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         handler!(...args)
-      })
+      }
+
+      const handlers = this.eventHandlersWrappers.get(eventOrHandler) ?? new Map()
+      this.eventHandlersWrappers.set(eventOrHandler, handlers)
+
+      handlers.set(handler, wrapper)
+
+      original(eventOrHandler, wrapper)
 
       // this.log.debug(`alt.${funcName} hook called with arguments:`, eventOrHandler, typeof handler)
     }) as AltAddUserEvent
@@ -148,16 +163,28 @@ class SharedSetup {
       event,
       handler,
     ) => {
+      this.log.debug(`hooked alt.${funcName} called args:`, event, typeof handler)
+
       if (event === null) {
         original(null, handler)
         return
       }
 
+      const handlers = this.eventHandlersWrappers.get(event)
+      if (!handlers) {
+        this.log.debug(`alt.${funcName} called but event handlers are not registered for event: ${event}`)
+        return
+      }
+
+      const wrapper = handlers.get(handler)
+      if (!wrapper) {
+        this.log.debug(`alt.${funcName} called but event handler is not registered for event: ${event}`)
+        return
+      }
+
       this.eventHandlers[scope][event]?.delete(handler)
-
-      original(event, handler)
-
-      this.log.debug(`hooked alt.${funcName} called with arguments:`, event, typeof handler)
+      handlers?.delete(handler)
+      original(event, wrapper)
     }) as AltRemoveEvent
   }
 
