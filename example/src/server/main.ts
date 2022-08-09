@@ -1,5 +1,7 @@
 import * as alt from 'alt-server'
-import { RadioStation } from 'altv-enums' // altvEnums feature
+
+// altvEnums feature https://xxshady.github.io/altv-esbuild/interfaces/ipluginoptions.html#altvenums
+import { RadioStation } from 'altv-enums' 
 
 alt.on('playerConnect', (player) => {
   alt.log('~gl~[playerConnect]~w~', 'player:~cl~', player.name)

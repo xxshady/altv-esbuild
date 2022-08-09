@@ -16,6 +16,7 @@
       "./node_modules/@altv",
       "./node_modules/altv-esbuild/altv-enums",
     ],
+    "allowJs": true
   },
   "include": [
     "./src/**/*",

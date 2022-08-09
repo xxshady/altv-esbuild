@@ -27,11 +27,6 @@
   resolved "https://registry.yarnpkg.com/@esbuild/linux-loong64/-/linux-loong64-0.14.54.tgz#de2a4be678bd4d0d1ffbb86e6de779cde5999028"
   integrity sha512-bZBrLAIX1kpWelV0XemxBZllyRmM6vgFQQG2GdNb+r3Fkp0FOh1NJSvekXDs7jq70k4euu1cryLMfU+mTXlEpw==
 
-altv-esbuild@latest:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/altv-esbuild/-/altv-esbuild-0.0.8.tgz#aa412ecc179585e23c23370e5a04fc8c0fcf9f44"
-  integrity sha512-nrIf6GYyUysD/8JsQ5Tc63rDPIiKPNvG59UAgP0Q15bF6esNUQrxP0SCal/7ZQR6dx+Z56IxAl45p29gJl8VRg==
-
 ansi-regex@^5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/ansi-regex/-/ansi-regex-5.0.1.tgz#082cb2c89c9fe8659a311a53bd6a4dc5301db304"
