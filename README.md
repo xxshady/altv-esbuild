@@ -11,7 +11,7 @@ A plugin that greatly simplifies server/client JS and TS development (as well as
 - Full client and server support
 - Restart console command for client and server ("res" by default)
 - Improved top-level exception output during development
-- direct support for alt:V enums, even in JS code ([documentation](https://xxshady.github.io/altv-esbuild/interfaces/ipluginoptions.html#altvenums))
+- Direct support for alt:V enums, even in JS code ([documentation](https://xxshady.github.io/altv-esbuild/interfaces/ipluginoptions.html#altvenums))
 
 ## Docs
 
