@@ -80,6 +80,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ipluginoptions.html#altvenums" class="tsd-kind-icon">altv<wbr>Enums</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ipluginoptions.html#bugfixes" class="tsd-kind-icon">bug<wbr>Fixes</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ipluginoptions.html#dev" class="tsd-kind-icon">dev</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="ipluginoptions.html#mode" class="tsd-kind-icon">mode</a></li>
@@ -90,6 +91,37 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="altvenums" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> altv<wbr>Enums</h3>
+					<div class="tsd-signature tsd-kind-icon">altv<wbr>Enums<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in main.d.ts:128</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Enables built-in &quot;altv-enums&quot; module that exports enums from
+							alt-shared, alt-server, alt-client.</p>
+						</div>
+						<p>To use it, you first need to add altv-enums to tsconfig &quot;typeRoots&quot; as follows:</p>
+						<pre><code class="language-json"><span style="color: #A31515">&quot;typeRoots&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;./node_modules/altv-esbuild/altv-enums&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">],</span>
+</code></pre>
+						<dl class="tsd-comment-tags">
+							<dt>example</dt>
+							<dd><pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">alt</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;alt-server&quot;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">RadioStation</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;altv-enums&quot;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">vehicle</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #001080">alt</span><span style="color: #000000">.</span><span style="color: #795E26">Vehicle</span><span style="color: #000000">(...)</span>
+<span style="color: #001080">vehicle</span><span style="color: #000000">.</span><span style="color: #001080">activeRadioStation</span><span style="color: #000000"> = </span><span style="color: #001080">RadioStation</span><span style="color: #000000">.</span><span style="color: #001080">Space</span><span style="color: #000000"> </span><span style="color: #008000">// works without any TS errors</span>
+</code></pre>
+							</dd>
+						</dl>
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="bugfixes" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> bug<wbr>Fixes</h3>
@@ -158,6 +190,9 @@
 					<li class="current tsd-kind-interface">
 						<a href="ipluginoptions.html" class="tsd-kind-icon">IPlugin<wbr>Options</a>
 						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="ipluginoptions.html#altvenums" class="tsd-kind-icon">altv<wbr>Enums</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="ipluginoptions.html#bugfixes" class="tsd-kind-icon">bug<wbr>Fixes</a>
 							</li>
