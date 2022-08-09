@@ -17,7 +17,7 @@ const files: Record<AltModule, string> = {
   [AltModule.Client]: BASE_TYPES_URL + `${AltModule.Client}/index.d.ts`,
 }
 
-const ENUM_START_CODE_LINE = "export const enum "
+const ENUM_START_CODE_REGEX = /export.+enum/
 const ENUM_END_CODE_LINE = "}"
 
 let enumsContents = ""
@@ -50,15 +50,15 @@ const fetchAltvTypes = async (): Promise<void> => {
     let currentReadingEnum = ""
 
     for (const line of lines) {
-      const enumStartIdx = line.indexOf(ENUM_START_CODE_LINE)
+      const enumStart = ENUM_START_CODE_REGEX.test(line)
       const enumEndIdx = line.indexOf(ENUM_END_CODE_LINE)
 
-      if (enumStartIdx !== -1) {
+      if (enumStart) {
         if (currentReadingEnum)
           throw new Error(`enum reading already started: ${currentReadingEnum}, but another beginning of enum is found`)
 
         const enumName = line.slice(
-          ENUM_START_CODE_LINE.length + 2,
+          line.indexOf("enum") + 5,
           line.lastIndexOf(" {"),
         )
 
