@@ -144,7 +144,7 @@ export interface IPluginOptions {
    * to tsconfig [typeRoots](https://www.typescriptlang.org/tsconfig#typeRoots) as follows:
    * ```json
    * "typeRoots": [
-   *   "./node_modules/altv-esbuild/altv-enums",
+   *   "./node_modules/altv-esbuild/altv-enums/types",
    * ],
    * ```
    *

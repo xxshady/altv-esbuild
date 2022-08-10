@@ -2,7 +2,7 @@ import fs from "fs"
 import esbuild from "esbuild"
 
 const OUTPUT_JS_FILE = "dist/enums.js"
-const OUTPUT_TYPES_FILE = "types/index.d.ts"
+const OUTPUT_TYPES_FILE = "types/types/index.d.ts"
 const BASE_TYPES_URL = "https://raw.githubusercontent.com/altmp/altv-types/master/"
 
 enum AltModule {
