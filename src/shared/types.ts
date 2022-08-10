@@ -140,12 +140,16 @@ export interface IPluginOptions {
    * Enables built-in "altv-enums" module that exports enums from
    * alt-shared, alt-server, alt-client.
    *
-   * To use it, you first need to add altv-enums to tsconfig "typeRoots" as follows:
+   * To use it, you first need to add altv-enums
+   * to tsconfig [typeRoots](https://www.typescriptlang.org/tsconfig#typeRoots) as follows:
    * ```json
    * "typeRoots": [
    *   "./node_modules/altv-esbuild/altv-enums",
    * ],
    * ```
+   *
+   * And disable [isolatedModules](https://www.typescriptlang.org/tsconfig#isolatedModules)
+   * so that your code editor does not complain when using enums from this module.
    *
    * @example
    * ```ts

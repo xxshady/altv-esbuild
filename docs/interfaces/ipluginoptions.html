@@ -97,7 +97,7 @@
 					<div class="tsd-signature tsd-kind-icon">altv<wbr>Enums<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in main.d.ts:128</li>
+							<li>Defined in main.d.ts:132</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -105,11 +105,14 @@
 							<p>Enables built-in &quot;altv-enums&quot; module that exports enums from
 							alt-shared, alt-server, alt-client.</p>
 						</div>
-						<p>To use it, you first need to add altv-enums to tsconfig &quot;typeRoots&quot; as follows:</p>
+						<p>To use it, you first need to add altv-enums
+						to tsconfig <a href="https://www.typescriptlang.org/tsconfig#typeRoots">typeRoots</a> as follows:</p>
 						<pre><code class="language-json"><span style="color: #A31515">&quot;typeRoots&quot;</span><span style="color: #000000">: [</span>
 <span style="color: #000000">  </span><span style="color: #A31515">&quot;./node_modules/altv-esbuild/altv-enums&quot;</span><span style="color: #000000">,</span>
 <span style="color: #000000">],</span>
 </code></pre>
+						<p>And disable <a href="https://www.typescriptlang.org/tsconfig#isolatedModules">isolatedModules</a>
+						so that your code editor does not complain when using enums from this module.</p>
 						<dl class="tsd-comment-tags">
 							<dt>example</dt>
 							<dd><pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">alt</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;alt-server&quot;</span>

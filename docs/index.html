@@ -72,6 +72,7 @@
 					<li>Full client and server support</li>
 					<li>Restart console command for client and server (&quot;res&quot; by default)</li>
 					<li>Improved top-level exception output during development</li>
+					<li>Direct support for alt:V enums, even in JS code (<a href="https://xxshady.github.io/altv-esbuild/interfaces/ipluginoptions.html#altvenums">documentation</a>)</li>
 				</ul>
 				<a href="#docs" id="docs" style="color: inherit; text-decoration: none;">
 					<h2>Docs</h2>
@@ -116,16 +117,16 @@
 <span style="color: #000000">})</span>
 </code></pre>
 				<a href="#how-to-find-exact-source-location-of-any-exception" id="how-to-find-exact-source-location-of-any-exception" style="color: inherit; text-decoration: none;">
-					<h3>How to find exact source location of any exception?</h3>
+					<h2>How to find exact source location of any exception?</h2>
 				</a>
 				<p>You can use <a href="https://esbuild.github.io/api/#sourcemap">esbuild source-maps</a> like this: <code>sourcemap: &quot;inline&quot;</code></p>
 				<a href="#serverside" id="serverside" style="color: inherit; text-decoration: none;">
-					<h4>serverside</h4>
+					<h3>serverside</h3>
 				</a>
 				<p>Enable source-maps in <a href="https://docs.altv.mp/articles/configs/server.html">server.cfg</a>
 				and <a href="https://imgur.com/HJYM0y1">here you go</a>.</p>
 				<a href="#clientside" id="clientside" style="color: inherit; text-decoration: none;">
-					<h4>clientside</h4>
+					<h3>clientside</h3>
 				</a>
 				<p>Here its a bit complicated. If you use vscode <a href="https://marketplace.visualstudio.com/items?itemName=vlkoti.vscode-sourcemaps-navigator">Source maps navigator</a> extension can help you jump to your source code.</p>
 				<a href="#contributions" id="contributions" style="color: inherit; text-decoration: none;">
