@@ -165,7 +165,7 @@ export interface IPluginOptions {
   altvEnums?: boolean
 
   /**
-   * Enables improved formatting of values alt.log, alt.logDebug and console.log if code being executed on clientside
+   * Adds better value formatting to alt.log, alt.logDebug and console.log if code is executed on the clientside
    * (uses util.inspect ported from nodejs).
    *
    * @example

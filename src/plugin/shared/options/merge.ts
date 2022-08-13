@@ -6,7 +6,7 @@ export const mergeOptions = ({
   dev,
   bugFixes,
   altvEnums,
-  enchancedAltLog,
+  enhancedAltLog,
 }: Readonly<IPluginOptions>): FilledPluginOptions => {
   if (typeof mode == null)
     throw new Error("mode option must be provided: \"server\" or \"client\"")
@@ -38,6 +38,6 @@ export const mergeOptions = ({
 
     altvEnums: altvEnums ?? OPTIONS_DEFAULTS.altvEnums,
 
-    enchancedAltLog: enchancedAltLog ?? OPTIONS_DEFAULTS.enchancedAltLog,
+    enhancedAltLog: enhancedAltLog ?? OPTIONS_DEFAULTS.enhancedAltLog,
   }
 }
