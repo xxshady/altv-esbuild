@@ -75,7 +75,7 @@ class SharedSetup {
 
       this.origAltOn("resourceStop", this.resourceStopEvent)
 
-      if (options.enchancedAltLog) this.hookAltLogging()
+      if (options.enhancedAltLog) this.hookAltLogging()
     }
   }
 

@@ -178,5 +178,5 @@ export interface IPluginOptions {
    *
    * `true` by default.
    */
-  enchancedAltLog?: boolean
+  enhancedAltLog?: boolean
 }
