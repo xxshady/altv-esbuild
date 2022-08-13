@@ -21,4 +21,5 @@ export const OPTIONS_DEFAULTS: FilledPluginOptions = {
     playerPrototype: true,
   },
   altvEnums: false,
+  enchancedAltLog: true,
 }

@@ -151,6 +151,8 @@ export interface IPluginOptions {
    * And disable [isolatedModules](https://www.typescriptlang.org/tsconfig#isolatedModules)
    * so that your code editor does not complain when using enums from this module.
    *
+   * `false` by default.
+   *
    * @example
    * ```ts
    * import alt from "alt-server"
@@ -161,4 +163,20 @@ export interface IPluginOptions {
    * ```
    */
   altvEnums?: boolean
+
+  /**
+   * Enables improved formatting of values alt.log, alt.logDebug and console.log if code being executed on clientside
+   * (uses util.inspect ported from nodejs).
+   *
+   * @example
+   * ```
+   * alt.log(
+   *   new Set([1, 2, 3]) // Set(3) { 1, 2, 3 }
+   *   array: [1, 2, { a: 10 }] // [ 1, 2, { a: 10 } ]
+   * )
+   * ```
+   *
+   * `true` by default.
+   */
+  enchancedAltLog?: boolean
 }

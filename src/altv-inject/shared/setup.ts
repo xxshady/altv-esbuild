@@ -9,6 +9,7 @@ import type {
 } from "./types"
 import type { IServerEvent } from "alt-server"
 import type { IClientEvent } from "alt-client"
+import inspect from "./util-inspect"
 
 type AltEventNames = keyof (IClientEvent & IServerEvent)
 type AltEvents = (IClientEvent & IServerEvent)
@@ -73,6 +74,8 @@ class SharedSetup {
       })
 
       this.origAltOn("resourceStop", this.resourceStopEvent)
+
+      if (options.enchancedAltLog) this.hookAltLogging()
     }
   }
 
@@ -228,6 +231,23 @@ class SharedSetup {
 
   public generateEventName(name: string): string {
     return `___${PLUGIN_NAME}:${name}___`
+  }
+
+  private hookAltLogging(): void {
+    const customLog = (original: (...args: unknown[]) => void, ...values: unknown[]): void => {
+      original(
+        ...values.map(v => {
+          return (typeof v === "string") ? v : inspect(v, { colors: true })
+        }),
+      )
+    }
+
+    const original = this.hookAlt("log", customLog)
+
+    if (_alt.isClient) console.log = customLog.bind(null, original)
+
+    // @ts-expect-error TODO: remove "if" when altv 13.0 will be released
+    if (_alt.logDebug) this.hookAlt("logDebug", customLog)
   }
 }
 
