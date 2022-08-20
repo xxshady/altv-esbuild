@@ -168,15 +168,15 @@ export interface IPluginOptions {
    * Adds better value formatting to alt.log, alt.logDebug and console.log if code is executed on the clientside
    * (uses util.inspect ported from nodejs).
    *
+   * `true` by default.
+   *
    * @example
    * ```
    * alt.log(
-   *   new Set([1, 2, 3]) // Set(3) { 1, 2, 3 }
-   *   array: [1, 2, { a: 10 }] // [ 1, 2, { a: 10 } ]
+   *   new Set([1, 2, 3]), // Set(3) { 1, 2, 3 }
+   *   [1, 2, { a: 10 }] // [ 1, 2, { a: 10 } ]
    * )
    * ```
-   *
-   * `true` by default.
    */
   enhancedAltLog?: boolean
 }
