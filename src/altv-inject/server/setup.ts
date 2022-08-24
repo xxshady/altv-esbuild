@@ -298,13 +298,17 @@ export class ServerSetup {
     const players = _alt.Player.all
     if (!players.length) return
 
-    for (const p of players)
+    for (const p of players) {
+      if (!p.valid) continue
       this.initPlayerReadyEvent(p)
+    }
 
     this.log.info(`start a timer for ~cl~${playersReconnectDelay}~w~ ms to reconnect players (${players.length})`)
 
     setTimeout(() => {
       for (const p of players) {
+        if (!p.valid) continue
+
         p.dimension = _alt.defaultDimension
         p.pos = initialPos
         p.streamed = true
@@ -335,6 +339,8 @@ export class ServerSetup {
     this.log.debug("despawn players")
 
     for (const p of _alt.Player.all) {
+      if (!p.valid) continue
+
       p.removeAllWeapons()
       p.clearBloodDamage()
       // despawn doesnt call detach now (see alt:V issue https://github.com/altmp/altv-issues/issues/1456)
@@ -349,8 +355,10 @@ export class ServerSetup {
   private initPlayerPrototypeTempFix(): void {
     // fix prototype of players objects in alt.Player.all after restart as close to resource start as possible
     _alt.nextTick(() => {
-      for (const player of _alt.Player.all)
-        sharedSetup.setPlayerObjectPrototype(player)
+      for (const p of _alt.Player.all) {
+        if (!p.valid) continue
+        sharedSetup.setPlayerObjectPrototype(p)
+      }
     })
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

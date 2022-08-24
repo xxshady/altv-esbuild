@@ -61,12 +61,14 @@ export class ClientSetup {
   private initPlayerPrototypeTempFix(): void {
     // fix prototype of players objects in alt.Player.all after restart as close to resource start as possible
     _alt.nextTick(() => {
-      for (const player of _alt.Player.all) {
-        if ((player as alt.Player | alt.LocalPlayer) !== _alt.Player.local)
-          sharedSetup.setPlayerObjectPrototype(player)
+      for (const p of _alt.Player.all) {
+        if (!p.valid) continue
+
+        if ((p as alt.Player | alt.LocalPlayer) !== _alt.Player.local)
+          sharedSetup.setPlayerObjectPrototype(p)
         else {
           this.log.debug("set local player prototype")
-          sharedSetup.setPlayerObjectPrototype(player, _alt.LocalPlayer)
+          sharedSetup.setPlayerObjectPrototype(p, _alt.LocalPlayer)
         }
       }
     })
