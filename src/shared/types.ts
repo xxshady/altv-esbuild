@@ -113,6 +113,11 @@ export interface IPluginFixesOption {
    * `true` by default.
    */
   playerPrototype?: boolean
+
+  /**
+   * test
+   */
+  test?: boolean
 }
 
 export interface IPluginOptions {

@@ -19,6 +19,7 @@ export const OPTIONS_DEFAULTS: FilledPluginOptions = {
   bugFixes: {
     webViewFlickering: true,
     playerPrototype: true,
+    test: true,
   },
   altvEnums: false,
   enhancedAltLog: true,
