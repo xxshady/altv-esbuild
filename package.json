@@ -29,7 +29,7 @@
     "run-enums": "node --es-module-specifier-resolution=node --experimental-fetch altv-enums/dist/main.js",
     "types": "dts-bundle-generator -o dist/plugin/main.d.ts --inline-declare-externals src/plugin/main.ts",
     "docs": "typedoc dist/plugin/main.d.ts",
-    "publ": "yarn build && yarn docs && yarn publish"
+    "publ": "yarn build && yarn publish"
   },
   "name": "altv-esbuild",
   "version": "0.2.1",
