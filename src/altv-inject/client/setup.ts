@@ -25,6 +25,11 @@ export class ClientSetup {
 
   private readonly log = new Logger("client")
 
+  private readonly onResourceStop = (): void => {
+    this.clearGame()
+    sharedSetup.destroyBaseObjects()
+  }
+
   constructor(options: FilledPluginOptions) {
     const { bugFixes, dev } = options
 
@@ -51,7 +56,9 @@ export class ClientSetup {
       }
 
       this.initClientReady()
-      this.initGameCleanupOnRestart()
+      this.hookBaseObjects()
+
+      sharedSetup.onResourceStop(this.onResourceStop)
     }
   }
 
@@ -129,7 +136,7 @@ export class ClientSetup {
     _alt.emitServerRaw(SERVER_EVENTS.clientReady)
   }
 
-  private initGameCleanupOnRestart(): void {
+  private clearGame(): void {
     const player = _alt.Player.local
     native.freezeEntityPosition(player, false)
     native.setEntityVisible(player, true, false)
@@ -144,5 +151,22 @@ export class ClientSetup {
     native.displayHud(true)
     native.displayRadar(true)
     native.clearFocus()
+  }
+
+  private hookBaseObjects(): void {
+    for (const _key in _alt) {
+      const key = _key as keyof typeof _alt
+      const value = _alt[key]
+
+      if (!(this.isBlipClass(value))) continue
+
+      this.log.debug("hooking class:", value.name);
+      (_alt[key] as typeof value) = sharedSetup.wrapBaseObjectChildClass(value)
+    }
+  }
+
+  private isBlipClass(value: unknown): value is typeof _alt.Blip {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    return (value as Function).prototype instanceof _alt.Blip
   }
 }

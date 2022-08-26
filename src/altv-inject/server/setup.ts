@@ -18,7 +18,6 @@ import {
 import type net from "net"
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import type alt from "alt-server"
-import { DEFAULT_JS_FUNC_PROPS } from "../shared/js-func"
 import { ControlledPromise, SocketConnect } from "@/shared/util"
 
 // eslint-disable-next-line camelcase
@@ -102,7 +101,6 @@ export class ServerSetup {
   private readonly onResourceStop = (
     clearPlayerMeta: () => void,
     despawnPlayers: () => void,
-    destroyBaseObjects: () => void,
   ): void => {
     this.log.debug("resourceStop")
     for (const key of this.syncedMetaKeys) {
@@ -111,7 +109,7 @@ export class ServerSetup {
     }
     clearPlayerMeta()
     despawnPlayers()
-    destroyBaseObjects()
+    sharedSetup.destroyBaseObjects()
   }
 
   private socket?: net.Socket
@@ -122,7 +120,6 @@ export class ServerSetup {
   private waitingForBuildEnd: PluginMode | null = null
   private restartInProgress = false
   private connectedAgain = false
-  private readonly baseObjects = new Set<alt.BaseObject>()
 
   private readonly buildsInProgress = new Set<PluginMode>()
   private readonly syncedMetaKeys = new Set<string>()
@@ -144,7 +141,7 @@ export class ServerSetup {
         original(key, value)
       })
 
-      const destroyBaseObjects = this.hookBaseObjects()
+      this.hookBaseObjects()
       const clearPlayerMeta = this.hookAltPlayer()
 
       let despawnPlayers = (): void => {}
@@ -153,12 +150,11 @@ export class ServerSetup {
         despawnPlayers = this.despawnPlayers.bind(this)
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      sharedSetup.origAltOn!(
-        "resourceStop",
+      sharedSetup.onResourceStop(
         this.onResourceStop.bind(
           this,
-          clearPlayerMeta, despawnPlayers, destroyBaseObjects,
+          clearPlayerMeta,
+          despawnPlayers,
         ),
       )
 
@@ -413,7 +409,7 @@ export class ServerSetup {
     })
   }
 
-  private hookBaseObjects(): () => void {
+  private hookBaseObjects(): void {
     for (const _key in _alt) {
       const key = _key as keyof typeof _alt
 
@@ -431,11 +427,7 @@ export class ServerSetup {
       }
       if (isClassAbstract) continue
 
-      (_alt[key] as unknown) = this.wrapBaseObjectChildClass(BaseObjectClass)
-    }
-
-    return (): void => {
-      for (const baseObj of this.baseObjects) baseObj.destroy()
+      (_alt[key] as unknown) = sharedSetup.wrapBaseObjectChildClass(BaseObjectClass)
     }
   }
 
@@ -446,91 +438,6 @@ export class ServerSetup {
       // Player class is bugged, see function initPlayerPrototypeTempFix
       value !== _alt.Player
     )
-  }
-
-  private wrapBaseObjectChildClass(BaseObjectChild: BaseObjectClass): BaseObjectClass {
-    // this.log.debug("wrapping baseobject class:", BaseObjectChild.name)
-
-    const proto = BaseObjectChild.prototype
-    const originalDestroy = Symbol("originalDestroy")
-    const baseObjects = this.baseObjects
-    const log = this.log
-
-    proto[originalDestroy] = proto.destroy
-
-    proto.destroy = function(): void {
-      try {
-        baseObjects.delete(this)
-        this[originalDestroy]()
-      }
-      catch (error) {
-        this.log.error(`failed to destroy alt.${BaseObjectChild.name} error:`)
-        throw error
-      }
-    }
-
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    const WrappedBaseObjectChild = function(this: object & { __proto__: object }, ...args: unknown[]): object {
-      try {
-        const baseObject = new BaseObjectChild(...args)
-
-        baseObjects.add(baseObject as alt.BaseObject)
-
-        // fix prototype in inherited from altv classes
-        // eslint-disable-next-line no-proto
-        Object.setPrototypeOf(baseObject, this.__proto__)
-
-        return baseObject
-      }
-      catch (error) {
-        log.error(`failed to create alt.${BaseObjectChild.name} error:`)
-        throw error
-      }
-    }
-
-    WrappedBaseObjectChild.prototype = BaseObjectChild.prototype
-    Object.defineProperty(WrappedBaseObjectChild, "name", {
-      value: BaseObjectChild.name,
-    })
-
-    try {
-      const originalKeys = Object.keys(BaseObjectChild)
-
-      // wrap all static stuff from original altv class
-      for (const key of originalKeys) {
-        if (DEFAULT_JS_FUNC_PROPS[key]) continue
-
-        try {
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          const { value, set } = Object.getOwnPropertyDescriptor(BaseObjectChild, key)!
-
-          // static method
-          if (typeof value === "function") {
-            (WrappedBaseObjectChild as unknown as Record<string, unknown>)[key] =
-              (BaseObjectChild as unknown as Record<string, unknown>)[key]
-          }
-
-          // static getter/setter
-          else {
-            Object.defineProperty(WrappedBaseObjectChild, key, {
-              get: () => (BaseObjectChild as unknown as Record<string, unknown>)[key],
-              set: set?.bind(BaseObjectChild),
-            })
-          }
-        }
-        catch (e) {
-          this.log.error(
-            `detected broken alt.${BaseObjectChild.name} static property: ${key}. \n`,
-            (e as Error)?.stack ?? e,
-          )
-        }
-      }
-    }
-    catch (e) {
-      this.log.error((e as Error).stack ?? e)
-    }
-
-    return WrappedBaseObjectChild as unknown as BaseObjectClass
   }
 
   private onBuildStart(mode: PluginMode): void {

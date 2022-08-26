@@ -5,11 +5,14 @@ import type {
   AltAddEvent,
   AltAddUserEvent,
   AltRemoveEvent,
+  BaseObjectClass,
   EventScope,
 } from "./types"
 import type { IServerEvent } from "alt-server"
 import type { IClientEvent } from "alt-client"
 import inspect from "./util-inspect"
+import { DEFAULT_JS_FUNC_PROPS } from "./js-func"
+import type alt from "alt-shared"
 
 type AltEventNames = keyof (IClientEvent & IServerEvent)
 type AltEvents = (IClientEvent & IServerEvent)
@@ -231,6 +234,104 @@ class SharedSetup {
 
   public generateEventName(name: string): string {
     return `___${PLUGIN_NAME}:${name}___`
+  }
+
+  public wrapBaseObjectChildClass<T extends BaseObjectClass>(BaseObjectChild: T): T {
+    // this.log.debug("wrapping baseobject class:", BaseObjectChild.name)
+
+    const proto = BaseObjectChild.prototype
+    const originalDestroy = Symbol("originalDestroy")
+    const baseObjects = this.baseObjects
+    const log = this.log
+
+    proto[originalDestroy] = proto.destroy
+
+    proto.destroy = function(): void {
+      try {
+        baseObjects.delete(this)
+        this[originalDestroy]()
+      }
+      catch (error) {
+        log.error(`failed to destroy alt.${BaseObjectChild.name} error:`)
+        throw error
+      }
+    }
+
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    const WrappedBaseObjectChild = function(this: object & { __proto__: object }, ...args: unknown[]): object {
+      try {
+        const baseObject = new BaseObjectChild(...args)
+
+        baseObjects.add(baseObject as alt.BaseObject)
+
+        // fix prototype in inherited from altv classes
+        // eslint-disable-next-line no-proto
+        Object.setPrototypeOf(baseObject, this.__proto__)
+
+        return baseObject
+      }
+      catch (error) {
+        log.error(`failed to create alt.${BaseObjectChild.name} error:`)
+        throw error
+      }
+    }
+
+    WrappedBaseObjectChild.prototype = BaseObjectChild.prototype
+    Object.defineProperty(WrappedBaseObjectChild, "name", {
+      value: BaseObjectChild.name,
+    })
+
+    try {
+      const originalKeys = Object.keys(BaseObjectChild)
+
+      // wrap all static stuff from original altv class
+      for (const key of originalKeys) {
+        if (DEFAULT_JS_FUNC_PROPS[key]) continue
+
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          const { value, set } = Object.getOwnPropertyDescriptor(BaseObjectChild, key)!
+
+          // static method
+          if (typeof value === "function") {
+            (WrappedBaseObjectChild as unknown as Record<string, unknown>)[key] =
+              (BaseObjectChild as unknown as Record<string, unknown>)[key]
+          }
+
+          // static getter/setter
+          else {
+            Object.defineProperty(WrappedBaseObjectChild, key, {
+              get: () => (BaseObjectChild as unknown as Record<string, unknown>)[key],
+              set: set?.bind(BaseObjectChild),
+            })
+          }
+        }
+        catch (e) {
+          this.log.error(
+            `detected broken alt.${BaseObjectChild.name} static property: ${key}. \n`,
+            (e as Error)?.stack ?? e,
+          )
+        }
+      }
+    }
+    catch (e) {
+      this.log.error((e as Error).stack ?? e)
+    }
+
+    return WrappedBaseObjectChild as unknown as T
+  }
+
+  public destroyBaseObjects(): void {
+    this.log.debug("destroyBaseObjects count:", this.baseObjects.size)
+    for (const obj of this.baseObjects) obj.destroy()
+  }
+
+  public onResourceStop(handler: () => void): void {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.origAltOn!(
+      "resourceStop",
+      handler,
+    )
   }
 
   private hookAltLogging(): void {
