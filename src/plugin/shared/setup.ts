@@ -131,7 +131,19 @@ export abstract class SharedSetup {
             alt.addGxtText("warning_text2",text2);
             let state=!alt.isConsoleOpen();
             const timeout=alt.setInterval(()=>{state=!alt.isConsoleOpen()},50);
-            const tick=alt.everyTick(()=>{if(state)${ALT_NATIVES_VAR}.setWarningMessageWithHeader("warning_error","warning_text",0,"warning_text2",!1,-1,0,0,!0,0)});
+            const tick=alt.everyTick(()=>{
+              if (state) {
+                ${ALT_NATIVES_VAR}.setWarningMessageWithHeader(
+                  "warning_error",
+                  "warning_text",
+                  0,
+                  "warning_text2",
+                  false, -1,
+                  null, null,
+                  true, 0
+                );
+              }
+            });
             return()=>{alt.clearInterval(timeout);alt.clearEveryTick(tick)}
           }
         }
