@@ -6,7 +6,7 @@ import {
   SERVER_EVENTS,
 } from "../shared"
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import alt from "alt-client"
+import type alt from "alt-client"
 
 // eslint-disable-next-line camelcase
 const _alt = ___altvEsbuild_altvInject_alt___
@@ -150,7 +150,7 @@ export class ClientSetup {
     native.setCamEffect(0)
     native.displayHud(true)
     native.displayRadar(true)
-    alt.FocusData.clearFocus()
+    _alt.FocusData.clearFocus()
     native.setFrontendActive(false) // force exit pause menu
   }
 
