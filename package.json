@@ -32,7 +32,7 @@
     "publ": "yarn build && yarn docs && yarn publish"
   },
   "name": "altv-esbuild",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "main": "dist/plugin/main.js",
   "types": "dist/plugin/main.d.ts",
   "files": [
