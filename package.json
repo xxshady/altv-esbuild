@@ -1,9 +1,9 @@
 {
   "devDependencies": {
-    "@altv/types-client": "^2.3.0",
+    "@altv/types-client": "^2.3.2",
     "@altv/types-natives": "^1.4.5",
-    "@altv/types-server": "^2.4.3",
-    "@altv/types-shared": "^1.2.7",
+    "@altv/types-server": "^2.4.6",
+    "@altv/types-shared": "^1.2.9",
     "@types/node": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
