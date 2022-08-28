@@ -166,7 +166,7 @@ export class ClientSetup {
     }
   }
 
-  private isBlipClass(value: unknown): value is typeof _alt.Blip {
+  private isBlipClass(value: unknown): value is new () => alt.Blip {
     // eslint-disable-next-line @typescript-eslint/ban-types
     return (value as Function).prototype instanceof _alt.Blip
   }
