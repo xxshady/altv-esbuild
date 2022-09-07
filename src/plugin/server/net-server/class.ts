@@ -91,6 +91,7 @@ export class NetServer {
 
     this.onErrorAddrInUse = (): void => {
       this.log.error("port:", this.port, "already in use")
+      process.exit()
     }
   }
 
