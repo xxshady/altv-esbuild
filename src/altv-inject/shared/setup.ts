@@ -121,11 +121,16 @@ class SharedSetup {
       eventOrHandler,
       handler,
     ) => {
+      if (!(typeof eventOrHandler === "string" || typeof eventOrHandler === "function"))
+        throw new Error("Expected a string or function as first argument")
+
       if (typeof eventOrHandler === "function") {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        original(handler!)
+        original(eventOrHandler)
         return
       }
+
+      if (typeof handler !== "function")
+        throw new Error("Expected a function as second argument")
 
       const eventHandlers = this.eventHandlers[scope];
 
