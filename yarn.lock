@@ -2,25 +2,25 @@
 # yarn lockfile v1
 
 
-"@altv/types-client@^2.3.2":
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/@altv/types-client/-/types-client-2.3.2.tgz#3b7f606f72d482a855f1e37246b7d590cabe7108"
-  integrity sha512-u/gZTNgIut5cdQPsD+umcwBddmU+DDQEwjY7hDlyYV+UmK3aLxDAl2kHVGB971EVf0GAs2V5npj56MhLAS0kiw==
+"@altv/types-client@^2.3.3":
+  version "2.3.3"
+  resolved "https://registry.yarnpkg.com/@altv/types-client/-/types-client-2.3.3.tgz#6bc9efa54eab4d5b1680129a183a9b3171b7194a"
+  integrity sha512-JDKgoJ8ARNa4XV3v/vv6OuHeiiTEYAN46HKm9bgt29OWGg8s/yEQFj0UkucYkpp4apA75ZgqfacoEaOgjZrHgQ==
 
 "@altv/types-natives@^1.4.5":
   version "1.4.5"
   resolved "https://registry.yarnpkg.com/@altv/types-natives/-/types-natives-1.4.5.tgz#9580c84c8fbee0662da44e7083cd1026502912aa"
   integrity sha512-5cy+NmZP5RzkTZbPtjz9tDR5lRMVbczwkaHDjPyJWAQm78/pKH/2gkt2/RcpC5BJ4mUkEZ5+VgJM0D2JhbjtuA==
 
-"@altv/types-server@^2.4.6":
-  version "2.4.6"
-  resolved "https://registry.yarnpkg.com/@altv/types-server/-/types-server-2.4.6.tgz#6f963e1eaf8200ea159c990c89062861e3901975"
-  integrity sha512-DDNdMYBzE085XBmVPVO5dF39WYKcVLRary5LgXPCbuv68hNKlJkRBqbCn2OiSjn+h/Sw8LabAd4lR15oZ5DrtA==
+"@altv/types-server@^2.4.7":
+  version "2.4.7"
+  resolved "https://registry.yarnpkg.com/@altv/types-server/-/types-server-2.4.7.tgz#5f24a41ffdf10bcdd6a06d8c3b274e6574773321"
+  integrity sha512-vkl/zAgvtXgb4r1Zjfh5LtDIDHFzgZvOE4b5BNKN/Gri/i9Yl/lmXYH7ATWC02DR2nesfJKifPRMfJtkfjIwoQ==
 
-"@altv/types-shared@^1.2.9":
-  version "1.2.9"
-  resolved "https://registry.yarnpkg.com/@altv/types-shared/-/types-shared-1.2.9.tgz#dae7f0df6bf6019af11ab9d0ee94436c0bd60a53"
-  integrity sha512-mJjSMtNsgYbJCM7WEU/D5BvuR3AwxlEdBrZNxL8WDipRD239Y/Y9PrJUYi26s2hNODT3Y5Aq1DsdEazcO4oZkg==
+"@altv/types-shared@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@altv/types-shared/-/types-shared-1.3.0.tgz#81d8a7e17347ca99f8cd37dec08b2a9e3e8ece18"
+  integrity sha512-Y/Y8YZ5yVDT5l3uu4NwX1EPLk40O9HRRsf+aOp7z1TOSyN1N8g6K4ciFJVcUSdLkBardtPKi93ISMcWEfj4eqA==
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"
