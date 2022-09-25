@@ -29,7 +29,14 @@ export const mergeOptions = ({
           ) as typeof OPTIONS_DEFAULTS.dev,
           enabled: false,
         }
-        : { ...OPTIONS_DEFAULTS.dev, ...dev })
+        : {
+          ...OPTIONS_DEFAULTS.dev,
+          ...dev,
+          playersReconnectResetPos:
+            dev.playersReconnectResetPos ??
+            dev.playersReconnect ??
+            OPTIONS_DEFAULTS.dev.playersReconnectResetPos,
+        })
     ),
 
     bugFixes: bugFixes === true

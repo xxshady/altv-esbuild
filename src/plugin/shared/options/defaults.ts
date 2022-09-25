@@ -1,5 +1,7 @@
 import type { FilledPluginOptions } from "@/shared"
 
+const playersReconnect = true
+
 export const OPTIONS_DEFAULTS: FilledPluginOptions = {
   mode: "client", // set by user anyway
   dev: {
@@ -8,9 +10,9 @@ export const OPTIONS_DEFAULTS: FilledPluginOptions = {
     // with dev mode enabled values:
     hotReload: true,
     hotReloadServerPort: 8877,
-    playersReconnect: true,
+    playersReconnect,
     playersReconnectDelay: 200,
-    playersReconnectResetPos: true,
+    playersReconnectResetPos: playersReconnect,
     connectionCompleteEvent: true,
     disconnectEvent: true,
     restartCommand: true,
