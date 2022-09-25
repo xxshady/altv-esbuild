@@ -55,6 +55,13 @@ export interface IPluginDevOption {
   playersReconnectDelay?: number
 
   /**
+   * Should the player's position be reset to the initial position (0, 0, 72) when emulating a reconnect?
+   *
+   * Equals `playersReconnect` by default.
+   */
+  playersReconnectResetPos?: boolean
+
+  /**
    * Enables command for restarting resource (destroying everything, reconnecting client, etc.).
    *
    * The command name is "res" if `true` specified, otherwise your passed value.

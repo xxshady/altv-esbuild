@@ -10,6 +10,7 @@ export const OPTIONS_DEFAULTS: FilledPluginOptions = {
     hotReloadServerPort: 8877,
     playersReconnect: true,
     playersReconnectDelay: 200,
+    playersReconnectResetPos: true,
     connectionCompleteEvent: true,
     disconnectEvent: true,
     restartCommand: true,

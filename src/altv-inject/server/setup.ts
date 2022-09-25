@@ -278,7 +278,7 @@ export class ServerSetup {
     }
   }
 
-  private initPlayersReconnect({ dev: { playersReconnectDelay } }: FilledPluginOptions): void {
+  private initPlayersReconnect({ dev: { playersReconnectDelay, playersReconnectResetPos } }: FilledPluginOptions): void {
     const initialPos = new _alt.Vector3(0, 0, 72)
     const resourceRestartedKey = `${PLUGIN_NAME}:resourceRestarted`
 
@@ -306,12 +306,13 @@ export class ServerSetup {
         if (!p.valid) continue
 
         p.dimension = _alt.defaultDimension
-        p.pos = initialPos
         p.streamed = true
         p.collision = true
         p.invincible = false
         p.visible = true
         p.frozen = false
+
+        if (playersReconnectResetPos) p.pos = initialPos
 
         this.waitForPlayerReadyEvent(p)
           .then((res) => {
