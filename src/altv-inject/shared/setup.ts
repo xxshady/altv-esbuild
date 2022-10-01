@@ -140,7 +140,7 @@ class SharedSetup {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       ).add(handler!)
 
-      const wrapper = (...args: unknown[]): void => {
+      const wrapper = async (...args: unknown[]): Promise<void> => {
         if (once) {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           eventHandlers[eventOrHandler]?.delete(handler!)
@@ -153,8 +153,8 @@ class SharedSetup {
           return
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        handler!(...args)
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/await-thenable
+        await handler!(...args)
       }
 
       const handlers = this.eventHandlersWrappers.get(eventOrHandler) ?? new Map()
