@@ -13,4 +13,5 @@ export const ESBUILD_OPTIONS = {
   define: {
     "___DEVMODE": devMode
   },
+  minify: !devMode,
 }
