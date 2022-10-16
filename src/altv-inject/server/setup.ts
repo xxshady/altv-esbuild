@@ -5,6 +5,7 @@ import type {
   PluginMode,
 } from "@/shared"
 import {
+  RESOURCE_CONTROL_ALTV_NAME,
   PLUGIN_NAME,
   EventManager,
 } from "@/shared"
@@ -172,7 +173,9 @@ export class ServerSetup {
           })
       }
 
-      if (dev.restartCommand)
+      if (dev.enhancedRestartCommand)
+        this.initEnhancedRestartCommand(options)
+      else if (dev.restartCommand)
         this.initRestartConsoleCommand(options)
 
       if (dev.connectionCompleteEvent)
@@ -292,7 +295,10 @@ export class ServerSetup {
     }
 
     const players = _alt.Player.all
-    if (!players.length) return
+    if (!players.length) {
+      this.log.debug("no players to reconnect")
+      return
+    }
 
     for (const p of players) {
       if (!p.valid) continue
@@ -391,6 +397,32 @@ export class ServerSetup {
     this.origAltOnClient!(SERVER_EVENTS.restartCommand, () => {
       triggerRestart()
     })
+  }
+
+  private initEnhancedRestartCommand({ dev: { enhancedRestartCommand } }: FilledPluginOptions): void {
+    const commandName = enhancedRestartCommand === true ? "res" : enhancedRestartCommand as string
+
+    if (!_alt.hasResource(RESOURCE_CONTROL_ALTV_NAME)) {
+      this.log.debug("control resource is not started", RESOURCE_CONTROL_ALTV_NAME)
+
+      const pathForStarting = `../node_modules/altv-esbuild/dist/${RESOURCE_CONTROL_ALTV_NAME}`
+      this.log.debug("resource control path:", pathForStarting)
+
+      _alt.nextTick(() => {
+        sharedSetup.origAltOnce!(
+          sharedSetup.generateEventName("resourceControlReady"),
+          () => {
+            _alt.emit(
+              sharedSetup.generateEventName("resourceControlInit"),
+              this.getFullResourceName(),
+              commandName,
+            )
+          })
+        _alt.startResource(pathForStarting)
+      })
+    }
+    else
+      this.log.debug("control resource already started", RESOURCE_CONTROL_ALTV_NAME)
   }
 
   private initConnectionCompleteEvent(): void {

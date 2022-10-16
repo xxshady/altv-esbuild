@@ -33,6 +33,7 @@ class SharedSetup {
   }
 
   public readonly origAltOn?: typeof _alt["on"]
+  public readonly origAltOnce?: typeof _alt["once"]
   public readonly origAltOff?: typeof _alt["off"]
   public readonly origAltSetMeta?: typeof _alt["setMeta"]
 
@@ -56,7 +57,7 @@ class SharedSetup {
   constructor(options: FilledPluginOptions) {
     if (options.dev.enabled) {
       this.origAltOn = this.hookAltEventAdd("local", "on", false)
-      this.hookAltEventAdd("local", "once", true)
+      this.origAltOnce = this.hookAltEventAdd("local", "once", true)
       this.origAltOff = this.hookAltEventRemove("local", "off")
 
       this.hookAlt("getEventListeners", (original, event) => {

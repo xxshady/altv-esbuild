@@ -102,6 +102,17 @@ export interface IPluginDevOption {
    * Equals `topLevelExceptionHandling` by default.
    */
   moveExternalsOnTop?: boolean
+
+  /**
+   * **Experimental** feature.
+   *
+   * Enables enhanced version of {@link restartCommand} option, that works even when script resource is stopped (serverside only).
+   *
+   * @remarks Overrides {@link restartCommand} option.
+   *
+   * `false` by default.
+   */
+  enhancedRestartCommand?: boolean | string
 }
 
 export interface IPluginFixesOption {
