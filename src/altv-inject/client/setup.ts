@@ -22,12 +22,13 @@ if (_alt.isClient) {
 export class ClientSetup {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private readonly origAltOnServer?: (event: string, handler: (...args: any[]) => void) => void
-
   private readonly log = new Logger("client")
+  private readonly clearPlayerMeta?: () => void
 
   private readonly onResourceStop = (): void => {
     this.clearGame()
     sharedSetup.destroyBaseObjects()
+    this.clearPlayerMeta?.()
   }
 
   constructor(options: FilledPluginOptions) {
@@ -57,6 +58,7 @@ export class ClientSetup {
 
       this.initClientReady()
       this.hookBaseObjects()
+      this.clearPlayerMeta = this.initPlayerMetaCleanup()
 
       sharedSetup.onResourceStop(this.onResourceStop)
     }
@@ -169,5 +171,27 @@ export class ClientSetup {
   private isBlipClass(value: unknown): value is new () => alt.Blip {
     // eslint-disable-next-line @typescript-eslint/ban-types
     return (value as Function).prototype instanceof _alt.Blip
+  }
+
+  private initPlayerMetaCleanup(): () => void {
+    const proto = _alt.Player.prototype
+    const _proto = (proto as unknown as Record<symbol, unknown>)
+    const metaStoreKey = Symbol("metaStoreKey")
+    const originalSetMeta = Symbol("originalSetMeta")
+
+    _proto[originalSetMeta] = proto.setMeta
+
+    proto.setMeta = sharedSetup.defineMetaSetter(_proto, originalSetMeta, metaStoreKey)
+
+    return (): void => {
+      for (const player of _alt.Player.all) {
+        if (!player?.valid) continue // idk how is that possible here
+
+        const _player = (player as unknown as Record<symbol, Record<string, unknown>>)
+
+        for (const key in _player[metaStoreKey])
+          player.deleteMeta(key)
+      }
+    }
   }
 }

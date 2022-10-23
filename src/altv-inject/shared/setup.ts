@@ -340,6 +340,18 @@ class SharedSetup {
     )
   }
 
+  public defineMetaSetter(proto: Record<symbol, unknown>, originalMethodKey: symbol, storeKey: symbol) {
+    return function(this: typeof proto, key: string, value: unknown): void {
+      if (arguments.length < 2)
+        throw new Error("2 arguments expected");
+
+      (this[originalMethodKey] as (key: string, value: unknown) => void)(key, value)
+
+      this[storeKey] ??= {};
+      (this[storeKey] as Record<string, unknown>)[key] = value
+    }
+  }
+
   private hookAltLogging(): void {
     const customLog = (original: (...args: unknown[]) => void, ...values: unknown[]): void => {
       original(

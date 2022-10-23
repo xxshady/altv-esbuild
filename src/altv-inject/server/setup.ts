@@ -247,18 +247,10 @@ export class ServerSetup {
     _proto[originalSetStreamSyncedMeta] = proto.setStreamSyncedMeta
     _proto[originalSetLocalMeta] = proto.setLocalMeta
 
-    const defineMetaSetter = (originalMethodKey: symbol, storeKey: symbol) =>
-      function(this: typeof _proto, key: string, value: unknown): void {
-        (this[originalMethodKey] as (key: string, value: unknown) => void)(key, value)
-
-        this[storeKey] ??= {};
-        (this[storeKey] as Record<string, unknown>)[key] = value
-      }
-
-    proto.setMeta = defineMetaSetter(originalSetMeta, metaStoreKey)
-    proto.setSyncedMeta = defineMetaSetter(originalSetSyncedMeta, syncedMetaStoreKey)
-    proto.setStreamSyncedMeta = defineMetaSetter(originalSetStreamSyncedMeta, streamSyncedMetaStoreKey)
-    proto.setLocalMeta = defineMetaSetter(originalSetLocalMeta, localMetaStoreKey)
+    proto.setMeta = sharedSetup.defineMetaSetter(_proto, originalSetMeta, metaStoreKey)
+    proto.setSyncedMeta = sharedSetup.defineMetaSetter(_proto, originalSetSyncedMeta, syncedMetaStoreKey)
+    proto.setStreamSyncedMeta = sharedSetup.defineMetaSetter(_proto, originalSetStreamSyncedMeta, streamSyncedMetaStoreKey)
+    proto.setLocalMeta = sharedSetup.defineMetaSetter(_proto, originalSetLocalMeta, localMetaStoreKey)
 
     return (): void => {
       for (const player of _alt.Player.all) {
