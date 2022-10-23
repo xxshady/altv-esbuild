@@ -56,26 +56,26 @@ class SharedSetup {
 
   constructor(options: FilledPluginOptions) {
     if (options.dev.enabled) {
-      this.origAltOn = this.hookAltEventAdd("local", "on", false)
-      this.origAltOnce = this.hookAltEventAdd("local", "once", true)
-      this.origAltOff = this.hookAltEventRemove("local", "off")
+      this.origAltOn = this.hookAltEventAdd("local", "on", 2)
+      this.origAltOnce = this.hookAltEventAdd("local", "once", 2, true)
+      this.origAltOff = this.hookAltEventRemove("local", "off", 2)
 
       this.hookAlt("getEventListeners", (original, event) => {
         return (typeof event === "string")
           ? [...(this.eventHandlers.local[event] ?? [])]
           : original(event)
-      })
+      }, 1)
 
       this.hookAlt("getRemoteEventListeners", (original, event) => {
         return (typeof event === "string")
           ? [...(this.eventHandlers.remote[event] ?? [])]
           : original(event)
-      })
+      }, 1)
 
       this.origAltSetMeta = this.hookAlt("setMeta", (original, key, value) => {
         this.metaKeys.add(key)
         original(key, value)
-      })
+      }, 2)
 
       this.origAltOn("resourceStop", this.resourceStopEvent)
 
@@ -87,6 +87,7 @@ class SharedSetup {
     property: K,
     // eslint-disable-next-line @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any
     replaceWith: V extends (...args: any) => any ? ((original: V, ...args: Parameters<V>) => ReturnType<V>) : Function,
+    expectedArgs: number,
   ): (typeof _alt)[K] {
     const original = (_alt)[property]
     if (original == null)
@@ -108,7 +109,12 @@ class SharedSetup {
       value: true,
     });
 
-    (_alt as Record<string, unknown>)[property] = replaceWith
+    (_alt as Record<string, unknown>)[property] = (...args: unknown[]): unknown => {
+      if (args.length < expectedArgs)
+        throw new Error(`${expectedArgs} arguments expected`)
+
+      return (replaceWith as (...args: unknown[]) => unknown)(...args)
+    }
 
     if ((altShared as Record<string, unknown>)[property] != null)
       (altShared as Record<string, unknown>)[property] = replaceWith
@@ -116,7 +122,7 @@ class SharedSetup {
     return original
   }
 
-  public hookAltEventAdd<K extends keyof typeof _alt>(scope: EventScope, funcName: K, once = false): AltAddUserEvent {
+  public hookAltEventAdd<K extends keyof typeof _alt>(scope: EventScope, funcName: K, expectedArgs: number, once = false): AltAddUserEvent {
     return this.hookAlt<K, AltAddEvent>(funcName, (
       original,
       eventOrHandler,
@@ -166,10 +172,10 @@ class SharedSetup {
       original(eventOrHandler, wrapper)
 
       // this.log.debug(`alt.${funcName} hook called with arguments:`, eventOrHandler, typeof handler)
-    }) as AltAddUserEvent
+    }, expectedArgs) as AltAddUserEvent
   }
 
-  public hookAltEventRemove<K extends keyof typeof _alt>(scope: EventScope, funcName: K): AltRemoveEvent {
+  public hookAltEventRemove<K extends keyof typeof _alt>(scope: EventScope, funcName: K, expectedArgs: number): AltRemoveEvent {
     return this.hookAlt<K, AltRemoveEvent>(funcName, (
       original,
       event,
@@ -197,7 +203,7 @@ class SharedSetup {
       this.eventHandlers[scope][event]?.delete(handler)
       handlers?.delete(handler)
       original(event, wrapper)
-    }) as AltRemoveEvent
+    }, expectedArgs) as AltRemoveEvent
   }
 
   public hookAltEvent<K extends AltEventNames>(
@@ -361,7 +367,7 @@ class SharedSetup {
       )
     }
 
-    const original = this.hookAlt("log", customLog)
+    const original = this.hookAlt("log", customLog, 0)
 
     if (_alt.isClient) console.log = customLog.bind(null, original)
 

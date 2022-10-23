@@ -38,9 +38,9 @@ export class ClientSetup {
       this.initWebViewFlickeringBugFix()
 
     if (dev.enabled) {
-      this.origAltOnServer = sharedSetup.hookAltEventAdd("remote", "onServer")
-      sharedSetup.hookAltEventAdd("remote", "onceServer", true)
-      sharedSetup.hookAltEventRemove("remote", "offServer")
+      this.origAltOnServer = sharedSetup.hookAltEventAdd("remote", "onServer", 2)
+      sharedSetup.hookAltEventAdd("remote", "onceServer", 2, true)
+      sharedSetup.hookAltEventRemove("remote", "offServer", 2)
 
       if (bugFixes.playerPrototype)
         this.initPlayerPrototypeTempFix()

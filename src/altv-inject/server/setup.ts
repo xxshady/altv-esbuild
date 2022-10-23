@@ -133,14 +133,14 @@ export class ServerSetup {
     const { dev, bugFixes } = options
 
     if (dev.enabled) {
-      this.origAltOnClient = sharedSetup.hookAltEventAdd("remote", "onClient")
-      sharedSetup.hookAltEventAdd("remote", "onceClient", true)
-      sharedSetup.hookAltEventRemove("remote", "offClient")
+      this.origAltOnClient = sharedSetup.hookAltEventAdd("remote", "onClient", 2)
+      sharedSetup.hookAltEventAdd("remote", "onceClient", 2, true)
+      sharedSetup.hookAltEventRemove("remote", "offClient", 2)
 
       sharedSetup.hookAlt("setSyncedMeta", (original, key, value) => {
         this.syncedMetaKeys.add(key)
         original(key, value)
-      })
+      }, 2)
 
       this.hookBaseObjects()
       const clearPlayerMeta = this.hookAltPlayer()
@@ -360,16 +360,6 @@ export class ServerSetup {
     sharedSetup.origAltOn!("playerConnect", (player: alt.Player) => {
       sharedSetup.setPlayerObjectPrototype(player)
     })
-
-    // // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    // sharedSetup.hookAltEvent("playerDisconnect", (player, ...args: [any]): [alt.Player, any] => {
-    //   sharedSetup.setPlayerObjectPrototype(player)
-
-    //   return [
-    //     player,
-    //     ...args,
-    //   ]
-    // })
   }
 
   private initRestartConsoleCommand(options: FilledPluginOptions): void {
