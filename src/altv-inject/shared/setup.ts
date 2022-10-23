@@ -372,7 +372,8 @@ class SharedSetup {
     if (_alt.isClient) console.log = customLog.bind(null, original)
 
     // @ts-expect-error TODO: remove "if" when altv 13.0 will be released
-    if (_alt.logDebug) this.hookAlt("logDebug", customLog)
+    if (_alt.logDebug)
+      this.hookAlt("logDebug", customLog, 0)
   }
 }
 
