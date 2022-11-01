@@ -56,9 +56,9 @@ class SharedSetup {
 
   constructor(options: FilledPluginOptions) {
     if (options.dev.enabled) {
-      this.origAltOn = this.hookAltEventAdd("local", "on", 2)
-      this.origAltOnce = this.hookAltEventAdd("local", "once", 2, true)
-      this.origAltOff = this.hookAltEventRemove("local", "off", 2)
+      this.origAltOn = this.hookAltEventAdd("local", "on", 1)
+      this.origAltOnce = this.hookAltEventAdd("local", "once", 1, true)
+      this.origAltOff = this.hookAltEventRemove("local", "off", 1)
 
       this.hookAlt("getEventListeners", (original, event) => {
         return (typeof event === "string")
