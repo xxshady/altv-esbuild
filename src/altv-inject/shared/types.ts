@@ -9,10 +9,16 @@ export type AltAddUserEvent = (
   handler: (...args: any[]) => void
 ) => void
 
-export type AltRemoveEvent = (
-  event: string | null,
-  handler: ((...args: unknown[]) => void)
-) => void
+export type AltRemoveEvent =
+  // generic event listener
+  ((
+    handler: ((...args: unknown[]) => void)
+  ) => void) |
+  // normal event listener
+  ((
+    event: string,
+    handler: ((...args: unknown[]) => void)
+  ) => void)
 
 export type EventScope = "local" | "remote"
 

@@ -34,7 +34,7 @@ class SharedSetup {
 
   public readonly origAltOn?: typeof _alt["on"]
   public readonly origAltOnce?: typeof _alt["once"]
-  public readonly origAltOff?: typeof _alt["off"]
+  public readonly origAltOff?: AltRemoveEvent
   public readonly origAltSetMeta?: typeof _alt["setMeta"]
 
   // first record key is scope, second is event name
@@ -178,31 +178,37 @@ class SharedSetup {
   public hookAltEventRemove<K extends keyof typeof _alt>(scope: EventScope, funcName: K, expectedArgs: number): AltRemoveEvent {
     return this.hookAlt<K, AltRemoveEvent>(funcName, (
       original,
-      event,
+      eventOrHandler: string | ((...args: unknown[]) => void),
       handler,
     ) => {
-      this.log.debug(`hooked alt.${funcName} called args:`, event, typeof handler)
+      this.log.debug(`hooked alt.${funcName} called args:`, eventOrHandler, typeof handler)
 
-      if (event === null) {
-        original(null, handler)
+      if (!(typeof eventOrHandler === "string" || typeof eventOrHandler === "function"))
+        throw new Error("Expected a string or function as first argument")
+
+      if (typeof eventOrHandler === "function") {
+        (original as unknown as ((genericListener: (...args: unknown[]) => void) => void))(eventOrHandler)
         return
       }
 
-      const handlers = this.eventHandlersWrappers.get(event)
+      if (typeof handler !== "function")
+        throw new Error("Expected a function as second argument")
+
+      const handlers = this.eventHandlersWrappers.get(eventOrHandler)
       if (!handlers) {
-        this.log.debug(`alt.${funcName} called but event handlers are not registered for event: ${event}`)
+        this.log.debug(`alt.${funcName} called but event handlers are not registered for event: ${eventOrHandler}`)
         return
       }
 
       const wrapper = handlers.get(handler)
       if (!wrapper) {
-        this.log.debug(`alt.${funcName} called but event handler is not registered for event: ${event}`)
+        this.log.debug(`alt.${funcName} called but event handler is not registered for event: ${eventOrHandler}`)
         return
       }
 
-      this.eventHandlers[scope][event]?.delete(handler)
+      this.eventHandlers[scope][eventOrHandler]?.delete(handler)
       handlers?.delete(handler)
-      original(event, wrapper)
+      original(eventOrHandler, wrapper)
     }, expectedArgs) as AltRemoveEvent
   }
 

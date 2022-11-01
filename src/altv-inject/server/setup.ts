@@ -133,9 +133,9 @@ export class ServerSetup {
     const { dev, bugFixes } = options
 
     if (dev.enabled) {
-      this.origAltOnClient = sharedSetup.hookAltEventAdd("remote", "onClient", 2)
-      sharedSetup.hookAltEventAdd("remote", "onceClient", 2, true)
-      sharedSetup.hookAltEventRemove("remote", "offClient", 2)
+      this.origAltOnClient = sharedSetup.hookAltEventAdd("remote", "onClient", 1)
+      sharedSetup.hookAltEventAdd("remote", "onceClient", 1, true)
+      sharedSetup.hookAltEventRemove("remote", "offClient", 1)
 
       sharedSetup.hookAlt("setSyncedMeta", (original, key, value) => {
         this.syncedMetaKeys.add(key)
