@@ -9,7 +9,7 @@ import {
   PLUGIN_NAME,
   EventManager,
 } from "@/shared"
-import type { BaseObjectClass } from "../shared"
+import type { AltRemoveUserEvent, BaseObjectClass } from "../shared"
 import {
   CLIENT_EVENTS,
   SERVER_EVENTS,
@@ -521,7 +521,7 @@ export class ServerSetup {
 
     ready.promise.finally(() => {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      sharedSetup.origAltOff!("playerDisconnect", handler)
+      (sharedSetup.origAltOff! as AltRemoveUserEvent)("playerDisconnect", handler)
     })
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
