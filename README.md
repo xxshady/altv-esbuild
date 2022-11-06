@@ -1,8 +1,10 @@
 # altv-esbuild
 
+Special thanks ❤️ to [innxz](https://github.com/innxz) for financially supporting me and this library.
+
 A plugin that greatly simplifies server/client JS and TS development (as well as production) on the [alt:V](https://altv.mp) platform.
 
-(extended and improved version of the previous [esbuild dev plugin](https://github.com/xxshady/esbuild-plugin-altv-dev-server))
+(extended and improved version of the previous [esbuild dev plugin](https://github.com/xxshady/esbuild-plugin-altv-dev-server)).
 
 ## Features
 
@@ -20,7 +22,7 @@ Docs web page: <https://xxshady.github.io/altv-esbuild>
 
 ## How to use?
 
-Example resource can be found [here](https://github.com/xxshady/altv-esbuild/tree/main/example)
+Example resource can be found [here](https://github.com/xxshady/altv-esbuild/tree/main/example).
 
 ### Install from npm
 
