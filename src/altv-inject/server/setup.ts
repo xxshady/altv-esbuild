@@ -162,7 +162,7 @@ export class ServerSetup {
       if (dev.hotReload) {
         this.socketConnect = new SocketConnect(
           _net,
-          this.options.dev.hotReloadServerPort,
+          ___altvEsbuild_altvInject_hotReloadServerPort,
           (socket) => {
             this.socket = socket
             this.eventManager = this.initEventManager(socket)

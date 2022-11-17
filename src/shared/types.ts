@@ -35,7 +35,7 @@ export interface IPluginDevOption {
   /**
    * TCP Port that will be used for hot reload server (communication between altv server and esbuild plugin).
    *
-   * `8877` by default.
+   * random free port (assigned by OS) by default.
    */
   hotReloadServerPort?: number
 

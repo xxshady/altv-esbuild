@@ -1,5 +1,6 @@
 import type { IFromNetEvent, INetEvent, PluginMode } from "@/shared"
 import { EventManager } from "@/shared"
+import type { AddressInfo } from "net"
 import net from "net"
 import { Logger } from "../../shared/util"
 import type { Sockets } from "./types"
@@ -78,14 +79,16 @@ export class NetServer {
     server: null,
   }
 
+  private readonly port: number
+
   constructor(
     private readonly mode: PluginMode,
-    private readonly port: number,
+    port: number,
     private readonly connectModeHandler: (mode: PluginMode) => void,
     private readonly clientBuildStartHandler: () => void,
     private readonly clientBuildEndHandler: () => void,
   ) {
-    this.tryListen(port)
+    this.port = this.tryListenPort(port)
     this.server.on("error", this.onError)
     this.server.on("listening", this.onStartListening)
 
@@ -110,7 +113,8 @@ export class NetServer {
     targetSocket.eventManager.send(event, ...args)
   }
 
-  private tryListen(port: number): void {
+  private tryListenPort(port: number): number {
     this.server.listen(port)
+    return (this.server.address() as AddressInfo).port
   }
 }

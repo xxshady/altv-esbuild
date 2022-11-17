@@ -6,3 +6,4 @@ declare const ___altvEsbuild_altvInject_pluginOptions___: import("@/shared").Fil
 declare const ___altvEsbuild_altvInject_alt___: typeof import("alt-client") & typeof import("alt-server")
 declare const ___altvEsbuild_altvInject_altShared___: typeof import("alt-shared")
 declare const ___altvEsbuild_altvInject_native___: typeof import("natives")
+declare const ___altvEsbuild_altvInject_hotReloadServerPort: number

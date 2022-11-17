@@ -9,7 +9,7 @@ export const OPTIONS_DEFAULTS: FilledPluginOptions = {
 
     // with dev mode enabled values:
     hotReload: true,
-    hotReloadServerPort: 8877,
+    hotReloadServerPort: 0, // assigned by OS
     playersReconnect,
     playersReconnectDelay: 200,
     playersReconnectResetPos: playersReconnect,
