@@ -160,8 +160,18 @@ class SharedSetup {
           return
         }
 
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/await-thenable
-        await handler!(...args)
+        try {
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/await-thenable
+          await handler!(...args)
+        }
+        catch (e) {
+          _alt.logError(
+            `Uncaught exception in event listener of event \"${eventOrHandler}\":\n`,
+            (e as Error)?.stack ?? e,
+          )
+
+          throw e
+        }
       }
 
       const handlers = this.eventHandlersWrappers.get(eventOrHandler) ?? new Map()
