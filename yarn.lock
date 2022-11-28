@@ -2,25 +2,25 @@
 # yarn lockfile v1
 
 
-"@altv/types-client@^2.3.7":
-  version "2.3.7"
-  resolved "https://registry.yarnpkg.com/@altv/types-client/-/types-client-2.3.7.tgz#0c07c701b131dc89553077918f2516d5019d75c6"
-  integrity sha512-WtOIN2ow+s/lfcZhysvkCWrzUBzXhBUncYhExqHa4ySxi6tVhFRNIH5FNygILvAiFeqQPH52E0oGtBJr7xsu1w==
+"@altv/types-client@^2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@altv/types-client/-/types-client-2.4.0.tgz#c95978847066efeabf0067cd9d0ab6a08c699d55"
+  integrity sha512-PguxiKCLV2PwKd/ZfAmPfE8M6n6/10lPveqMMrQK90g09D1zohIXNUT3w6dgIL+ZYZclm17ztUG3DbQreTJUHQ==
 
-"@altv/types-natives@^1.4.5":
-  version "1.4.5"
-  resolved "https://registry.yarnpkg.com/@altv/types-natives/-/types-natives-1.4.5.tgz#9580c84c8fbee0662da44e7083cd1026502912aa"
-  integrity sha512-5cy+NmZP5RzkTZbPtjz9tDR5lRMVbczwkaHDjPyJWAQm78/pKH/2gkt2/RcpC5BJ4mUkEZ5+VgJM0D2JhbjtuA==
+"@altv/types-natives@^1.4.6":
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/@altv/types-natives/-/types-natives-1.4.6.tgz#e78674ccb81d787dd55b7224b81fea022fa4c427"
+  integrity sha512-T1N6l6xitdPWBdHaZO4cG0rZ2DWqDtYrTDwnHCF7qQIsAzzuvOV31Ur2LI/bBEVg7TISRAW6D5NkSbFenjqekQ==
 
-"@altv/types-server@^2.5.0":
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/@altv/types-server/-/types-server-2.5.0.tgz#9629be97b58f1812524ea1ca078d9d763b41dd29"
-  integrity sha512-8tc3vz7+PdVHlquSKD5JZjQjFqtnbS+n93bz7xuDfQ6dEHWVIhTW1s3IugJTbMXBhJwhtuey7Vsd2ev4LGiExg==
+"@altv/types-server@^2.5.3":
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/@altv/types-server/-/types-server-2.5.3.tgz#c319c4b3756493d4721b4728a1bd30cbbc97d395"
+  integrity sha512-+51KaAMsJKqzvNX6CCy1ICIoK5LGd897WuUrYEc4Zuhfi3G3HZZkNJF4lvjlkJirkq4miUuhmT75nIWSuzEN8A==
 
-"@altv/types-shared@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@altv/types-shared/-/types-shared-1.3.1.tgz#1a0ce63b9d197f0b614c68dc4c21de3bf24e033b"
-  integrity sha512-6zepdoj+PoVZOHFfNaevoAIUOKIj/QdnnrhP65tteXa5Slo893jr/RLHHsJsYmJp4K4hKMNt5KazGDzDZO6dEg==
+"@altv/types-shared@^1.3.3":
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/@altv/types-shared/-/types-shared-1.3.3.tgz#42756e98dba0a3e9262b63f19f5544121cd8b3da"
+  integrity sha512-gop/t7/HybV94+0HljfDXNXfrOz1wRs4z6qh+F29rUYWpS4TWjFNbkf0uBWSPZK+HS1ppuzt7iNeTZDbt+L3rg==
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"
