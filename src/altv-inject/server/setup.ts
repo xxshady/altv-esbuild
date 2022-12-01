@@ -125,7 +125,7 @@ export class ServerSetup {
   private readonly buildsInProgress = new Set<PluginMode>()
   private readonly syncedMetaKeys = new Set<string>()
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private readonly origAltOnClient?: (event: string, handler: (player: alt.Player, ...args: any[]) => void) => void
+  private readonly origAltOnClient?: typeof alt.onClient
   private socketConnect?: SocketConnect
   private readonly playerReadyEvents = new Map<alt.Player, ControlledPromise<boolean>>()
 
@@ -133,7 +133,7 @@ export class ServerSetup {
     const { dev, bugFixes } = options
 
     if (dev.enabled) {
-      this.origAltOnClient = sharedSetup.hookAltEventAdd("remote", "onClient", 1)
+      this.origAltOnClient = sharedSetup.hookAltEventAdd("remote", "onClient", 1) as typeof alt.onClient
       sharedSetup.hookAltEventAdd("remote", "onceClient", 1, true)
       sharedSetup.hookAltEventRemove("remote", "offClient", 1)
 

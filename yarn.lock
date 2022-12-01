@@ -17,10 +17,10 @@
   resolved "https://registry.yarnpkg.com/@altv/types-server/-/types-server-2.5.3.tgz#c319c4b3756493d4721b4728a1bd30cbbc97d395"
   integrity sha512-+51KaAMsJKqzvNX6CCy1ICIoK5LGd897WuUrYEc4Zuhfi3G3HZZkNJF4lvjlkJirkq4miUuhmT75nIWSuzEN8A==
 
-"@altv/types-shared@^1.3.3":
-  version "1.3.3"
-  resolved "https://registry.yarnpkg.com/@altv/types-shared/-/types-shared-1.3.3.tgz#42756e98dba0a3e9262b63f19f5544121cd8b3da"
-  integrity sha512-gop/t7/HybV94+0HljfDXNXfrOz1wRs4z6qh+F29rUYWpS4TWjFNbkf0uBWSPZK+HS1ppuzt7iNeTZDbt+L3rg==
+"@altv/types-shared@^1.3.4":
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/@altv/types-shared/-/types-shared-1.3.4.tgz#0ec6617b73814015493cf4849b39dc5256eeff99"
+  integrity sha512-n79+d/kQ72yia4szFd3SW+7bxVN/fgI5WC51NqlaoPgaeHQs131fxSKylmubokafMbTIVIs6N9aIF7i7z17CiA==
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"
