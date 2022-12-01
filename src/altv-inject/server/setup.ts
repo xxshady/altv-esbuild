@@ -148,7 +148,11 @@ export class ServerSetup {
       let despawnPlayers = (): void => {}
       if (dev.playersReconnect) {
         this.initPlayersReconnect(options)
-        despawnPlayers = this.despawnPlayers.bind(this)
+
+        // TODO: test it more carefully, it was crashing client
+        const updateStreamPos = new _alt.Vector3((_alt.getServerConfig().mapBoundsMaxX ?? 100_000) + 2000)
+        this.log.debug("despawnPlayers updateStreamPos:", updateStreamPos)
+        despawnPlayers = this.despawnPlayers.bind(this, updateStreamPos)
       }
 
       sharedSetup.onResourceStop(
@@ -274,7 +278,6 @@ export class ServerSetup {
   }
 
   private initPlayersReconnect({ dev: { playersReconnectDelay, playersReconnectResetPos } }: FilledPluginOptions): void {
-    const initialPos = new _alt.Vector3(0, 0, 72)
     const resourceRestartedKey = `${PLUGIN_NAME}:resourceRestarted`
 
     this.log.debug("_alt.getMeta(resourceRestartedKey):", _alt.getMeta(resourceRestartedKey))
@@ -310,8 +313,6 @@ export class ServerSetup {
         p.visible = true
         p.frozen = false
 
-        if (playersReconnectResetPos) p.pos = initialPos
-
         this.waitForPlayerReadyEvent(p)
           .then((res) => {
             if (!res) {
@@ -330,7 +331,7 @@ export class ServerSetup {
     }, playersReconnectDelay)
   }
 
-  private despawnPlayers(): void {
+  private despawnPlayers(updateStreamPos: alt.Vector3): void {
     this.log.debug("despawn players")
 
     for (const p of _alt.Player.all) {
@@ -338,9 +339,11 @@ export class ServerSetup {
 
       p.removeAllWeapons()
       p.clearBloodDamage()
-      // despawn doesnt call detach now (see alt:V issue https://github.com/altmp/altv-issues/issues/1456)
+      // despawn doesn't call detach now (see alt:V issue https://github.com/altmp/altv-issues/issues/1456)
       p.detach()
       p.despawn()
+
+      if (this.options.dev.playersReconnectResetPos) p.pos = updateStreamPos
     }
   }
 
