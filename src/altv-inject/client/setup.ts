@@ -149,7 +149,7 @@ export class ClientSetup {
     native.newLoadSceneStop()
     native.destroyAllCams(false)
     native.animpostfxStopAll()
-    native.setCamEffect(0)
+    native.setCamDeathFailEffectState(0)
     native.displayHud(true)
     native.displayRadar(true)
     _alt.FocusData.clearFocus()
@@ -161,16 +161,25 @@ export class ClientSetup {
       const key = _key as keyof typeof _alt
       const value = _alt[key]
 
-      if (!(this.isBlipClass(value))) continue
+      if (!(this.isAltBlipClass(value) || this.isAltObjectClass(value))) continue
 
       this.log.debug("hooking class:", value.name);
       (_alt[key] as typeof value) = sharedSetup.wrapBaseObjectChildClass(value)
     }
   }
 
-  private isBlipClass(value: unknown): value is new () => alt.Blip {
+  private isAltBlipClass(value: unknown): value is new () => alt.Blip {
     // eslint-disable-next-line @typescript-eslint/ban-types
     return (value as Function).prototype instanceof _alt.Blip
+  }
+
+  private isAltObjectClass(value: unknown): value is new () => alt.Object {
+    return (
+      /* eslint-disable @typescript-eslint/ban-types */
+      (value as Function).prototype instanceof _alt.Entity &&
+      (value as Function).name === "Object"
+      /* eslint-enable */
+    )
   }
 
   private initPlayerMetaCleanup(): () => void {
