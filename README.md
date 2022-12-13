@@ -62,7 +62,8 @@ esbuild.build({
 
 ## Limitations
 
-[Connection queue](https://docs.altv.mp/articles/connection_queue.html) is not supported between hot reload restarts (or just resource restarts). Only [player reconnect](https://xxshady.github.io/altv-esbuild/interfaces/iplugindevoption.html#playersreconnect) is emulated for now in dev environment.
+[Connection queue](https://docs.altv.mp/articles/connection_queue.html) is not supported between hot reloads (or just resource restarts).<br>
+Player disconnect is also [not supported](https://github.com/xxshady/altv-esbuild/issues/8) between hot reloads. Only [player connect](https://xxshady.github.io/altv-esbuild/interfaces/iplugindevoption.html#playersreconnect) is emulated for now in dev environment.
 
 ## How to find exact source location of any exception?
 
