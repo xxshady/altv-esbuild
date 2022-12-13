@@ -2,8 +2,7 @@
 
 Special thanks ❤️ to [innxz](https://github.com/innxz) for financially supporting me and this library.
 
-A plugin that greatly simplifies server/client JS and TS development (as well as production) on the [alt:V](https://altv.mp) platform.
-
+A plugin that greatly simplifies server/client JS and TS development (as well as production) on the [alt:V](https://altv.mp) platform.<br>
 (extended and improved version of the previous [esbuild dev plugin](https://github.com/xxshady/esbuild-plugin-altv-dev-server)).
 
 ## Features
@@ -18,7 +17,7 @@ A plugin that greatly simplifies server/client JS and TS development (as well as
 
 ## Docs
 
-Docs web page: <https://xxshady.github.io/altv-esbuild>
+Docs web page: <https://xxshady.github.io/altv-esbuild>.
 
 ## How to use?
 
@@ -61,9 +60,13 @@ esbuild.build({
 })
 ```
 
+## Limitations
+
+[Connection queue](https://docs.altv.mp/articles/connection_queue.html) is not supported between hot reload restarts (or just resource restarts). Only [player reconnect](https://xxshady.github.io/altv-esbuild/interfaces/iplugindevoption.html#playersreconnect) is emulated for now in dev environment.
+
 ## How to find exact source location of any exception?
 
-You can use [esbuild source-maps](https://esbuild.github.io/api/#sourcemap) like this: `sourcemap: "inline"`
+You can use [esbuild source-maps](https://esbuild.github.io/api/#sourcemap) like this: `sourcemap: "inline"`.
 
 ### serverside
 
