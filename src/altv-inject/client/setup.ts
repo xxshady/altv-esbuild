@@ -112,7 +112,7 @@ export class ClientSetup {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     sharedSetup.origAltOn!(
       "resourceStop",
-      () => sharedSetup.emitAltEvent("disconnect"),
+      () => sharedSetup.emitAltEvent<"client_disconnect">("disconnect"),
     )
   }
 
@@ -130,7 +130,7 @@ export class ClientSetup {
       this.log.debug("received connectionComplete")
       if (connectionCompleteCalled) return
 
-      sharedSetup.emitAltEvent("connectionComplete")
+      sharedSetup.emitAltEvent<"client_connectionComplete">("connectionComplete")
     })
   }
 

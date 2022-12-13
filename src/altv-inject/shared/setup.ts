@@ -224,20 +224,46 @@ class SharedSetup {
 
   public hookAltEvent<K extends AltEventNames>(
     event: K,
-    handler: (...args: Parameters<AltEvents[K]>) => Parameters<AltEvents[K]>,
+    handler: (...args: Parameters<AltEvents[K]>) => Parameters<AltEvents[K]> | false,
   ): void {
     this.hookedAltEvents[event] = true
+
+    this.log.debug("hooked alt event:", event)
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.origAltOn!(event as string, (...args: unknown[]) => {
       this.log.debug("received hooked alt event:", event)
 
       const patchedArgs = handler(...args as Parameters<AltEvents[K]>)
-      this.emitAltEvent(event, ...patchedArgs)
+      if (patchedArgs === false) {
+        this.log.debug("hooked altv event:", event, "was canceled")
+        return
+      }
+
+      this.log.debug("hooked altv event:", event, "calling with args:", patchedArgs)
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      this.emitAltEvent<any>(event, ...patchedArgs)
     })
   }
 
-  public emitAltEvent(event: AltEventNames, ...args: unknown[]): void {
+  // don't ask me why, its working and i'm happy
+  public emitAltEvent<
+    K extends `server_${keyof IServerEvent}` | `client_${keyof IClientEvent}` = never,
+  >(
+    event: K extends `server_${infer S}` ? S : K extends `client_${infer S}` ? S : never,
+    /* eslint-disable @typescript-eslint/indent */
+    ...args: Parameters<
+      K extends `server_${infer S extends keyof IServerEvent}`
+        ? IServerEvent[S]
+        : (
+          K extends `client_${infer S extends keyof IClientEvent}`
+            ? IClientEvent[S]
+            : (...args: never[]) => void
+        )
+    >
+    /* eslint-enable @typescript-eslint/indent */
+  ): void {
     const handlers = this.eventHandlers.local[event]
     if (!handlers) {
       this.log.debug("callAltEvent:", event, "no handlers")

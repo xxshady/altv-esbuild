@@ -75,6 +75,8 @@ export interface IPluginDevOption {
    * {@link https://xxshady.github.io/custom-altv-types/interfaces/_alt_client_.iclientevent.html#connectioncomplete connectionComplete}
    * event in dev mode.
    *
+   * @remarks If you want to change it set value for both "client" and "server" plugin modes!
+   *
    * `true` by default if `dev` enabled.
    */
   connectionCompleteEvent?: boolean
@@ -113,6 +115,15 @@ export interface IPluginDevOption {
    * `false` by default.
    */
   enhancedRestartCommand?: boolean | string
+
+  /**
+   * Enables emulation of serverside
+   * {@link https://xxshady.github.io/custom-altv-types/interfaces/_alt_server_.iserverevent.html#serverstarted serverStarted}
+   * event in dev mode.
+   *
+   * `true` by default if `dev` enabled.
+   */
+  serverStartedEvent?: boolean
 }
 
 export interface IPluginFixesOption {

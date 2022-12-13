@@ -19,6 +19,7 @@ export const OPTIONS_DEFAULTS: FilledPluginOptions = {
     topLevelExceptionHandling: true,
     moveExternalsOnTop: true,
     enhancedRestartCommand: false,
+    serverStartedEvent: true,
   },
   bugFixes: {
     webViewFlickering: true,

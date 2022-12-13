@@ -183,6 +183,9 @@ export class ServerSetup {
 
       if (bugFixes.playerPrototype)
         this.initPlayerPrototypeTempFix()
+
+      if (dev.serverStartedEvent)
+        this.initServerStartedEvent()
     }
   }
 
@@ -549,5 +552,28 @@ export class ServerSetup {
     return path
       .slice(resourcesDir.length)
       .replaceAll("\\", "/")
+  }
+
+  private initServerStartedEvent(): void {
+    this.log.debug("initServerStartedEvent")
+
+    let timer: InstanceType<typeof alt.Utils.Timeout> | null = new _alt.Utils.Timeout(() => {
+      timer = null
+
+      this.log.debug("emitting serverStarted from timer")
+      sharedSetup.emitAltEvent<"server_serverStarted">("serverStarted")
+    }, 500)
+
+    sharedSetup.hookAltEvent("serverStarted", (...args) => {
+      if (!timer) {
+        this.log.error("original serverStarted was called, but timer is already null")
+        return false
+      }
+      timer?.destroy()
+      timer = null
+
+      this.log.debug("emitting serverStarted from original")
+      return args
+    })
   }
 }
