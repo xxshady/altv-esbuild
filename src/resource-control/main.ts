@@ -33,17 +33,7 @@ const triggerRestart = (): void => {
     return
   }
 
-  // TODO: switch to resource.valid
-  // const valid = alt.Resource.getByName(mainResourceName)?.valid
-  let valid = true
-  try {
-    // temp workaround
-    // eslint-disable-next-line no-unused-expressions
-    alt.Resource.getByName(mainResourceName)?.isStarted
-  }
-  catch {
-    valid = false
-  }
+  const valid = alt.Resource.getByName(mainResourceName)?.valid
 
   log.debug("resource valid:", valid)
   if (!valid) {
@@ -56,11 +46,7 @@ const triggerRestart = (): void => {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-alt.on("consoleCommand", (command) => {
-  if (command !== restartCommand) return
-  triggerRestart()
-})
+new alt.Utils.ConsoleCommand(restartCommand, triggerRestart)
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 alt.onClient(generateEventName("restartCommand"), () => {
