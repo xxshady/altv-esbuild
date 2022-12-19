@@ -194,6 +194,9 @@ export interface IPluginOptions {
   altvEnums?: boolean
 
   /**
+   * Now this is a useless option because
+   * [it was integrated](https://github.com/altmp/altv-js-module/pull/170#issuecomment-1273613155) into the alt:V JS module.
+   *
    * Adds better value formatting to alt.log, alt.logDebug and console.log if code is executed on the clientside
    * (uses util.inspect ported from nodejs).
    *

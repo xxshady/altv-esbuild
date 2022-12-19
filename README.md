@@ -13,7 +13,6 @@ A plugin that greatly simplifies server/client JS and TS development (as well as
 - Restart console command for client and server ("res" by default)
 - Improved top-level exception output during development
 - Direct support for alt:V enums, even in JS code ([documentation](https://xxshady.github.io/altv-esbuild/interfaces/ipluginoptions.html#altvenums))
-- Enhanced alt.log value formatting ([documentation](https://xxshady.github.io/altv-esbuild/interfaces/ipluginoptions.html#enhancedaltlog))
 
 ## Docs
 
