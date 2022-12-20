@@ -151,7 +151,10 @@ const ${customRequireVar} = ${createRequireVar}(import.meta.url);
             try {
               module.exports = ${customRequireVar}('${path}')
             } catch (e) {
-              if (e.code !== 'ERR_REQUIRE_ESM') {
+              if (!(
+                e.code === 'ERR_REQUIRE_ESM' ||
+                e.code === 'MODULE_NOT_FOUND' // altv resource import error fix
+              )) {
                 try {
                   ${ALT_SHARED_VAR}.nextTick(() => ${ALT_SHARED_VAR}.logError(e?.stack))
                 } catch {}
