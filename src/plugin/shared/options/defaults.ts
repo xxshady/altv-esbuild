@@ -24,6 +24,7 @@ export const OPTIONS_DEFAULTS: FilledPluginOptions = {
   bugFixes: {
     webViewFlickering: true,
     playerPrototype: true,
+    playerDamageOnFirstConnect: false,
   },
   altvEnums: false,
   enhancedAltLog: true,

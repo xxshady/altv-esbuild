@@ -140,6 +140,17 @@ export interface IPluginFixesOption {
    * `true` by default.
    */
   playerPrototype?: boolean
+
+  /**
+   * **Experimental** feature.
+   *
+   * https://github.com/altmp/altv-issues/issues/1046
+   *
+   * Loads `mp_m_freemode_01` and `mp_f_freemode_01` models before player connect
+   *
+   * `false` by default.
+   */
+  playerDamageOnFirstConnect?: boolean
 }
 
 export interface IPluginOptions {

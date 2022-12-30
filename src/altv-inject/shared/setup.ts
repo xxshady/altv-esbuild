@@ -165,11 +165,7 @@ class SharedSetup {
           await handler!(...args)
         }
         catch (e) {
-          _alt.logError(
-            `Uncaught exception in event listener of event \"${eventOrHandler}\":\n`,
-            (e as Error)?.stack ?? e,
-          )
-
+          this.logEventException(eventOrHandler, e as Error)
           throw e
         }
       }
@@ -222,28 +218,33 @@ class SharedSetup {
     }, expectedArgs) as AltRemoveEvent
   }
 
-  public hookAltEvent<K extends AltEventNames>(
+  public hookAltEvent<K extends AltEventNames, TReturnType = Parameters<AltEvents[K]> | false>(
     event: K,
-    handler: (...args: Parameters<AltEvents[K]>) => Parameters<AltEvents[K]> | false,
+    handler: (...args: Parameters<AltEvents[K]>) => Promise<TReturnType> | TReturnType,
   ): void {
     this.hookedAltEvents[event] = true
 
     this.log.debug("hooked alt event:", event)
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    this.origAltOn!(event as string, (...args: unknown[]) => {
+    this.origAltOn!(event as string, async (...args: unknown[]) => {
       this.log.debug("received hooked alt event:", event)
 
-      const patchedArgs = handler(...args as Parameters<AltEvents[K]>)
-      if (patchedArgs === false) {
-        this.log.debug("hooked altv event:", event, "was canceled")
-        return
+      try {
+        const patchedArgs = await handler(...args as Parameters<AltEvents[K]>) as TReturnType
+        if ((patchedArgs as unknown as boolean) === false) {
+          this.log.debug("hooked altv event:", event, "was canceled")
+          return
+        }
+
+        this.log.debug("hooked altv event:", event, "calling with args:", patchedArgs)
+
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        this.emitAltEvent<any>(event, ...patchedArgs as any)
       }
-
-      this.log.debug("hooked altv event:", event, "calling with args:", patchedArgs)
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.emitAltEvent<any>(event, ...patchedArgs)
+      catch (e) {
+        this.log.error("hook of altv event:", event, "error:", e)
+      }
     })
   }
 
@@ -270,15 +271,15 @@ class SharedSetup {
       return
     }
 
-    for (const handler of handlers) {
+    handlers.forEach(async (handler) => {
       try {
-        handler(...args)
+        // eslint-disable-next-line @typescript-eslint/await-thenable
+        await handler(...args)
       }
       catch (e) {
-        const message = ((e as Error)?.stack ?? e) + ""
-        _alt.logError(`Exception at resource ${_alt.resourceName} in listener of "${event}" event:\n  ${message}`)
+        this.logEventException(event, e as Error)
       }
-    }
+    })
   }
 
   // eslint-disable-next-line @typescript-eslint/ban-types
@@ -416,6 +417,13 @@ class SharedSetup {
     // @ts-expect-error TODO: remove "if" when altv 13.0 will be released
     if (_alt.logDebug)
       this.hookAlt("logDebug", customLog, 0)
+  }
+
+  private logEventException(event: string, error: Error | undefined): void {
+    _alt.logError(
+      `Uncaught exception in event listener of event \"${event}\":\n`,
+      error?.stack ?? error,
+    )
   }
 }
 
