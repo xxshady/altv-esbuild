@@ -55,7 +55,7 @@ export interface IPluginDevOption {
   playersReconnectDelay?: number
 
   /**
-   * Should the player's position be reset to the initial position (0, 0, 72) when emulating a reconnect?
+   * Should the player position be reset when emulating a reconnect?
    *
    * Equals `playersReconnect` by default.
    */

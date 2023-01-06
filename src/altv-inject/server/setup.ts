@@ -77,7 +77,6 @@ export class ServerSetup {
       this.clientConnected = true
     },
 
-    // TODO: TEST IT
     clientDisconnect: (): void => {
       this.log.debug("clientDisconnect")
       this.clientConnected = false
@@ -151,7 +150,10 @@ export class ServerSetup {
       let despawnPlayers = (): void => {}
       if (dev.playersReconnect) {
         this.initPlayersReconnect(options)
-        despawnPlayers = this.despawnPlayers.bind(this)
+
+        const streamOutPos = new _alt.Vector3((_alt.getServerConfig().mapBoundsMaxX ?? 100_000) + 2000)
+        this.log.debug("despawnPlayers streamOutPos:", streamOutPos)
+        despawnPlayers = this.despawnPlayers.bind(this, streamOutPos)
       }
 
       sharedSetup.onResourceStop(
@@ -280,7 +282,6 @@ export class ServerSetup {
   }
 
   private initPlayersReconnect({ dev: { playersReconnectDelay, playersReconnectResetPos } }: FilledPluginOptions): void {
-    const initialPos = new _alt.Vector3(0, 0, 72)
     const resourceRestartedKey = `${PLUGIN_NAME}:resourceRestarted`
 
     this.log.debug("_alt.getMeta(resourceRestartedKey):", _alt.getMeta(resourceRestartedKey))
@@ -316,8 +317,6 @@ export class ServerSetup {
         p.visible = true
         p.frozen = false
 
-        if (playersReconnectResetPos) p.pos = initialPos
-
         this.waitForPlayerReadyEvent(p)
           .then((res) => {
             if (!res) {
@@ -336,7 +335,7 @@ export class ServerSetup {
     }, playersReconnectDelay)
   }
 
-  private despawnPlayers(): void {
+  private despawnPlayers(streamOutPos: alt.Vector3): void {
     this.log.debug("despawn players")
 
     for (const p of _alt.Player.all) {
@@ -344,9 +343,12 @@ export class ServerSetup {
 
       p.removeAllWeapons()
       p.clearBloodDamage()
-      // despawn doesnt call detach now (see alt:V issue https://github.com/altmp/altv-issues/issues/1456)
+      // despawn doesn't call detach now (see alt:V issue https://github.com/altmp/altv-issues/issues/1456)
       p.detach()
       p.despawn()
+      p.visible = false
+
+      if (this.options.dev.playersReconnectResetPos) p.pos = streamOutPos
     }
   }
 
@@ -486,7 +488,6 @@ export class ServerSetup {
     }
 
     if (mode === "server") {
-      // TODO: TEST IT
       if (!this.clientConnected) {
         this.log.debug("[buildStart] client is not connected, skip waiting for another build")
         this.waitingForBuildEnd = mode
