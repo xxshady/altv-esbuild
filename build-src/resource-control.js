@@ -13,8 +13,8 @@ esbuild.build({
   ],
   plugins: [
     copyStaticFiles({
-      src: "src/resource-control/resource.cfg",
-      dest: "dist/__altv-esbuild-resource-control/resource.cfg",
+      src: "src/resource-control/resource.toml",
+      dest: "dist/__altv-esbuild-resource-control/resource.toml",
     })
   ],
 })
