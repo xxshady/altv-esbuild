@@ -226,8 +226,10 @@ class SharedSetup {
 
     this.log.debug("hooked alt event:", event)
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    this.origAltOn!(event as string, async (...args: unknown[]) => {
+    const altOn = this.origAltOn ?? _alt.on
+    this.log.debug("hookAltEvent altOn:", altOn)
+
+    altOn(event as string, async (...args: unknown[]) => {
       this.log.debug("received hooked alt event:", event)
 
       try {
