@@ -51,13 +51,13 @@ esbuild.build({
     altvEsbuild({
       mode: "server", // use "server" for server code, and "client" for client code
 
-      // see docs for more info
+      // see docs for more info about these options:
       dev: {
         enabled: DEV_MODE,
 
         // if `DEV_MODE` is false it will also be automatically set to false too
         enhancedRestartCommand: true, 
-      }, 
+      },
       altvEnums: true,
       bugFixes: {
         playerDamageOnFirstConnect: true,
