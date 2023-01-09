@@ -36,16 +36,29 @@ Example of the build server code:
 import esbuild from "esbuild"
 import { altvEsbuild } from "altv-esbuild"
 
+// your own variable
+const DEV_MODE = true
+
 esbuild.build({
   entryPoints: ["src/main.js"],
   outfile: "dist/bundle.js",
   bundle: true,
-  watch: dev,
+  watch: DEV_MODE,
   plugins: [
     altvEsbuild({
       mode: "server", // use "server" for server code, and "client" for client code
 
-      dev: true, // see docs for more info
+      // see docs for more info
+      dev: {
+        enabled: DEV_MODE,
+
+        // if `DEV_MODE` is false it will also be automatically set to false too
+        enhancedRestartCommand: true, 
+      }, 
+      altvEnums: true,
+      bugFixes: {
+        playerDamageOnFirstConnect: true,
+      },
     }),
   ],
   
