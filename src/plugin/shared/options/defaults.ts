@@ -1,8 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import type { FilledPluginOptions } from "@/shared"
 
 const playersReconnect = true
 
-export const OPTIONS_DEFAULTS: FilledPluginOptions = {
+export const OPTIONS_DEFAULTS = {
   mode: "client", // set by user anyway
   dev: {
     enabled: true,
@@ -28,4 +29,4 @@ export const OPTIONS_DEFAULTS: FilledPluginOptions = {
   },
   altvEnums: false,
   enhancedAltLog: true,
-}
+} as const satisfies FilledPluginOptions

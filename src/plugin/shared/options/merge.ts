@@ -1,4 +1,4 @@
-import type { FilledPluginOptions, IPluginOptions } from "@/shared"
+import type { FilledPluginOptions, IPluginDevOption, IPluginOptions } from "@/shared"
 import { OPTIONS_DEFAULTS } from "./defaults"
 
 export const mergeOptions = ({
@@ -18,23 +18,22 @@ export const mergeOptions = ({
 
     dev: (dev === true
       ? { ...OPTIONS_DEFAULTS.dev, enabled: true }
-      : (dev === false
-
+      : (devIsDisabled(dev)
         // set all options to false or -1
         ? {
           ...Object.fromEntries(
             Object.entries(
               OPTIONS_DEFAULTS.dev,
             ).map(([key, value]) => [key, typeof value === "boolean" ? false : -1]),
-          ) as typeof OPTIONS_DEFAULTS.dev,
+          ) as FilledPluginOptions["dev"],
           enabled: false,
         }
         : {
           ...OPTIONS_DEFAULTS.dev,
           ...dev,
           playersReconnectResetPos:
-            dev.playersReconnectResetPos ??
-            dev.playersReconnect ??
+            (dev as IPluginDevOption).playersReconnectResetPos ??
+            (dev as IPluginDevOption).playersReconnect ??
             OPTIONS_DEFAULTS.dev.playersReconnectResetPos,
         })
     ),
@@ -47,4 +46,8 @@ export const mergeOptions = ({
 
     enhancedAltLog: enhancedAltLog ?? OPTIONS_DEFAULTS.enhancedAltLog,
   }
+}
+
+function devIsDisabled(dev: boolean | IPluginDevOption): boolean {
+  return dev === false || (dev as IPluginDevOption).enabled === false
 }
