@@ -44,6 +44,9 @@ esbuild.build({
   outfile: "dist/bundle.js",
   bundle: true,
   watch: DEV_MODE,
+  target: "esnext",
+  format: "esm",
+  
   plugins: [
     altvEsbuild({
       mode: "server", // use "server" for server code, and "client" for client code
