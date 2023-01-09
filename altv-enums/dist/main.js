@@ -41,7 +41,10 @@ var fetchAltvTypes = async () => {
       if (enumStart) {
         if (currentReadingEnum)
           throw new Error(`enum reading already started: ${currentReadingEnum}, but another beginning of enum is found`);
-        const enumName = line.slice(line.indexOf("enum") + 5, line.lastIndexOf(" {"));
+        const enumName = line.slice(
+          line.indexOf("enum") + 5,
+          line.lastIndexOf(" {")
+        );
         if (enumNamesMap[enumName]) {
           console.log(`!!! [${module}] detected duplicated enum:`, enumName, "!!!");
           continue;
@@ -76,9 +79,12 @@ ${footer}
 `);
 };
 await fetchAltvTypes();
-var { code } = esbuild.transformSync(enumsContents, {
-  loader: "ts"
-});
+var { code } = esbuild.transformSync(
+  enumsContents,
+  {
+    loader: "ts"
+  }
+);
 writeFile(OUTPUT_JS_FILE, code);
 var typesContents = "";
 for (const [altModule, enums] of Object.entries(enumNamesModules)) {
@@ -89,5 +95,10 @@ for (const [altModule, enums] of Object.entries(enumNamesModules)) {
 `;
   typesContents += altExports;
 }
-writeFile(OUTPUT_TYPES_FILE, typesContents, '/// <reference types="@altv/types-client"/>\n/// <reference types="@altv/types-server"/>\n/// <reference types="@altv/types-shared"/>\ndeclare module "altv-enums" {', "}");
+writeFile(
+  OUTPUT_TYPES_FILE,
+  typesContents,
+  '/// <reference types="@altv/types-client"/>\n/// <reference types="@altv/types-server"/>\n/// <reference types="@altv/types-shared"/>\ndeclare module "altv-enums" {',
+  "}"
+);
 console.log("enumNamesModules:", enumNamesModules);

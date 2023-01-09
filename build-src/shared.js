@@ -11,7 +11,7 @@ export const ESBUILD_OPTIONS = {
   format: "esm",
   logLevel: "info",
   define: {
-    "___DEVMODE": devMode
+    "___DEVMODE": `${devMode}`
   },
   minify: !devMode,
 }
