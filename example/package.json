@@ -1,7 +1,6 @@
 {
-  "name": "esbuild-any-named-export",
+  "name": "altv-esbuild-example",
   "version": "1.0.0",
-  "main": "index.js",
   "license": "MIT",
   "scripts": {
     "watch-server": "node --es-module-specifier-resolution=node watch-server.js",
@@ -9,13 +8,13 @@
     "watch": "concurrently npm:watch-*"
   },
   "dependencies": {
-    "@altv/types-client": "^2.2.7",
-    "@altv/types-natives": "^1.4.4",
-    "@altv/types-server": "^2.4.1",
-    "@altv/types-shared": "^1.2.6",
+    "@altv/types-client": "latest",
+    "@altv/types-natives": "latest",
+    "@altv/types-server": "latest",
+    "@altv/types-shared": "latest",
     "altv-esbuild": "latest",
     "concurrently": "^7.0.0",
-    "esbuild": "^0.14.51"
+    "esbuild": "^0.16.16"
   },
   "type": "module"
 }

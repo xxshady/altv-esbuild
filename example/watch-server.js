@@ -1,5 +1,8 @@
 import { build } from "esbuild"
 import { altvEsbuild } from "altv-esbuild"
+import { SHARED_ALTV_ESBUILD_OPTIONS } from './watch-shared'
+
+console.log('SHARED_ALTV_ESBUILD_OPTIONS:', SHARED_ALTV_ESBUILD_OPTIONS)
 
 build({
   watch: true,
@@ -12,9 +15,8 @@ build({
   outfile: "./dist/server.js",
   plugins: [
     altvEsbuild({
+      ...SHARED_ALTV_ESBUILD_OPTIONS,
       mode: "server",
-      dev: true, // enables hot reload automatically
-      altvEnums: true,
     })
   ],
 })
