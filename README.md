@@ -94,7 +94,7 @@ You can use [esbuild source-maps](https://esbuild.github.io/api/#sourcemap) like
 
 ### serverside
 
-Enable source-maps in [server.cfg](https://docs.altv.mp/articles/configs/server.html)
+Enable source-maps in [server.toml](https://docs.altv.mp/articles/configs/server.html)
 and [here you go](https://imgur.com/HJYM0y1).
 
 ### clientside
