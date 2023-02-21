@@ -103,17 +103,20 @@
 <span style="color: #000000">  </span><span style="color: #001080">outfile:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;dist/bundle.js&quot;</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">bundle:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">watch:</span><span style="color: #000000"> </span><span style="color: #0070C1">DEV_MODE</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">target:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;esnext&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">format:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;esm&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span>
 <span style="color: #000000">  </span><span style="color: #001080">plugins:</span><span style="color: #000000"> [</span>
 <span style="color: #000000">    </span><span style="color: #795E26">altvEsbuild</span><span style="color: #000000">({</span>
 <span style="color: #000000">      </span><span style="color: #001080">mode:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;server&quot;</span><span style="color: #000000">, </span><span style="color: #008000">// use &quot;server&quot; for server code, and &quot;client&quot; for client code</span>
 
-<span style="color: #000000">      </span><span style="color: #008000">// see docs for more info</span>
+<span style="color: #000000">      </span><span style="color: #008000">// see docs for more info about these options:</span>
 <span style="color: #000000">      </span><span style="color: #001080">dev:</span><span style="color: #000000"> {</span>
 <span style="color: #000000">        </span><span style="color: #001080">enabled:</span><span style="color: #000000"> </span><span style="color: #0070C1">DEV_MODE</span><span style="color: #000000">,</span>
 
 <span style="color: #000000">        </span><span style="color: #008000">// if `DEV_MODE` is false it will also be automatically set to false too</span>
 <span style="color: #000000">        </span><span style="color: #001080">enhancedRestartCommand:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">, </span>
-<span style="color: #000000">      }, </span>
+<span style="color: #000000">      },</span>
 <span style="color: #000000">      </span><span style="color: #001080">altvEnums:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
 <span style="color: #000000">      </span><span style="color: #001080">bugFixes:</span><span style="color: #000000"> {</span>
 <span style="color: #000000">        </span><span style="color: #001080">playerDamageOnFirstConnect:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
