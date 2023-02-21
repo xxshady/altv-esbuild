@@ -147,24 +147,37 @@ export class ServerSetup extends SharedSetup {
         (`import { createRequire as ${createRequireVar} } from 'module';
 const ${customRequireVar} = ${createRequireVar}(import.meta.url);
 `),
-        (path, externalVarName) => (`
+
+        // who wrote this demonic fuckery?
+        (
+          path,
+          externalVarName, // if its null its built-in node js module whose name starts with "node:"
+        ) => (`
             try {
               module.exports = ${customRequireVar}('${path}')
             } catch (e) {
-              if (!(
-                e.code === 'ERR_REQUIRE_ESM' ||
-                e.code === 'MODULE_NOT_FOUND' // altv resource import error fix
-              )) {
-                try {
-                  ${ALT_SHARED_VAR}.nextTick(() => ${ALT_SHARED_VAR}.logError(e?.stack))
-                } catch {}
+              ${
+  /* eslint-disable @typescript-eslint/indent */
+                externalVarName
+                  ? `
+                        if (!(
+                          e.code === 'ERR_REQUIRE_ESM' ||
+                          e.code === 'MODULE_NOT_FOUND' // altv resource import error fix
+                        )) {
+                          try {
+                            ${ALT_SHARED_VAR}.nextTick(() => ${ALT_SHARED_VAR}.logError(e?.stack))
+                          } catch {}
+                        }
+                        Object.defineProperty(exports, '__esModule', { value: true })
+                        for (const key in ${externalVarName}) {
+                          exports[key] = ${externalVarName}[key]
+                        }`
+                  : `${ALT_SHARED_VAR}.nextTick(() => ${ALT_SHARED_VAR}.logError("Failed to import nodejs built in module name: '${path}'", e?.stack))`
+                }
               }
-              Object.defineProperty(exports, '__esModule', { value: true })
-              for (const key in ${externalVarName}) {
-                exports[key] = ${externalVarName}[key]
-              }
-            }
-          `),
+        `),
+          /* eslint-enable @typescript-eslint/indent */
+        "node:",
       )
     }
 
