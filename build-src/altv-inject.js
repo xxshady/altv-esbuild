@@ -1,7 +1,7 @@
 import esbuild from "esbuild"
 import * as shared from "./shared"
 
-esbuild.build({
+const ctx = await esbuild.context({
   ...shared.ESBUILD_OPTIONS,
   entryPoints: ["src/altv-inject/main.ts"],
   outfile: "dist/altv-inject/main.js",
@@ -13,3 +13,7 @@ esbuild.build({
     "net",
   ],
 })
+
+if (shared.watch) {
+  await ctx.watch()
+}

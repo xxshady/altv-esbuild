@@ -1,11 +1,10 @@
 import esbuild from "esbuild"
 import * as shared from "../build-src/shared"
 
-const watch = shared.ESBUILD_OPTIONS.watch
+const watch = shared.watch
 
-esbuild.build({
+const ctx = await esbuild.context({
   ...shared.ESBUILD_OPTIONS,
-  watch,
   entryPoints: ["altv-enums/src/main.ts"],
   outfile: "altv-enums/dist/main.js",
   platform: 'node',
@@ -13,3 +12,7 @@ esbuild.build({
     'esbuild'
   ],
 })
+
+if (watch) {
+  await ctx.watch()
+}

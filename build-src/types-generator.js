@@ -2,8 +2,8 @@ import { exec } from "child_process"
 import process from "process"
 
 export const typesGenerator = () => 
-  (errorInfo, result) => {
-    if (errorInfo?.errors?.length) {
+  (result) => {
+    if (result?.errors?.length) {
       console.log('typesGenerator build errors -> skip')
       return
     }
