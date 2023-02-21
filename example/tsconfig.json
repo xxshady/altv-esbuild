@@ -8,13 +8,13 @@
     "resolveJsonModule": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "isolatedModules": true,
+    "isolatedModules": false,
     "declaration": false,
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "typeRoots": [
       "./node_modules/@altv",
-      "./node_modules/altv-esbuild/altv-enums",
+      "./node_modules/altv-esbuild/altv-enums/types",
     ],
     "allowJs": true
   },

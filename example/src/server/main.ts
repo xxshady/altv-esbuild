@@ -23,3 +23,6 @@ alt.on('playerConnect', (player) => {
     player.setIntoVehicle(veh, 1)
   }, 1000)
 })
+
+// try to change this line and save the file
+alt.log('it works?', RadioStation.BlaineCountyRadio)
