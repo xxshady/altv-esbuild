@@ -2,7 +2,7 @@ import esbuild from "esbuild"
 import * as shared from "./shared"
 import copyStaticFiles from "esbuild-copy-static-files"
 
-esbuild.build({
+const ctx = await esbuild.context({
   ...shared.ESBUILD_OPTIONS,
   platform: "node",
   entryPoints: ["src/resource-control/main.ts"],
@@ -18,3 +18,7 @@ esbuild.build({
     })
   ],
 })
+
+if (shared.watch) {
+  await ctx.watch()
+}

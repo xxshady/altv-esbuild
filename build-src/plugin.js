@@ -2,12 +2,21 @@ import esbuild from "esbuild"
 import * as shared from "./shared"
 import { typesGenerator } from "./types-generator"
 
-const watch = shared.ESBUILD_OPTIONS.watch && { onRebuild: typesGenerator() }
+const watch = shared.watch && { onRebuild: typesGenerator() }
 
-esbuild.build({
+// esbuild.build({
+// }).then(typesGenerator())
+
+const ctx = await esbuild.context({
   ...shared.ESBUILD_OPTIONS,
-  watch,
   entryPoints: ["src/plugin/main.ts"],
   outfile: "dist/plugin/main.js",
   platform: 'node',
-}).then(typesGenerator())
+})
+
+// TEST
+console.log('build plugin watch:', watch)
+if (watch) {
+  console.log('build plugin yes watch')
+  await ctx.watch()
+}
