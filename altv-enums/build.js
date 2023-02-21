@@ -1,10 +1,6 @@
-import esbuild from "esbuild"
-import * as shared from "../build-src/shared"
+import { ctxWrapper } from "../build-src/ctx-wrapper"
 
-const watch = shared.watch
-
-const ctx = await esbuild.context({
-  ...shared.ESBUILD_OPTIONS,
+ctxWrapper({
   entryPoints: ["altv-enums/src/main.ts"],
   outfile: "altv-enums/dist/main.js",
   platform: 'node',
@@ -12,7 +8,3 @@ const ctx = await esbuild.context({
     'esbuild'
   ],
 })
-
-if (watch) {
-  await ctx.watch()
-}

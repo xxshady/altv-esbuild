@@ -1,8 +1,6 @@
-import esbuild from "esbuild"
-import * as shared from "./shared"
+import { ctxWrapper } from "./ctx-wrapper"
 
-const ctx = await esbuild.context({
-  ...shared.ESBUILD_OPTIONS,
+ctxWrapper({
   entryPoints: ["src/altv-inject/main.ts"],
   outfile: "dist/altv-inject/main.js",
   external: [
@@ -13,7 +11,3 @@ const ctx = await esbuild.context({
     "net",
   ],
 })
-
-if (shared.watch) {
-  await ctx.watch()
-}

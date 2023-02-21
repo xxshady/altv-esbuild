@@ -1,9 +1,8 @@
-import esbuild from "esbuild"
 import * as shared from "./shared"
 import copyStaticFiles from "esbuild-copy-static-files"
+import { ctxWrapper } from "./ctx-wrapper"
 
-const ctx = await esbuild.context({
-  ...shared.ESBUILD_OPTIONS,
+await ctxWrapper({
   platform: "node",
   entryPoints: ["src/resource-control/main.ts"],
   outfile: "dist/__altv-esbuild-resource-control/main.js",
@@ -18,7 +17,3 @@ const ctx = await esbuild.context({
     })
   ],
 })
-
-if (shared.watch) {
-  await ctx.watch()
-}
