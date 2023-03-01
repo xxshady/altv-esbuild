@@ -3,14 +3,14 @@ import type net from "net"
 export class SocketConnect {
   private static readonly RECONNECT_MS = 500
 
-  private static readonly logDebug = ___DEVMODE
-    ? (info: string): void => console.log("[DEBUG]", info)
+  private readonly logDebug = ___DEVMODE
+    ? (info: string): void => console.log(`[${this.name}][DEBUG]`, info)
     : (): void => {}
 
   private readonly onError = (e: Error & { code?: string }): void => {
     if (!(e?.code === "ECONNRESET" || e?.code === "ECONNREFUSED")) return
 
-    SocketConnect.logDebug(`disconnected from server, trying reconnecting in ${SocketConnect.RECONNECT_MS}ms...`)
+    this.logDebug(`disconnected from server, trying reconnecting in ${SocketConnect.RECONNECT_MS}ms...`)
 
     setTimeout(
       () => this.connect(),
@@ -25,6 +25,7 @@ export class SocketConnect {
   private _socket: net.Socket
 
   constructor(
+    private readonly name: string,
     private readonly _net: typeof net,
     private readonly port: number,
     private readonly connectHandler: (socket: net.Socket) => void,

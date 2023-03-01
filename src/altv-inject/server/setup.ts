@@ -164,8 +164,12 @@ export class ServerSetup {
         ),
       )
 
+      this.log.debug("dev.hotReload:", dev.hotReload)
       if (dev.hotReload) {
+        this.log.debug("init socketConnect")
+
         this.socketConnect = new SocketConnect(
+          "server-inject",
           _net,
           this.options.dev.hotReloadServerPort,
           (socket) => {

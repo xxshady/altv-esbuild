@@ -36,6 +36,7 @@ export class ClientSetup extends SharedSetup {
     const { dev } = options
     if (dev.hotReload) {
       this.socketConnect = new SocketConnect(
+        "plugin-client",
         net,
         this.options.dev.hotReloadServerPort,
         (socket) => {
