@@ -43,7 +43,7 @@ esbuild.build({
   entryPoints: ["src/main.js"],
   outfile: "dist/bundle.js",
   bundle: true,
-  watch: DEV_MODE,
+  watch: DEV_MODE, // this build option is outdated, see example directory in the repo
   target: "esnext",
   format: "esm",
   
