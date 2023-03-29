@@ -102,7 +102,7 @@
 <span style="color: #000000">  </span><span style="color: #001080">entryPoints:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;src/main.js&quot;</span><span style="color: #000000">],</span>
 <span style="color: #000000">  </span><span style="color: #001080">outfile:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;dist/bundle.js&quot;</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">bundle:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">watch:</span><span style="color: #000000"> </span><span style="color: #0070C1">DEV_MODE</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">watch:</span><span style="color: #000000"> </span><span style="color: #0070C1">DEV_MODE</span><span style="color: #000000">, </span><span style="color: #008000">// this build option is outdated, see example directory in the repo</span>
 <span style="color: #000000">  </span><span style="color: #001080">target:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;esnext&quot;</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">format:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;esm&quot;</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span>
@@ -162,6 +162,16 @@
 					<h3>clientside</h3>
 				</a>
 				<p>Here its a bit complicated. If you use vscode <a href="https://marketplace.visualstudio.com/items?itemName=vlkoti.vscode-sourcemaps-navigator">Source maps navigator</a> extension can help you jump to your source code.</p>
+				<a href="#some-libraries-don39t-work-with-bundling" id="some-libraries-don39t-work-with-bundling" style="color: inherit; text-decoration: none;">
+					<h2>Some libraries don&#39;t work with bundling</h2>
+				</a>
+				<p>If you see such errors it may mean this is your case:</p>
+				<ul>
+					<li><code>Error: Dynamic require of &quot;crypto&quot; is not supported</code></li>
+					<li><code>SyntaxError: Unexpected identifier</code></li>
+				</ul>
+				<p>Libraries that must be external: <code>discord.js</code></p>
+				<p>✅ <strong>Solution:</strong> add this library to <a href="https://esbuild.github.io/api/#external"><code>external</code></a> build option of esbuild</p>
 				<a href="#contributions" id="contributions" style="color: inherit; text-decoration: none;">
 					<h2>Contributions</h2>
 				</a>
