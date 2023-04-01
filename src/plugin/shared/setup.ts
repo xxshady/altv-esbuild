@@ -246,7 +246,7 @@ export abstract class SharedSetup {
           }
         }
 
-        const externalVarName = codeVarName(`externalOnTop_${additionalExternalStart}_${path}`)
+        const externalVarName = codeVarName(`externalOnTop_${path}`)
         // log(`resolve external import ${path}`)
 
         if (!externalVarName) {
