@@ -29,4 +29,5 @@ export const OPTIONS_DEFAULTS = {
   },
   altvEnums: false,
   enhancedAltLog: true,
+  altDefaultImport: false,
 } as const satisfies FilledPluginOptions

@@ -222,4 +222,14 @@ export interface IPluginOptions {
    * ```
    */
   enhancedAltLog?: boolean
+
+  /**
+   * Import alt-client, alt-server, etc. as normal ES modules
+   * and export them using default export.
+   *
+   * Temp fix for high memory usage.
+   *
+   * `false` by default.
+   */
+  altDefaultImport?: boolean
 }

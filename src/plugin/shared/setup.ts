@@ -168,8 +168,12 @@ export abstract class SharedSetup {
       namespace,
     }))
 
+    const useDefaultExport = this.options.altDefaultImport
+
     build.onLoad({ filter: /.*/, namespace }, () => {
-      return { contents: `module.exports = ${varName}` }
+      return {
+        contents: useDefaultExport ? `export default ${varName}` : `module.exports = ${varName}`,
+      }
     })
   }
 
