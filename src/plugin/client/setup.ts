@@ -64,8 +64,8 @@ export class ClientSetup extends SharedSetup {
       })
     }
 
-    this.addExternalImportHandling(build, "alt-client", ALT_VAR)
-    this.addExternalImportHandling(build, "natives", ALT_NATIVES_VAR)
+    this.addExternalImportHandling(build, "alt-client", ALT_VAR, true)
+    this.addExternalImportHandling(build, "natives", ALT_NATIVES_VAR, true)
   }
 
   public handleBuildOptions(): IPatchedBuildOptions {

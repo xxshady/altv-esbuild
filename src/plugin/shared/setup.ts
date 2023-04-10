@@ -157,7 +157,7 @@ export abstract class SharedSetup {
     )
   }
 
-  protected addExternalImportHandling(build: esbuild.PluginBuild, moduleName: string, varName: string): void {
+  protected addExternalImportHandling(build: esbuild.PluginBuild, moduleName: string, varName: string, useDefaultExport = false): void {
     const namespace = `${PLUGIN_NAME}:external-handling-${moduleName}`
 
     if (!this.bannerImportsCode.includes(`import ${varName} from`))
@@ -169,7 +169,9 @@ export abstract class SharedSetup {
     }))
 
     build.onLoad({ filter: /.*/, namespace }, () => {
-      return { contents: `module.exports = ${varName}` }
+      return {
+        contents: useDefaultExport ? `export default ${varName}` : `module.exports = ${varName}`,
+      }
     })
   }
 
