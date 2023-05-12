@@ -1,6 +1,6 @@
 export type AltAddEvent = (
   eventOrHandler: string | ((...args: unknown[]) => void),
-  handler?: ((...args: unknown[]) => void)
+  handler?: ((...args: unknown[]) => unknown)
 ) => void
 
 export type AltAddUserEvent = (

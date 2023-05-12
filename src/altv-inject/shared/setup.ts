@@ -147,7 +147,7 @@ class SharedSetup {
       // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       ).add(handler!)
 
-      const wrapper = async (...args: unknown[]): Promise<void> => {
+      const wrapper = (...args: unknown[]): unknown => {
         if (once) {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           eventHandlers[eventOrHandler]?.delete(handler!)
@@ -162,7 +162,19 @@ class SharedSetup {
 
         try {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/await-thenable
-          await handler!(...args)
+          const result = handler!(...args)
+
+          this.log.debug("callback result:", result)
+
+          if (result instanceof Promise) {
+            // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+            return result.catch(e => {
+              this.logEventException(eventOrHandler, e as Error)
+              throw e
+            })
+          }
+          else
+            return result
         }
         catch (e) {
           this.logEventException(eventOrHandler, e as Error)
@@ -229,12 +241,11 @@ class SharedSetup {
     const altOn = this.origAltOn ?? _alt.on
     this.log.debug("hookAltEvent altOn:", altOn)
 
-    altOn(event as string, async (...args: unknown[]) => {
+    altOn(event as string, (...args: unknown[]) => {
       this.log.debug("received hooked alt event:", event)
 
-      try {
-        const patchedArgs = await handler(...args as Parameters<AltEvents[K]>) as TReturnType
-        if ((patchedArgs as unknown as boolean) === false) {
+      const handlePatchedArgs = (patchedArgs: unknown): void => {
+        if ((patchedArgs as boolean) === false) {
           this.log.debug("hooked altv event:", event, "was canceled")
           return
         }
@@ -243,6 +254,20 @@ class SharedSetup {
 
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         this.emitAltEvent<any>(event, ...patchedArgs as any)
+      }
+
+      try {
+        const result = handler(...args as Parameters<AltEvents[K]>)
+
+        if (result instanceof Promise) {
+          result.then(result => {
+            handlePatchedArgs(result)
+          }).catch(e => {
+            this.log.error(e)
+          })
+        }
+        else
+          handlePatchedArgs(result)
       }
       catch (e) {
         this.log.error("hook of altv event:", event, "error:", e)
