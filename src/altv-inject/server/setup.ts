@@ -285,7 +285,7 @@ export class ServerSetup {
     }
   }
 
-  private initPlayersReconnect({ dev: { playersReconnectDelay, playersReconnectResetPos } }: FilledPluginOptions): void {
+  private initPlayersReconnect({ dev: { playersReconnectDelay } }: FilledPluginOptions): void {
     const resourceRestartedKey = `${PLUGIN_NAME}:resourceRestarted`
 
     this.log.debug("_alt.getMeta(resourceRestartedKey):", _alt.getMeta(resourceRestartedKey))
@@ -607,8 +607,7 @@ export class ServerSetup {
 
         let timeout = _alt.setTimeout(() => {
           timeout = 0
-          this.log.warn("[playerDamageOnFirstConnectFix] resolve playerConnect after timeout")
-
+          this.log.warn("[playerDamageOnFirstConnectFix] resolve playerConnect after timeout (maybe player is already disconnected?)")
           resolvePlayer(promise, player)
         }, 5000)
 
