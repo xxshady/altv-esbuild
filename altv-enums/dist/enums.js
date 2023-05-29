@@ -24,7 +24,8 @@
     BaseObjectType2[BaseObjectType2["LocalPed"] = 20] = "LocalPed";
     BaseObjectType2[BaseObjectType2["LocalVehicle"] = 21] = "LocalVehicle";
     BaseObjectType2[BaseObjectType2["AudioFilter"] = 22] = "AudioFilter";
-    BaseObjectType2[BaseObjectType2["Size"] = 23] = "Size";
+    BaseObjectType2[BaseObjectType2["ConnectionInfo"] = 23] = "ConnectionInfo";
+    BaseObjectType2[BaseObjectType2["Size"] = 24] = "Size";
     return BaseObjectType2;
   })(BaseObjectType || {});
   export var BlipSprite = /* @__PURE__ */ ((BlipSprite2) => {
@@ -1496,105 +1497,6 @@
     VehicleLockState2[VehicleLockState2["LockedCanBeDamaged"] = 7] = "LockedCanBeDamaged";
     return VehicleLockState2;
   })(VehicleLockState || {});
-  export var Locale = /* @__PURE__ */ ((Locale2) => {
-    Locale2["Arabic"] = "ar";
-    Locale2["Belarusian"] = "by";
-    Locale2["Czech"] = "cz";
-    Locale2["German"] = "de";
-    Locale2["English"] = "en";
-    Locale2["Spanish"] = "es";
-    Locale2["Farsi"] = "fa";
-    Locale2["French"] = "fr";
-    Locale2["Hebrew"] = "he";
-    Locale2["Hungarian"] = "hu";
-    Locale2["Indonesian"] = "id";
-    Locale2["Hindi"] = "in_hd";
-    Locale2["Malayalam"] = "in_ml";
-    Locale2["Telugu"] = "in_tl";
-    Locale2["Tamil"] = "in_tm";
-    Locale2["Italian"] = "it";
-    Locale2["Lithuanian"] = "lt";
-    Locale2["Latvian"] = "lv";
-    Locale2["NorwegianBokmal"] = "nb_no";
-    Locale2["NorwegianNynorsk"] = "nn_no";
-    Locale2["Polish"] = "pl";
-    Locale2["Portugese"] = "pt";
-    Locale2["BrazilianPortuguese"] = "pt_br";
-    Locale2["Romanian"] = "ro";
-    Locale2["Serbian"] = "rs";
-    Locale2["Russian"] = "ru";
-    Locale2["Slovak"] = "sk";
-    Locale2["Thai"] = "th";
-    Locale2["Turkish"] = "tr";
-    Locale2["Ukrainian"] = "ua";
-    Locale2["ChineseSimplified"] = "zh_cn";
-    Locale2["ChineseTraditional"] = "zh_tw";
-    return Locale2;
-  })(Locale || {});
-  export var PermissionState = /* @__PURE__ */ ((PermissionState2) => {
-    PermissionState2[PermissionState2["ALLOWED"] = 0] = "ALLOWED";
-    PermissionState2[PermissionState2["DENIED"] = 1] = "DENIED";
-    PermissionState2[PermissionState2["UNSPECIFIED"] = 2] = "UNSPECIFIED";
-    PermissionState2[PermissionState2["FAILED"] = 3] = "FAILED";
-    return PermissionState2;
-  })(PermissionState || {});
-  export var StatName = /* @__PURE__ */ ((StatName2) => {
-    StatName2["Stamina"] = "stamina";
-    StatName2["Strength"] = "strength";
-    StatName2["LungCapacity"] = "lung_capacity";
-    StatName2["Wheelie"] = "wheelie_ability";
-    StatName2["Flying"] = "flying_ability";
-    StatName2["Shooting"] = "shooting_ability";
-    StatName2["Stealth"] = "stealth_ability";
-    return StatName2;
-  })(StatName || {});
-  export var VehicleIndicatorLights = /* @__PURE__ */ ((VehicleIndicatorLights2) => {
-    VehicleIndicatorLights2[VehicleIndicatorLights2["BlinkLeft"] = 1] = "BlinkLeft";
-    VehicleIndicatorLights2[VehicleIndicatorLights2["BlinkRight"] = 2] = "BlinkRight";
-    VehicleIndicatorLights2[VehicleIndicatorLights2["BlinkPermBoth"] = 4] = "BlinkPermBoth";
-    VehicleIndicatorLights2[VehicleIndicatorLights2["StaticBoth"] = 8] = "StaticBoth";
-    VehicleIndicatorLights2[VehicleIndicatorLights2["Interior"] = 64] = "Interior";
-    return VehicleIndicatorLights2;
-  })(VehicleIndicatorLights || {});
-  export var WebSocketReadyState = /* @__PURE__ */ ((WebSocketReadyState2) => {
-    WebSocketReadyState2[WebSocketReadyState2["Connecting"] = 0] = "Connecting";
-    WebSocketReadyState2[WebSocketReadyState2["Open"] = 1] = "Open";
-    WebSocketReadyState2[WebSocketReadyState2["Closing"] = 2] = "Closing";
-    WebSocketReadyState2[WebSocketReadyState2["Closed"] = 3] = "Closed";
-    return WebSocketReadyState2;
-  })(WebSocketReadyState || {});
-  export var ConfigFlag = /* @__PURE__ */ ((ConfigFlag2) => {
-    ConfigFlag2["DisableAutoWeaponSwap"] = "DISABLE_AUTO_WEAPON_SWAP";
-    ConfigFlag2["DisablePedPropKnockOff"] = "DISABLE_PED_PROP_KNOCK_OFF";
-    ConfigFlag2["DisableIdleCamera"] = "DISABLE_IDLE_CAMERA";
-    ConfigFlag2["DisableVehicleEngineShutdownOnLeave"] = "DISABLE_VEHICLE_ENGINE_SHUTDOWN_ON_LEAVE";
-    ConfigFlag2["DisableSPEnterVehicleClipset"] = "DISABLE_SP_ENTER_VEHICLE_CLIPSET";
-    return ConfigFlag2;
-  })(ConfigFlag || {});
-  export var WatermarkPosition = /* @__PURE__ */ ((WatermarkPosition2) => {
-    WatermarkPosition2[WatermarkPosition2["BottomRight"] = 0] = "BottomRight";
-    WatermarkPosition2[WatermarkPosition2["TopRight"] = 1] = "TopRight";
-    WatermarkPosition2[WatermarkPosition2["TopLeft"] = 2] = "TopLeft";
-    WatermarkPosition2[WatermarkPosition2["TopCenter"] = 3] = "TopCenter";
-    WatermarkPosition2[WatermarkPosition2["BottomCenter"] = 4] = "BottomCenter";
-    return WatermarkPosition2;
-  })(WatermarkPosition || {});
-  export var ProfileSourceType = /* @__PURE__ */ ((ProfileSourceType2) => {
-    ProfileSourceType2["Script"] = "script";
-    ProfileSourceType2["Builtin"] = "builtins";
-    ProfileSourceType2["Native"] = "native-callback";
-    ProfileSourceType2["Internal"] = "internal";
-    ProfileSourceType2["Unknown"] = "unknown";
-    return ProfileSourceType2;
-  })(ProfileSourceType || {});
-  export var GameFont = /* @__PURE__ */ ((GameFont2) => {
-    GameFont2[GameFont2["ChaletLondon"] = 0] = "ChaletLondon";
-    GameFont2[GameFont2["HouseScript"] = 1] = "HouseScript";
-    GameFont2[GameFont2["Monospace"] = 2] = "Monospace";
-    GameFont2[GameFont2["CharletComprimeColonge"] = 4] = "CharletComprimeColonge";
-    GameFont2[GameFont2["Pricedown"] = 7] = "Pricedown";
-    return GameFont2;
-  })(GameFont || {});
   export var ExplosionType = /* @__PURE__ */ ((ExplosionType2) => {
     ExplosionType2[ExplosionType2["Grenade"] = 0] = "Grenade";
     ExplosionType2[ExplosionType2["GrenadeLauncher"] = 1] = "GrenadeLauncher";
@@ -1821,5 +1723,102 @@
     ConnectDeniedReason2[ConnectDeniedReason2["WRONG_CDN_URL"] = 4] = "WRONG_CDN_URL";
     return ConnectDeniedReason2;
   })(ConnectDeniedReason || {});
+  export var Locale = /* @__PURE__ */ ((Locale2) => {
+    Locale2["Arabic"] = "ar";
+    Locale2["Belarusian"] = "by";
+    Locale2["Czech"] = "cz";
+    Locale2["German"] = "de";
+    Locale2["English"] = "en";
+    Locale2["Spanish"] = "es";
+    Locale2["Farsi"] = "fa";
+    Locale2["French"] = "fr";
+    Locale2["Hebrew"] = "he";
+    Locale2["Hungarian"] = "hu";
+    Locale2["Indonesian"] = "id";
+    Locale2["Hindi"] = "in_hd";
+    Locale2["Malayalam"] = "in_ml";
+    Locale2["Telugu"] = "in_tl";
+    Locale2["Tamil"] = "in_tm";
+    Locale2["Italian"] = "it";
+    Locale2["Lithuanian"] = "lt";
+    Locale2["Latvian"] = "lv";
+    Locale2["NorwegianBokmal"] = "nb_no";
+    Locale2["NorwegianNynorsk"] = "nn_no";
+    Locale2["Polish"] = "pl";
+    Locale2["Portugese"] = "pt";
+    Locale2["BrazilianPortuguese"] = "pt_br";
+    Locale2["Romanian"] = "ro";
+    Locale2["Serbian"] = "rs";
+    Locale2["Russian"] = "ru";
+    Locale2["Slovak"] = "sk";
+    Locale2["Thai"] = "th";
+    Locale2["Turkish"] = "tr";
+    Locale2["Ukrainian"] = "ua";
+    Locale2["ChineseSimplified"] = "zh_cn";
+    Locale2["ChineseTraditional"] = "zh_tw";
+    return Locale2;
+  })(Locale || {});
+  export var PermissionState = /* @__PURE__ */ ((PermissionState2) => {
+    PermissionState2[PermissionState2["ALLOWED"] = 0] = "ALLOWED";
+    PermissionState2[PermissionState2["DENIED"] = 1] = "DENIED";
+    PermissionState2[PermissionState2["UNSPECIFIED"] = 2] = "UNSPECIFIED";
+    PermissionState2[PermissionState2["FAILED"] = 3] = "FAILED";
+    return PermissionState2;
+  })(PermissionState || {});
+  export var StatName = /* @__PURE__ */ ((StatName2) => {
+    StatName2["Stamina"] = "stamina";
+    StatName2["Strength"] = "strength";
+    StatName2["LungCapacity"] = "lung_capacity";
+    StatName2["Wheelie"] = "wheelie_ability";
+    StatName2["Flying"] = "flying_ability";
+    StatName2["Shooting"] = "shooting_ability";
+    StatName2["Stealth"] = "stealth_ability";
+    return StatName2;
+  })(StatName || {});
+  export var VehicleIndicatorLights = /* @__PURE__ */ ((VehicleIndicatorLights2) => {
+    VehicleIndicatorLights2[VehicleIndicatorLights2["BlinkLeft"] = 1] = "BlinkLeft";
+    VehicleIndicatorLights2[VehicleIndicatorLights2["BlinkRight"] = 2] = "BlinkRight";
+    VehicleIndicatorLights2[VehicleIndicatorLights2["BlinkPermBoth"] = 4] = "BlinkPermBoth";
+    VehicleIndicatorLights2[VehicleIndicatorLights2["StaticBoth"] = 8] = "StaticBoth";
+    VehicleIndicatorLights2[VehicleIndicatorLights2["Interior"] = 64] = "Interior";
+    return VehicleIndicatorLights2;
+  })(VehicleIndicatorLights || {});
+  export var WebSocketReadyState = /* @__PURE__ */ ((WebSocketReadyState2) => {
+    WebSocketReadyState2[WebSocketReadyState2["Connecting"] = 0] = "Connecting";
+    WebSocketReadyState2[WebSocketReadyState2["Open"] = 1] = "Open";
+    WebSocketReadyState2[WebSocketReadyState2["Closing"] = 2] = "Closing";
+    WebSocketReadyState2[WebSocketReadyState2["Closed"] = 3] = "Closed";
+    return WebSocketReadyState2;
+  })(WebSocketReadyState || {});
+  export var ConfigFlag = /* @__PURE__ */ ((ConfigFlag2) => {
+    ConfigFlag2["DisableAutoWeaponSwap"] = "DISABLE_AUTO_WEAPON_SWAP";
+    ConfigFlag2["DisablePedPropKnockOff"] = "DISABLE_PED_PROP_KNOCK_OFF";
+    ConfigFlag2["DisableIdleCamera"] = "DISABLE_IDLE_CAMERA";
+    ConfigFlag2["DisableVehicleEngineShutdownOnLeave"] = "DISABLE_VEHICLE_ENGINE_SHUTDOWN_ON_LEAVE";
+    ConfigFlag2["DisableSPEnterVehicleClipset"] = "DISABLE_SP_ENTER_VEHICLE_CLIPSET";
+    return ConfigFlag2;
+  })(ConfigFlag || {});
+  export var WatermarkPosition = /* @__PURE__ */ ((WatermarkPosition2) => {
+    WatermarkPosition2[WatermarkPosition2["BottomRight"] = 0] = "BottomRight";
+    WatermarkPosition2[WatermarkPosition2["TopRight"] = 1] = "TopRight";
+    WatermarkPosition2[WatermarkPosition2["TopLeft"] = 2] = "TopLeft";
+    WatermarkPosition2[WatermarkPosition2["TopCenter"] = 3] = "TopCenter";
+    WatermarkPosition2[WatermarkPosition2["BottomCenter"] = 4] = "BottomCenter";
+    return WatermarkPosition2;
+  })(WatermarkPosition || {});
+  export var GameFont = /* @__PURE__ */ ((GameFont2) => {
+    GameFont2[GameFont2["ChaletLondon"] = 0] = "ChaletLondon";
+    GameFont2[GameFont2["HouseScript"] = 1] = "HouseScript";
+    GameFont2[GameFont2["Monospace"] = 2] = "Monospace";
+    GameFont2[GameFont2["CharletComprimeColonge"] = 4] = "CharletComprimeColonge";
+    GameFont2[GameFont2["Pricedown"] = 7] = "Pricedown";
+    return GameFont2;
+  })(GameFont || {});
+  export var TextAlign = /* @__PURE__ */ ((TextAlign2) => {
+    TextAlign2[TextAlign2["Center"] = 0] = "Center";
+    TextAlign2[TextAlign2["Left"] = 1] = "Left";
+    TextAlign2[TextAlign2["Rigth"] = 2] = "Rigth";
+    return TextAlign2;
+  })(TextAlign || {});
   
 

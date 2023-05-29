@@ -5,6 +5,6 @@
 declare module "altv-enums" {
   export { BaseObjectType, BlipSprite, BlipColor, MarkerType, ColShapeType, AudioCategory, FileEncoding, Permission, CheckpointType, ModelType, KeyCode, BodyPart, PedConfigFlag, VehicleLockState, } from "alt-shared";
   export { ExplosionType, BlipType, RadioStation, NumberPlateStyle, VehicleBumper, VehicleBumperDamage, VehicleDoor, VehicleDoorState, VehicleModType, VehiclePart, VehiclePartDamage, WeatherType, WindowTint, ConnectDeniedReason, } from "alt-server";
-  export { Locale, PermissionState, StatName, VehicleIndicatorLights, WebSocketReadyState, ConfigFlag, WatermarkPosition, ProfileSourceType, GameFont, } from "alt-client";
+  export { Locale, PermissionState, StatName, VehicleIndicatorLights, WebSocketReadyState, ConfigFlag, WatermarkPosition, GameFont, TextAlign, } from "alt-client";
   
 }
