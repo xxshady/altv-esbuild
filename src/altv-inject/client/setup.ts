@@ -157,6 +157,7 @@ export class ClientSetup {
     native.displayRadar(true)
     _alt.FocusData.clearFocus()
     native.setFrontendActive(false) // force exit pause menu
+    _alt.setCamFrozen(false)
   }
 
   private hookBaseObjects(): void {
