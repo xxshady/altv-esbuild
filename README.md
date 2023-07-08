@@ -1,6 +1,6 @@
 # altv-esbuild
 
-Special thanks ❤️ to [innxz](https://github.com/innxz) for financially supporting me and this library.
+Special thanks ❤️ to [innxz](https://github.com/innxz) and [uncle_ara](https://github.com/uncle-ara) for financially supporting me and this library.
 
 A plugin that greatly simplifies server/client JS and TS development (as well as production) on the [alt:V](https://altv.mp) platform.<br>
 (extended and improved version of the previous [esbuild dev plugin](https://github.com/xxshady/esbuild-plugin-altv-dev-server)).
@@ -85,6 +85,7 @@ Player disconnect is also [not supported](https://github.com/xxshady/altv-esbuil
 ### esbuild
 
 Not supported build options
+
 - Wild-card `*` [`external`](https://esbuild.github.io/api/#external) (for example: `"node_modules/*"`)
 - [`packages`](https://esbuild.github.io/api/#packages)
 
@@ -104,6 +105,7 @@ Here its a bit complicated. If you use vscode [Source maps navigator](https://ma
 ## Some libraries don't work with bundling
 
 If you see such errors it may mean this is your case:
+
 - `Error: Dynamic require of "crypto" is not supported`
 - `SyntaxError: Unexpected identifier`
 - `ReferenceError: __dirname is not defined`
