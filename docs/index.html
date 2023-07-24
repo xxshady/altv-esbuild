@@ -1,107 +1,228 @@
-<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>altv-esbuild</title><meta name="description" content="Documentation for altv-esbuild"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script defer src="assets/main.js"></script><script async src="assets/search.js" id="tsd-search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
-<div class="tsd-toolbar-contents container">
-<div class="table-cell" id="tsd-search" data-base=".">
-<div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
-<div class="field">
-<div id="tsd-toolbar-links"></div></div>
-<ul class="results">
-<li class="state loading">Preparing search index...</li>
-<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">altv-esbuild</a></div>
-<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>altv-esbuild</title>
+	<meta name="description" content="Documentation for altv-esbuild">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">altv-esbuild</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>altv-esbuild</h1>
+		</div>
+	</div>
+</header>
 <div class="container container-main">
-<div class="col-content">
-<div class="tsd-page-title">
-<h2>altv-esbuild</h2></div>
-<div class="tsd-panel tsd-typography"><a id="md:altv-esbuild" class="tsd-anchor"></a><h1><a href="#md:altv-esbuild">altv-esbuild</a></h1><p>Special thanks ❤️ to <a href="https://github.com/innxz">innxz</a> and <a href="https://github.com/uncle-ara">uncle_ara</a> for financially supporting me and this library.</p>
-<p>A plugin that greatly simplifies server/client JS and TS development (as well as production) on the <a href="https://altv.mp">alt:V</a> platform.<br>
-(extended and improved version of the previous <a href="https://github.com/xxshady/esbuild-plugin-altv-dev-server">esbuild dev plugin</a>).</p>
-<a id="md:features" class="tsd-anchor"></a><h2><a href="#md:features">Features</a></h2><ul>
-<li>Write your scripts in JS/TS with enabled 5-million-polygon cars and mlo without client crashes</li>
-<li>Hot reload without server restart or client reconnect (using alt:V <a href="https://docs.altv.mp/articles/commandlineargs.html#server-commands">resource restart</a>)</li>
-<li>Full client and server support</li>
-<li>Restart console command for client and server (&quot;res&quot; by default)</li>
-<li>Improved top-level exception output during development</li>
-<li>Direct support for alt:V enums, even in JS code (<a href="https://xxshady.github.io/altv-esbuild/interfaces/ipluginoptions.html#altvenums">documentation</a>)</li>
-</ul>
-<a id="md:docs" class="tsd-anchor"></a><h2><a href="#md:docs">Docs</a></h2><p>Docs web page: <a href="https://xxshady.github.io/altv-esbuild">https://xxshady.github.io/altv-esbuild</a>.</p>
-<a id="md:how-to-use" class="tsd-anchor"></a><h2><a href="#md:how-to-use">How to use?</a></h2><p>Example resource can be found <a href="https://github.com/xxshady/altv-esbuild/tree/main/example">here</a>.</p>
-<a id="md:install-from-npm" class="tsd-anchor"></a><h3><a href="#md:install-from-npm">Install from npm</a></h3><pre><code class="language-cli">npm i altv-esbuild
-</code><button>Copy</button></pre>
-<a id="md:add-to-your-build-code-of-the-server-and-client" class="tsd-anchor"></a><h3><a href="#md:add-to-your-build-code-of-the-server-and-client">Add to your build code of the server and client</a></h3><p>Example of the build server code:</p>
-<pre><code class="language-js"><span class="hl-0">import</span><span class="hl-1"> </span><span class="hl-2">esbuild</span><span class="hl-1"> </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;esbuild&quot;</span><br/><span class="hl-0">import</span><span class="hl-1"> { </span><span class="hl-2">altvEsbuild</span><span class="hl-1"> } </span><span class="hl-0">from</span><span class="hl-1"> </span><span class="hl-3">&quot;altv-esbuild&quot;</span><br/><br/><span class="hl-4">// your own variable</span><br/><span class="hl-5">const</span><span class="hl-1"> </span><span class="hl-6">DEV_MODE</span><span class="hl-1"> = </span><span class="hl-5">true</span><br/><br/><span class="hl-2">esbuild</span><span class="hl-1">.</span><span class="hl-7">build</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-2">entryPoints:</span><span class="hl-1"> [</span><span class="hl-3">&quot;src/main.js&quot;</span><span class="hl-1">],</span><br/><span class="hl-1">  </span><span class="hl-2">outfile:</span><span class="hl-1"> </span><span class="hl-3">&quot;dist/bundle.js&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-2">bundle:</span><span class="hl-1"> </span><span class="hl-5">true</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-2">watch:</span><span class="hl-1"> </span><span class="hl-6">DEV_MODE</span><span class="hl-1">, </span><span class="hl-4">// this build option is outdated, see example directory in the repo</span><br/><span class="hl-1">  </span><span class="hl-2">target:</span><span class="hl-1"> </span><span class="hl-3">&quot;esnext&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-2">format:</span><span class="hl-1"> </span><span class="hl-3">&quot;esm&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><br/><span class="hl-1">  </span><span class="hl-2">plugins:</span><span class="hl-1"> [</span><br/><span class="hl-1">    </span><span class="hl-7">altvEsbuild</span><span class="hl-1">({</span><br/><span class="hl-1">      </span><span class="hl-2">mode:</span><span class="hl-1"> </span><span class="hl-3">&quot;server&quot;</span><span class="hl-1">, </span><span class="hl-4">// use &quot;server&quot; for server code, and &quot;client&quot; for client code</span><br/><br/><span class="hl-1">      </span><span class="hl-4">// see docs for more info about these options:</span><br/><span class="hl-1">      </span><span class="hl-2">dev:</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-2">enabled:</span><span class="hl-1"> </span><span class="hl-6">DEV_MODE</span><span class="hl-1">,</span><br/><br/><span class="hl-1">        </span><span class="hl-4">// if `DEV_MODE` is false it will also be automatically set to false too</span><br/><span class="hl-1">        </span><span class="hl-2">enhancedRestartCommand:</span><span class="hl-1"> </span><span class="hl-5">true</span><span class="hl-1">, </span><br/><span class="hl-1">      },</span><br/><span class="hl-1">      </span><span class="hl-2">altvEnums:</span><span class="hl-1"> </span><span class="hl-5">true</span><span class="hl-1">,</span><br/><span class="hl-1">      </span><span class="hl-2">bugFixes:</span><span class="hl-1"> {</span><br/><span class="hl-1">        </span><span class="hl-2">playerDamageOnFirstConnect:</span><span class="hl-1"> </span><span class="hl-5">true</span><span class="hl-1">,</span><br/><span class="hl-1">      },</span><br/><span class="hl-1">    }),</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><br/><span class="hl-1">  </span><span class="hl-2">external:</span><span class="hl-1"> [</span><br/><span class="hl-1">    </span><span class="hl-4">// none of the following is required, the plugin handles all alt:V modules automatically</span><br/><span class="hl-1">    </span><span class="hl-4">// &quot;alt-server&quot;,</span><br/><span class="hl-1">    </span><span class="hl-4">// &quot;alt-client&quot;,</span><br/><span class="hl-1">    </span><span class="hl-4">// &quot;alt-shared&quot;,</span><br/><span class="hl-1">    </span><span class="hl-4">// &quot;natives&quot;</span><br/><span class="hl-1">  ]</span><br/><span class="hl-1">})</span>
-</code><button>Copy</button></pre>
-<a id="md:limitations" class="tsd-anchor"></a><h2><a href="#md:limitations">Limitations</a></h2><a id="md:altv" class="tsd-anchor"></a><h3><a href="#md:altv">alt:V</a></h3><p><a href="https://docs.altv.mp/articles/connection_queue.html">Connection queue</a> is not supported between hot reloads (or just resource restarts).<br>
-Player disconnect is also <a href="https://github.com/xxshady/altv-esbuild/issues/8">not supported</a> between hot reloads. Only <a href="https://xxshady.github.io/altv-esbuild/interfaces/iplugindevoption.html#playersreconnect">player connect</a> is emulated for now in dev environment.</p>
-<a id="md:esbuild" class="tsd-anchor"></a><h3><a href="#md:esbuild">esbuild</a></h3><p>Not supported build options</p>
-<ul>
-<li>Wild-card <code>*</code> <a href="https://esbuild.github.io/api/#external"><code>external</code></a> (for example: <code>&quot;node_modules/*&quot;</code>)</li>
-<li><a href="https://esbuild.github.io/api/#packages"><code>packages</code></a></li>
-</ul>
-<a id="md:how-to-find-exact-source-location-of-any-exception" class="tsd-anchor"></a><h2><a href="#md:how-to-find-exact-source-location-of-any-exception">How to find exact source location of any exception?</a></h2><p>You can use <a href="https://esbuild.github.io/api/#sourcemap">esbuild source-maps</a> like this: <code>sourcemap: &quot;inline&quot;</code>.</p>
-<a id="md:serverside" class="tsd-anchor"></a><h3><a href="#md:serverside">serverside</a></h3><p>Enable source-maps in <a href="https://docs.altv.mp/articles/configs/server.html">server.toml</a>
-and <a href="https://imgur.com/HJYM0y1">here you go</a>.</p>
-<a id="md:clientside" class="tsd-anchor"></a><h3><a href="#md:clientside">clientside</a></h3><p>Here its a bit complicated. If you use vscode <a href="https://marketplace.visualstudio.com/items?itemName=vlkoti.vscode-sourcemaps-navigator">Source maps navigator</a> extension can help you jump to your source code.</p>
-<a id="md:some-libraries-don39t-work-with-bundling" class="tsd-anchor"></a><h2><a href="#md:some-libraries-don39t-work-with-bundling">Some libraries don&#39;t work with bundling</a></h2><p>If you see such errors it may mean this is your case:</p>
-<ul>
-<li><code>Error: Dynamic require of &quot;crypto&quot; is not supported</code></li>
-<li><code>SyntaxError: Unexpected identifier</code></li>
-<li><code>ReferenceError: __dirname is not defined</code></li>
-</ul>
-<p>Libraries that must be external: <code>discord.js, prisma</code></p>
-<p>✅ <strong>Solution:</strong> add this library to <a href="https://esbuild.github.io/api/#external"><code>external</code></a> build option of esbuild</p>
-<a id="md:contributions" class="tsd-anchor"></a><h2><a href="#md:contributions">Contributions</a></h2><p>All contributions are greatly appreciated. If there are any questions or you would like to discuss a feature, you can always <a href="https://github.com/xxshady/altv-esbuild/issues">open issue</a>.</p>
-</div></div>
-<div class="col-sidebar">
-<div class="page-menu">
-<div class="tsd-navigation settings">
-<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
-<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)" id="icon-chevronDown"></path></svg>Settings</h3></summary>
-<div class="tsd-accordion-details">
-<div class="tsd-filter-visibility">
-<h4 class="uppercase">Member Visibility</h4><form>
-<ul id="tsd-filter-options">
-<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
-<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li>
-<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
-<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></form></div>
-<div class="tsd-theme-toggle">
-<h4 class="uppercase">Theme</h4><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
-<details open class="tsd-index-accordion tsd-page-navigation"><summary class="tsd-accordion-summary">
-<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><use href="#icon-chevronDown"></use></svg>On This Page</h3></summary>
-<div class="tsd-accordion-details">
-<ul>
-<li>
-<ul>
-<li><a href="#md:altv-esbuild"><span>altv-<wbr/>esbuild</span></a></li>
-<li>
-<ul>
-<li><a href="#md:features"><span>Features</span></a></li>
-<li><a href="#md:docs"><span>Docs</span></a></li>
-<li><a href="#md:how-to-use"><span>How to use?</span></a></li>
-<li>
-<ul>
-<li><a href="#md:install-from-npm"><span>Install from npm</span></a></li>
-<li><a href="#md:add-to-your-build-code-of-the-server-and-client"><span>Add to your build code of the server and client</span></a></li></ul></li>
-<li><a href="#md:limitations"><span>Limitations</span></a></li>
-<li>
-<ul>
-<li><a href="#md:altv"><span>alt:V</span></a></li>
-<li><a href="#md:esbuild"><span>esbuild</span></a></li></ul></li>
-<li><a href="#md:how-to-find-exact-source-location-of-any-exception"><span>How to find exact source location of any exception?</span></a></li>
-<li>
-<ul>
-<li><a href="#md:serverside"><span>serverside</span></a></li>
-<li><a href="#md:clientside"><span>clientside</span></a></li></ul></li>
-<li><a href="#md:some-libraries-don39t-work-with-bundling"><span>Some libraries don&#39;t work with bundling</span></a></li>
-<li><a href="#md:contributions"><span>Contributions</span></a></li></ul></li></ul></li></ul></div></details></div>
-<div class="site-menu">
-<nav class="tsd-navigation"><a href="modules.html" class="current"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-namespace)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.33 16V7.24H10.77L13.446 14.74C13.43 14.54 13.41 14.296 13.386 14.008C13.37 13.712 13.354 13.404 13.338 13.084C13.33 12.756 13.326 12.448 13.326 12.16V7.24H14.37V16H12.93L10.266 8.5C10.282 8.692 10.298 8.936 10.314 9.232C10.33 9.52 10.342 9.828 10.35 10.156C10.366 10.476 10.374 10.784 10.374 11.08V16H9.33Z" fill="var(--color-text)"></path></g></svg><span>altv-<wbr/>esbuild</span></a>
-<ul class="tsd-small-nested-navigation">
-<li><a href="interfaces/IPluginDevOption.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-256"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-interface)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.51 16V15.016H11.298V8.224H9.51V7.24H14.19V8.224H12.402V15.016H14.19V16H9.51Z" fill="var(--color-text)"></path></g></svg><span>IPlugin<wbr/>Dev<wbr/>Option</span></a></li>
-<li><a href="interfaces/IPluginFixesOption.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>IPlugin<wbr/>Fixes<wbr/>Option</span></a></li>
-<li><a href="interfaces/IPluginOptions.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-256"></use></svg><span>IPlugin<wbr/>Options</span></a></li>
-<li><a href="types/PluginMode.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-4194304"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-type-alias)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M11.31 16V8.224H8.91V7.24H14.79V8.224H12.39V16H11.31Z" fill="var(--color-text)"></path></g></svg><span>Plugin<wbr/>Mode</span></a></li>
-<li><a href="functions/altvEsbuild.html"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-64"><rect fill="var(--color-icon-background)" stroke="var(--color-ts-function)" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="6"></rect><path d="M9.39 16V7.24H14.55V8.224H10.446V11.128H14.238V12.112H10.47V16H9.39Z" fill="var(--color-text)"></path></g></svg><span>altv<wbr/>Esbuild</span></a></li></ul></nav></div></div></div>
-<div class="tsd-generator">
-<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
-<div class="overlay"></div></body></html>
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#altv-esbuild" id="altv-esbuild" style="color: inherit; text-decoration: none;">
+					<h1>altv-esbuild</h1>
+				</a>
+				<p>Special thanks ❤️ to <a href="https://github.com/innxz">innxz</a> and <a href="https://github.com/uncle-ara">uncle_ara</a> for financially supporting me and this library.</p>
+				<p>A plugin that greatly simplifies server/client JS and TS development (as well as production) on the <a href="https://altv.mp">alt:V</a> platform.<br>
+				(extended and improved version of the previous <a href="https://github.com/xxshady/esbuild-plugin-altv-dev-server">esbuild dev plugin</a>).</p>
+				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
+					<h2>Features</h2>
+				</a>
+				<ul>
+					<li>Write your scripts in JS/TS with enabled 5-million-polygon cars and mlo without client crashes</li>
+					<li>Hot reload without server restart or client reconnect (using alt:V <a href="https://docs.altv.mp/articles/commandlineargs.html#server-commands">resource restart</a>)</li>
+					<li>Full client and server support</li>
+					<li>Restart console command for client and server (&quot;res&quot; by default)</li>
+					<li>Improved top-level exception output during development</li>
+					<li>Direct support for alt:V enums, even in JS code (<a href="https://xxshady.github.io/altv-esbuild/interfaces/ipluginoptions.html#altvenums">documentation</a>)</li>
+				</ul>
+				<a href="#docs" id="docs" style="color: inherit; text-decoration: none;">
+					<h2>Docs</h2>
+				</a>
+				<p>Docs web page: <a href="https://xxshady.github.io/altv-esbuild">https://xxshady.github.io/altv-esbuild</a>.</p>
+				<a href="#how-to-use" id="how-to-use" style="color: inherit; text-decoration: none;">
+					<h2>How to use?</h2>
+				</a>
+				<p>Example resource can be found <a href="https://github.com/xxshady/altv-esbuild/tree/main/example">here</a>.</p>
+				<a href="#install-from-npm" id="install-from-npm" style="color: inherit; text-decoration: none;">
+					<h3>Install from npm</h3>
+				</a>
+				<pre><code class="language-cli">npm i altv-esbuild
+</code></pre>
+				<a href="#add-to-your-build-code-of-the-server-and-client" id="add-to-your-build-code-of-the-server-and-client" style="color: inherit; text-decoration: none;">
+					<h3>Add to your build code of the server and client</h3>
+				</a>
+				<p>Example of the build server code:</p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">esbuild</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;esbuild&quot;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">altvEsbuild</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;altv-esbuild&quot;</span>
+
+<span style="color: #008000">// your own variable</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">DEV_MODE</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span>
+
+<span style="color: #001080">esbuild</span><span style="color: #000000">.</span><span style="color: #795E26">build</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">entryPoints:</span><span style="color: #000000"> [</span><span style="color: #A31515">&quot;src/main.js&quot;</span><span style="color: #000000">],</span>
+<span style="color: #000000">  </span><span style="color: #001080">outfile:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;dist/bundle.js&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">bundle:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">watch:</span><span style="color: #000000"> </span><span style="color: #0070C1">DEV_MODE</span><span style="color: #000000">, </span><span style="color: #008000">// this build option is outdated, see example directory in the repo</span>
+<span style="color: #000000">  </span><span style="color: #001080">target:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;esnext&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">format:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;esm&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span>
+<span style="color: #000000">  </span><span style="color: #001080">plugins:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">    </span><span style="color: #795E26">altvEsbuild</span><span style="color: #000000">({</span>
+<span style="color: #000000">      </span><span style="color: #001080">mode:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;server&quot;</span><span style="color: #000000">, </span><span style="color: #008000">// use &quot;server&quot; for server code, and &quot;client&quot; for client code</span>
+
+<span style="color: #000000">      </span><span style="color: #008000">// see docs for more info about these options:</span>
+<span style="color: #000000">      </span><span style="color: #001080">dev:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">enabled:</span><span style="color: #000000"> </span><span style="color: #0070C1">DEV_MODE</span><span style="color: #000000">,</span>
+
+<span style="color: #000000">        </span><span style="color: #008000">// if `DEV_MODE` is false it will also be automatically set to false too</span>
+<span style="color: #000000">        </span><span style="color: #001080">enhancedRestartCommand:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">, </span>
+<span style="color: #000000">      },</span>
+<span style="color: #000000">      </span><span style="color: #001080">altvEnums:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">bugFixes:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">playerDamageOnFirstConnect:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">      },</span>
+<span style="color: #000000">    }),</span>
+<span style="color: #000000">  ],</span>
+<span style="color: #000000">  </span>
+<span style="color: #000000">  </span><span style="color: #001080">external:</span><span style="color: #000000"> [</span>
+<span style="color: #000000">    </span><span style="color: #008000">// none of the following is required, the plugin handles all alt:V modules automatically</span>
+<span style="color: #000000">    </span><span style="color: #008000">// &quot;alt-server&quot;,</span>
+<span style="color: #000000">    </span><span style="color: #008000">// &quot;alt-client&quot;,</span>
+<span style="color: #000000">    </span><span style="color: #008000">// &quot;alt-shared&quot;,</span>
+<span style="color: #000000">    </span><span style="color: #008000">// &quot;natives&quot;</span>
+<span style="color: #000000">  ]</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				<a href="#limitations" id="limitations" style="color: inherit; text-decoration: none;">
+					<h2>Limitations</h2>
+				</a>
+				<a href="#altv" id="altv" style="color: inherit; text-decoration: none;">
+					<h3>alt:V</h3>
+				</a>
+				<p><a href="https://docs.altv.mp/articles/connection_queue.html">Connection queue</a> is not supported between hot reloads (or just resource restarts).<br>
+				Player disconnect is also <a href="https://github.com/xxshady/altv-esbuild/issues/8">not supported</a> between hot reloads. Only <a href="https://xxshady.github.io/altv-esbuild/interfaces/iplugindevoption.html#playersreconnect">player connect</a> is emulated for now in dev environment.</p>
+				<a href="#esbuild" id="esbuild" style="color: inherit; text-decoration: none;">
+					<h3>esbuild</h3>
+				</a>
+				<p>Not supported build options</p>
+				<ul>
+					<li>Wild-card <code>*</code> <a href="https://esbuild.github.io/api/#external"><code>external</code></a> (for example: <code>&quot;node_modules/*&quot;</code>)</li>
+					<li><a href="https://esbuild.github.io/api/#packages"><code>packages</code></a></li>
+				</ul>
+				<a href="#how-to-find-exact-source-location-of-any-exception" id="how-to-find-exact-source-location-of-any-exception" style="color: inherit; text-decoration: none;">
+					<h2>How to find exact source location of any exception?</h2>
+				</a>
+				<p>You can use <a href="https://esbuild.github.io/api/#sourcemap">esbuild source-maps</a> like this: <code>sourcemap: &quot;inline&quot;</code>.</p>
+				<a href="#serverside" id="serverside" style="color: inherit; text-decoration: none;">
+					<h3>serverside</h3>
+				</a>
+				<p>Enable source-maps in <a href="https://docs.altv.mp/articles/configs/server.html">server.toml</a>
+				and <a href="https://imgur.com/HJYM0y1">here you go</a>.</p>
+				<a href="#clientside" id="clientside" style="color: inherit; text-decoration: none;">
+					<h3>clientside</h3>
+				</a>
+				<p>Here its a bit complicated. If you use vscode <a href="https://marketplace.visualstudio.com/items?itemName=vlkoti.vscode-sourcemaps-navigator">Source maps navigator</a> extension can help you jump to your source code.</p>
+				<a href="#some-libraries-don39t-work-with-bundling" id="some-libraries-don39t-work-with-bundling" style="color: inherit; text-decoration: none;">
+					<h2>Some libraries don&#39;t work with bundling</h2>
+				</a>
+				<p>If you see such errors it may mean this is your case:</p>
+				<ul>
+					<li><code>Error: Dynamic require of &quot;crypto&quot; is not supported</code></li>
+					<li><code>SyntaxError: Unexpected identifier</code></li>
+					<li><code>ReferenceError: __dirname is not defined</code></li>
+				</ul>
+				<p>Libraries that must be external: <code>discord.js, prisma</code></p>
+				<p>✅ <strong>Solution:</strong> add this library to <a href="https://esbuild.github.io/api/#external"><code>external</code></a> build option of esbuild</p>
+				<a href="#contributions" id="contributions" style="color: inherit; text-decoration: none;">
+					<h2>Contributions</h2>
+				</a>
+				<p>All contributions are greatly appreciated. If there are any questions or you would like to discuss a feature, you can always <a href="https://github.com/xxshady/altv-esbuild/issues">open issue</a>.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/iplugindevoption.html" class="tsd-kind-icon">IPlugin<wbr>Dev<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ipluginfixesoption.html" class="tsd-kind-icon">IPlugin<wbr>Fixes<wbr>Option</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/ipluginoptions.html" class="tsd-kind-icon">IPlugin<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="modules.html#pluginmode" class="tsd-kind-icon">Plugin<wbr>Mode</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="modules.html#altvesbuild" class="tsd-kind-icon">altv<wbr>Esbuild</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
