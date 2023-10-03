@@ -12,10 +12,10 @@
   resolved "https://registry.yarnpkg.com/@altv/types-natives/-/types-natives-1.5.4.tgz#f999821ad5e11a0b8132a0ff8a7b8dfaf05dd328"
   integrity sha512-N4jtJ4f8KFOCi0sxlVvTWF7I7Nz/ylq136sIJMpsHIcBWIlysWF6zdJFdBW5bkquDGWgY8aBYPQ4TU+ayQhukw==
 
-"@altv/types-server@^3.0.6":
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/@altv/types-server/-/types-server-3.0.6.tgz#3776062bf218e1896772c1985a675cf5c957c1a3"
-  integrity sha512-acFX4WFbEiDB/8FL8/4fJWillo5XIwcBv9NET1ddyBc0zUiND4VV+yi09bBH94TLk2wto5tWFu7fqoq8kFJmeg==
+"@altv/types-server@3.0.5":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@altv/types-server/-/types-server-3.0.5.tgz#043bbddae113b91d4ff49cbdfb7acdc03d8b5d5b"
+  integrity sha512-us9772ALKMv3wKbWmN8MfTQT5c+fHNKCquQjsKXXJQHm0y/m1rnx2RjXXlOggKJYe9bBAZR1wX21jCryECq2Pw==
 
 "@altv/types-shared@^1.6.5":
   version "1.6.5"

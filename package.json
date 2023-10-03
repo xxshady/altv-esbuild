@@ -2,7 +2,7 @@
   "devDependencies": {
     "@altv/types-client": "^3.0.1",
     "@altv/types-natives": "^1.5.4",
-    "@altv/types-server": "^3.0.6",
+    "@altv/types-server": "3.0.5",
     "@altv/types-shared": "^1.6.5",
     "@types/node": "^18.11.18",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
