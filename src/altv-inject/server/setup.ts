@@ -441,7 +441,10 @@ export class ServerSetup {
       const key = _key as keyof typeof _alt
 
       const BaseObjectClass = _alt[key]
-      if (!this.isBaseObjectClass(BaseObjectClass)) continue
+      if (
+        this.isAltVirtualEntityGroupClass(BaseObjectClass) ||
+        !this.isBaseObjectClass(BaseObjectClass)
+      ) continue
 
       let isClassAbstract = false
       try {
@@ -455,7 +458,14 @@ export class ServerSetup {
       if (isClassAbstract) continue
 
       (_alt[key] as unknown) = sharedSetup.wrapBaseObjectChildClass(BaseObjectClass)
+
+      this.log.debug("wrapped base object class:", BaseObjectClass.name)
     }
+  }
+
+  private isAltVirtualEntityGroupClass(value: unknown): value is new () => alt.Blip {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    return (value as Function).name === "VirtualEntityGroup"
   }
 
   // eslint-disable-next-line @typescript-eslint/ban-types
