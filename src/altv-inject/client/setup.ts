@@ -158,6 +158,7 @@ export class ClientSetup {
     _alt.FocusData.clearFocus()
     native.setFrontendActive(false) // force exit pause menu
     _alt.setCamFrozen(false)
+    native.setBigmapActive(false, false)
   }
 
   private hookBaseObjects(): void {
