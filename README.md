@@ -1,5 +1,7 @@
 # altv-esbuild
 
+[![ingame demo](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXJxejQ5dGE5cHE1ZzA2OWxqOXRiYmVmbGk2d20xZzg2cGRnZ3gzdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Qq64W7EXWNcppAd1fC/giphy.gif)](https://imgur.com/a/vWBZsoe)
+
 Special thanks ❤️ to [innxz](https://github.com/innxz) and [uncle_ara](https://github.com/uncle-ara) for financially supporting me and this library.
 
 A plugin that greatly simplifies server/client JS and TS development (as well as production) on the [alt:V](https://altv.mp) platform.<br>
