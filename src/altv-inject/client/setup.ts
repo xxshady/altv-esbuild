@@ -60,7 +60,6 @@ export class ClientSetup {
       }
 
       this.initClientReady()
-      this.hookBaseObjects()
       this.clearPlayerMeta = this.initPlayerMetaCleanup()
 
       sharedSetup.onResourceStop(this.onResourceStop)
@@ -159,32 +158,6 @@ export class ClientSetup {
     native.setFrontendActive(false) // force exit pause menu
     _alt.setCamFrozen(false)
     native.setBigmapActive(false, false)
-  }
-
-  private hookBaseObjects(): void {
-    for (const _key in _alt) {
-      const key = _key as keyof typeof _alt
-      const value = _alt[key]
-
-      if (!(this.isAltBlipClass(value) || this.isAltObjectClass(value))) continue
-
-      this.log.debug("hooking class:", value.name);
-      (_alt[key] as typeof value) = sharedSetup.wrapBaseObjectChildClass(value)
-    }
-  }
-
-  private isAltBlipClass(value: unknown): value is new () => alt.Blip {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    return (value as Function).prototype instanceof _alt.Blip
-  }
-
-  private isAltObjectClass(value: unknown): value is new () => alt.Object {
-    return (
-      /* eslint-disable @typescript-eslint/ban-types */
-      (value as Function).prototype instanceof _alt.Entity &&
-      (value as Function).name === "Object"
-      /* eslint-enable */
-    )
   }
 
   private initPlayerMetaCleanup(): () => void {
