@@ -131,9 +131,6 @@ export class ServerSetup {
   constructor(private readonly options: FilledPluginOptions) {
     const { dev, bugFixes } = options
 
-    if (bugFixes.playerDamageOnFirstConnect)
-      this.initPlayerDamageOnFirstConnectFix()
-
     if (dev.enabled) {
       this.origAltOnClient = sharedSetup.hookAltEventAdd("remote", "onClient", 1) as typeof alt.onClient
       sharedSetup.hookAltEventAdd("remote", "onceClient", 1, true)
@@ -592,63 +589,6 @@ export class ServerSetup {
 
       this.log.debug("emitting serverStarted from original")
       return args
-    })
-  }
-
-  private initPlayerDamageOnFirstConnectFix(): void {
-    const loadingModelPromises = new Map<alt.Player, ControlledPromise<[alt.Player]>>()
-
-    const resolvePlayer = (promise: ControlledPromise<[alt.Player]>, player: alt.Player): void => {
-      if (!player.valid) {
-        promise.reject(new Error("[playerDamageOnFirstConnectFix] player object is invalid"))
-        return
-      }
-
-      promise.resolve([player])
-    }
-
-    sharedSetup.hookAltEvent(
-      "playerConnect",
-      (player) => {
-        this.log.debug("playerDamageOnFirstConnectFix received playerConnect", player.name, player.id)
-
-        const promise = new ControlledPromise<[alt.Player]>()
-        loadingModelPromises.set(player, promise)
-
-        let timeout = _alt.setTimeout(() => {
-          timeout = 0
-          this.log.warn("[playerDamageOnFirstConnectFix] resolve playerConnect after timeout (maybe player is already disconnected?)")
-          resolvePlayer(promise, player)
-        }, 5000)
-
-        promise.promise.finally(() => {
-          this.log.debug("playerDamageOnFirstConnectFix promise.finally player:", player.name, player.id)
-          if (timeout) {
-            _alt.clearTimeout(timeout)
-            timeout = 0
-          }
-
-          loadingModelPromises.delete(player)
-        })
-
-        player.emitRaw(CLIENT_EVENTS.loadPlayerModels)
-
-        return promise.promise
-      },
-    )
-
-    // origAltOnClient is only set in dev mode
-    const onClient = this.origAltOnClient ?? _alt.onClient
-
-    onClient(SERVER_EVENTS.playerModelsLoaded, (player) => {
-      this.log.debug("received playerModelsLoaded player:", player.name, player.id)
-
-      const promise = loadingModelPromises.get(player)
-      if (!promise) {
-        this.log.debug("cant get loadingModelPromise, skip")
-        return
-      }
-      resolvePlayer(promise, player)
     })
   }
 }
