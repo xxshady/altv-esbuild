@@ -62,9 +62,6 @@ esbuild.build({
         enhancedRestartCommand: true, 
       },
       altvEnums: true,
-      bugFixes: {
-        playerDamageOnFirstConnect: true,
-      },
     }),
   ],
   

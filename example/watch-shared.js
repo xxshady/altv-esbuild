@@ -15,11 +15,8 @@ export const watch = async ({
         dev: true, // enables hot reload automatically
 
         // see docs for more info about these options:
-        altvEnums: true, 
-        bugFixes: {
-          playerDamageOnFirstConnect: true,
-        },
-        
+        altvEnums: true,
+
         ...altvEsbuildOptions,
       })
     ],
