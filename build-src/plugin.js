@@ -1,6 +1,6 @@
-import { typesGenerator } from "./types-generator"
-import { onBuildEnd } from "./on-build-end"
-import { ctxWrapper } from "./ctx-wrapper"
+import { typesGenerator } from "./types-generator.js"
+import { onBuildEnd } from "./on-build-end.js"
+import { ctxWrapper } from "./ctx-wrapper.js"
 
 ctxWrapper({
   entryPoints: ["src/plugin/main.ts"],

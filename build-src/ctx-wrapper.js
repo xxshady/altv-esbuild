@@ -1,12 +1,12 @@
 import esbuild from "esbuild"
-import * as shared from "./shared"
+import * as shared from "./shared.js"
 
 export const ctxWrapper = async (buildOptions) => {
   const ctx = await esbuild.context({
     ...shared.ESBUILD_OPTIONS,
     ...buildOptions
   })
-  
+
   console.log('watch:', shared.watch)
   if (shared.watch) {
     console.log('starting watch')

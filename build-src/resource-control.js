@@ -1,6 +1,6 @@
-import * as shared from "./shared"
+import * as shared from "./shared.js"
 import copyStaticFiles from "esbuild-copy-static-files"
-import { ctxWrapper } from "./ctx-wrapper"
+import { ctxWrapper } from "./ctx-wrapper.js"
 
 await ctxWrapper({
   platform: "node",
@@ -8,7 +8,7 @@ await ctxWrapper({
   outfile: "dist/__altv-esbuild-resource-control/main.js",
   external: [
     "alt-shared",
-    "alt-server", 
+    "alt-server",
   ],
   plugins: [
     copyStaticFiles({

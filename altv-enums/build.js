@@ -1,4 +1,4 @@
-import { ctxWrapper } from "../build-src/ctx-wrapper"
+import { ctxWrapper } from "../build-src/ctx-wrapper.js"
 
 ctxWrapper({
   entryPoints: ["altv-enums/src/main.ts"],
