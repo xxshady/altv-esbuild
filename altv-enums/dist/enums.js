@@ -1966,6 +1966,7 @@
     return StatName2;
   })(StatName || {});
   export var VehicleIndicatorLights = /* @__PURE__ */ ((VehicleIndicatorLights2) => {
+    VehicleIndicatorLights2[VehicleIndicatorLights2["None"] = 0] = "None";
     VehicleIndicatorLights2[VehicleIndicatorLights2["BlinkLeft"] = 1] = "BlinkLeft";
     VehicleIndicatorLights2[VehicleIndicatorLights2["BlinkRight"] = 2] = "BlinkRight";
     VehicleIndicatorLights2[VehicleIndicatorLights2["BlinkPermBoth"] = 4] = "BlinkPermBoth";
@@ -1990,6 +1991,7 @@
     ConfigFlag2["ForceHideNightProps"] = "FORCE_HIDE_NIGHT_PROPS";
     ConfigFlag2["ForceShowNightProps"] = "FORCE_SHOW_NIGHT_PROPS";
     ConfigFlag2["DisableEmissiveLightsRendering"] = "DISABLE_EMISSIVE_LIGHTS_RENDERING";
+    ConfigFlag2["ForceVehicleTyreBurst"] = "FORCE_VEHICLE_TYRE_BURST";
     return ConfigFlag2;
   })(ConfigFlag || {});
   export var WatermarkPosition = /* @__PURE__ */ ((WatermarkPosition2) => {
@@ -2014,5 +2016,12 @@
     TextAlign2[TextAlign2["Rigth"] = 2] = "Rigth";
     return TextAlign2;
   })(TextAlign || {});
+  export var TextLabelAlignment = /* @__PURE__ */ ((TextLabelAlignment2) => {
+    TextLabelAlignment2[TextLabelAlignment2["Left"] = 0] = "Left";
+    TextLabelAlignment2[TextLabelAlignment2["Right"] = 1] = "Right";
+    TextLabelAlignment2[TextLabelAlignment2["Center"] = 2] = "Center";
+    TextLabelAlignment2[TextLabelAlignment2["Justify"] = 3] = "Justify";
+    return TextLabelAlignment2;
+  })(TextLabelAlignment || {});
   
 
