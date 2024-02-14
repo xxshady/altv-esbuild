@@ -10,7 +10,6 @@ export abstract class SharedSetup {
   private readonly _log: Logger
 
   private bannerImportsCode = "// banner imports\n"
-  private bannerBodyCode = "// banner body\n"
 
   constructor(
     protected readonly options: FilledPluginOptions,
@@ -60,25 +59,6 @@ export abstract class SharedSetup {
       buildOptions.external.splice(altSharedIdx, 1)
 
     return buildOptions
-  }
-
-  protected appendBannerJs(
-    buildOptions: IPatchedBuildOptions,
-    code: string,
-    semicolon?: boolean,
-    comment?: string,
-  ): void {
-    this.appendCodeTo(buildOptions, "banner", code, semicolon, comment)
-  }
-
-  private appendCodeTo(
-    buildOptions: IPatchedBuildOptions,
-    option: "banner" | "footer",
-    code: string,
-    semicolon = true,
-    comment = "",
-  ): void {
-    buildOptions[option].js += `${code}${semicolon ? ";" : ""}${comment ? ` // ${comment}` : ""}\n`
   }
 
   protected endBannerJs(buildOptions: IPatchedBuildOptions): void {
