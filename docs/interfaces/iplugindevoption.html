@@ -80,6 +80,7 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iplugindevoption.html#clientserverinstancevalidation" class="tsd-kind-icon">client<wbr>Server<wbr>Instance<wbr>Validation</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iplugindevoption.html#connectioncompleteevent" class="tsd-kind-icon">connection<wbr>Complete<wbr>Event</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iplugindevoption.html#disconnectevent" class="tsd-kind-icon">disconnect<wbr>Event</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iplugindevoption.html#enabled" class="tsd-kind-icon">enabled</a></li>
@@ -100,6 +101,24 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="clientserverinstancevalidation" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> client<wbr>Server<wbr>Instance<wbr>Validation</h3>
+					<div class="tsd-signature tsd-kind-icon">client<wbr>Server<wbr>Instance<wbr>Validation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in main.d.ts:107</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p><strong>Experimental</strong> feature.</p>
+						</div>
+						<p>Ensures client and server code versions are same between hot reloads.
+						Affects <code>playerConnect</code> event emit (<a href="iplugindevoption.html#playersreconnect">playersReconnect</a>).</p>
+						<p><code>false</code> by default.</p>
+					</div>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="connectioncompleteevent" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> connection<wbr>Complete<wbr>Event</h3>
@@ -189,7 +208,7 @@
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Enables resource restart at any file change.</p>
+							<p>Enables resource restart at source code rebuild.</p>
 						</div>
 						<p><code>true</code> by default if <code>dev</code> enabled.</p>
 					</div>
@@ -238,7 +257,7 @@
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>Enables players reconnect emulation (clearing some player stuff on resourceStop and emiting playerConnect).</p>
+							<p>Enables players reconnect emulation (clearing some player stuff on resourceStop and emitting playerConnect).</p>
 						</div>
 						<p><code>true</code> by default if <code>dev</code> enabled.</p>
 					</div>
@@ -344,6 +363,9 @@
 					<li class="current tsd-kind-interface">
 						<a href="iplugindevoption.html" class="tsd-kind-icon">IPlugin<wbr>Dev<wbr>Option</a>
 						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iplugindevoption.html#clientserverinstancevalidation" class="tsd-kind-icon">client<wbr>Server<wbr>Instance<wbr>Validation</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="iplugindevoption.html#connectioncompleteevent" class="tsd-kind-icon">connection<wbr>Complete<wbr>Event</a>
 							</li>
