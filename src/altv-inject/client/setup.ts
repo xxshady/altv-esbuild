@@ -56,7 +56,10 @@ export class ClientSetup {
         this.initConnectionCompleteEvent()
       }
 
-      this.initClientReady()
+      if (dev.clientServerInstanceValidation)
+        this.initClientServerInstanceValidation()
+
+      this.initClientReady(options)
       this.clearPlayerMeta = this.initPlayerMetaCleanup()
 
       sharedSetup.onResourceStop(this.onResourceStop)
@@ -133,8 +136,25 @@ export class ClientSetup {
     })
   }
 
-  private initClientReady(): void {
-    _alt.emitServerRaw(SERVER_EVENTS.clientReady)
+  private initClientReady(options: FilledPluginOptions): void {
+    if (!options.dev.clientServerInstanceValidation)
+      _alt.emitServerRaw(SERVER_EVENTS.clientReady)
+  }
+
+  private initClientServerInstanceValidation(): void {
+    // next tick because ___altvEsbuild_altvInject_instanceId___ is initialized only after all other code is called
+    _alt.nextTick(() => {
+      const instanceId =
+        // eslint-disable-next-line camelcase
+        typeof ___altvEsbuild_altvInject_instanceId___ !== "undefined"
+          // eslint-disable-next-line camelcase
+          ? ___altvEsbuild_altvInject_instanceId___
+          : ""
+
+      this.log.debug("initClientServerInstanceValidation", { instanceId })
+
+      _alt.emitServerRaw(SERVER_EVENTS.clientReady, instanceId)
+    })
   }
 
   private clearGame(): void {

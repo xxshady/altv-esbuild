@@ -24,7 +24,12 @@ export abstract class SharedSetup {
       this.addCustomModule(
         build,
         "altv-enums",
-        fs.readFileSync(new URL("../../altv-enums/dist/enums.js", import.meta.url)).toString(),
+        fs.readFileSync(
+          new URL(
+            "../../altv-enums/dist/enums.js",
+            import.meta.url,
+          ),
+        ).toString(),
       )
     }
   }
@@ -157,7 +162,7 @@ export abstract class SharedSetup {
     })
   }
 
-  protected addCustomModule(build: esbuild.PluginBuild, moduleName: string, contents: string): void {
+  protected addCustomModule(build: esbuild.PluginBuild, moduleName: string, contents_: string | (() => string)): void {
     const namespace = `${PLUGIN_NAME}:custom-module-${moduleName}`
 
     build.onResolve({ filter: new RegExp(`^${moduleName}$`) }, (args) => ({
@@ -165,8 +170,10 @@ export abstract class SharedSetup {
       namespace,
     }))
 
+    const contents = typeof contents_ === "string" ? (): string => contents_ : contents_
+
     build.onLoad({ filter: /.*/, namespace }, () => {
-      return { contents, loader: "js" }
+      return { contents: contents(), loader: "js" }
     })
   }
 

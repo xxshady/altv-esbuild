@@ -164,7 +164,7 @@ class SharedSetup {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion, @typescript-eslint/await-thenable
           const result = handler!(...args)
 
-          this.log.debug("callback result:", result)
+          // this.log.debug("callback result:", result)
 
           if (result instanceof Promise) {
             // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

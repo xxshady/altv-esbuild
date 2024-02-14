@@ -9,5 +9,8 @@ ctxWrapper({
     "alt-server",
     "natives",
     "net",
+    "path",
+    "fs",
+    "crypto",
   ],
 })

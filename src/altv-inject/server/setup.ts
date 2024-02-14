@@ -20,14 +20,29 @@ import type net from "net"
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import type alt from "alt-server"
 import { ControlledPromise, SocketConnect } from "@/shared/util"
+import { INSTANCE_ID_META_KEY } from "./constants"
+import type path from "path"
+import type fs from "fs"
+import type crypto from "crypto"
+import { codeVarName } from "@/plugin/shared/util"
 
 // eslint-disable-next-line camelcase
 const _alt = ___altvEsbuild_altvInject_alt___
 let _net!: typeof net
+let _path!: typeof path
+let _fs!: typeof fs
+let _crypto!: typeof crypto
 
-if (_alt.isServer)
+if (_alt.isServer) {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   _net = await (async () => await import("net"))()
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  _path = await (async () => await import("path"))()
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  _fs = await (async () => await import("fs"))()
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  _crypto = await (async () => await import("crypto"))()
+}
 
 export class ServerSetup {
   // TODO: need to do something with this shit: (e.g. when only server changes it takes time to restart)
@@ -120,6 +135,7 @@ export class ServerSetup {
   private waitingForBuildEnd: PluginMode | null = null
   private restartInProgress = false
   private connectedAgain = false
+  private instanceId = this.getCurrentInstanceId()
 
   private readonly buildsInProgress = new Set<PluginMode>()
   private readonly syncedMetaKeys = new Set<string>()
@@ -184,8 +200,7 @@ export class ServerSetup {
       else if (dev.restartCommand)
         this.initRestartConsoleCommand(options)
 
-      if (dev.connectionCompleteEvent)
-        this.initConnectionCompleteEvent()
+      this.initClientReady()
 
       if (bugFixes.playerPrototype)
         this.initPlayerPrototypeTempFix()
@@ -212,6 +227,10 @@ export class ServerSetup {
     this.restartInProgress = true
 
     this.clearCurrentBuild()
+
+    // TODO: support for enhanced restart command
+    if (this.options.dev.clientServerInstanceValidation)
+      this.appendInstanceIdToClientBundle()
 
     const name = this.getFullResourceName()
     this.log.info(`restarting resource ${name}...`)
@@ -400,6 +419,7 @@ export class ServerSetup {
       this.log.debug("resource control path:", pathForStarting)
 
       _alt.nextTick(() => {
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         sharedSetup.origAltOnce!(
           sharedSetup.generateEventName("resourceControlReady"),
           () => {
@@ -416,13 +436,27 @@ export class ServerSetup {
       this.log.debug("control resource already started", RESOURCE_CONTROL_ALTV_NAME)
   }
 
-  private initConnectionCompleteEvent(): void {
-    this.log.debug("initConnectionCompleteEvent")
+  private initClientReady(): void {
+    this.log.debug("initClientReady")
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    this.origAltOnClient!(SERVER_EVENTS.clientReady, (player: alt.Player) => {
-      this.log.debug("received clientReady player:", player.name, player.id)
-      player.emitRaw(CLIENT_EVENTS.connectionComplete)
+    this.origAltOnClient!(SERVER_EVENTS.clientReady, (player: alt.Player, instanceId: string) => {
+      this.log.debug("received clientReady player:", player.name, player.id, { instanceId })
+
+      if (this.options.dev.clientServerInstanceValidation) {
+        // if this.instanceId is "" resource was not restarted yet so client & server are on same version
+        if (this.instanceId !== "") {
+          if (this.instanceId !== instanceId) {
+            this.log.debug("this.instanceId !== InstanceId")
+            return
+          }
+        }
+
+        this.log.debug("clientServerInstanceValidation ~gl~success")
+      }
+
+      if (this.options.dev.connectionCompleteEvent)
+        player.emitRaw(CLIENT_EVENTS.connectionComplete)
 
       const ready = this.playerReadyEvents.get(player)
       if (!ready) {
@@ -560,7 +594,7 @@ export class ServerSetup {
   }
 
   private getFullResourceName(): string {
-    const { path } = _alt.Resource.current as unknown as { path: string } // <server root>\resources\test\subfolder
+    const { path } = _alt.Resource.current // <server root>\resources\test\subfolder
     const resourcesDir = `${_alt.rootDir}\\resources\\` // <server root>\resources
 
     // returned path will be "test/subfolder"
@@ -590,5 +624,30 @@ export class ServerSetup {
       this.log.debug("emitting serverStarted from original")
       return args
     })
+  }
+
+  private nextInstanceId(): string {
+    this.instanceId = _crypto.randomUUID()
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    sharedSetup.origAltSetMeta!(INSTANCE_ID_META_KEY, this.instanceId.toString())
+    return this.instanceId
+  }
+
+  private getCurrentInstanceId(): string {
+    return _alt.getMeta(INSTANCE_ID_META_KEY) as string ?? ""
+  }
+
+  private appendInstanceIdToClientBundle(): void {
+    const resource = _alt.Resource.current
+    const clientMain = resource.config["client-main"]
+    if (clientMain == null)
+      throw new Error("[clientServerInstanceValidation] Failed to get client-main from resource config")
+
+    const clientPath = _path.join(resource.path, clientMain)
+    const instanceId = this.nextInstanceId()
+    this.log.debug({ instanceId })
+
+    const varName = codeVarName("altvInject_instanceId")
+    _fs.writeFileSync(clientPath, `\n\nglobalThis.${varName} = "${instanceId}"`, { flag: "a" })
   }
 }

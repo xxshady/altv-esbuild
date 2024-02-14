@@ -21,6 +21,7 @@ export const OPTIONS_DEFAULTS = {
     moveExternalsOnTop: true,
     enhancedRestartCommand: false,
     serverStartedEvent: true,
+    clientServerInstanceValidation: false,
   },
   bugFixes: {
     webViewFlickering: true,

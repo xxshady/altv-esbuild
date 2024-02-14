@@ -28,7 +28,7 @@ export interface IPluginDevOption {
   enabled?: boolean
 
   /**
-   * Enables resource restart at any file change.
+   * Enables resource restart at source code rebuild.
    *
    * `true` by default if `dev` enabled.
    */
@@ -42,7 +42,7 @@ export interface IPluginDevOption {
   hotReloadServerPort?: number
 
   /**
-   * Enables players reconnect emulation (clearing some player stuff on resourceStop and emiting playerConnect).
+   * Enables players reconnect emulation (clearing some player stuff on resourceStop and emitting playerConnect).
    *
    * `true` by default if `dev` enabled.
    */
@@ -124,6 +124,16 @@ export interface IPluginDevOption {
    * `true` by default if `dev` enabled.
    */
   serverStartedEvent?: boolean
+
+  /**
+   * **Experimental** feature.
+   *
+   * Ensures client and server code versions are same between hot reloads.
+   * Affects `playerConnect` event emit ({@link playersReconnect}).
+   *
+   * `false` by default.
+   */
+  clientServerInstanceValidation?: boolean
 }
 
 export interface IPluginFixesOption {
