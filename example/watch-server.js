@@ -1,4 +1,4 @@
-import { watch } from "./watch-shared"
+import { watch } from "./watch-shared.js"
 
 watch({
   esbuild: {

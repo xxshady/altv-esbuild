@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "watch-server": "node --es-module-specifier-resolution=node watch-server.js",
-    "watch-client": "node --es-module-specifier-resolution=node watch-client.js",
+    "watch-server": "node watch-server.js",
+    "watch-client": "node watch-client.js",
     "watch": "concurrently npm:watch-*"
   },
   "dependencies": {
