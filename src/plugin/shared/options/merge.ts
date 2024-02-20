@@ -25,7 +25,12 @@ export const mergeOptions = ({
           ...Object.fromEntries(
             Object.entries(
               OPTIONS_DEFAULTS.dev,
-            ).map(([key, value]) => [key, typeof value === "boolean" ? false : -1]),
+            ).map(([key, value]) => [
+              key,
+              typeof value === "boolean"
+                ? (false)
+                : (typeof value === "string" ? "" : -1),
+            ]),
           ) as FilledPluginOptions["dev"],
           enabled: false,
         }

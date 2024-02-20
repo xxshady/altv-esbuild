@@ -85,6 +85,7 @@ export class ServerSetup extends SharedSetup {
         const server = new NetServer(
           mode,
           dev.hotReloadServerPort,
+          dev.hotReloadServerHost,
           this.onConnectSomeMode,
           this.onClientBuildStart,
           this.onClientBuildEnd,

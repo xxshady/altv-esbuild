@@ -11,6 +11,7 @@ export const OPTIONS_DEFAULTS = {
     // with dev mode enabled values:
     hotReload: true,
     hotReloadServerPort: 8877,
+    hotReloadServerHost: "",
     playersReconnect,
     playersReconnectDelay: 200,
     playersReconnectResetPos: playersReconnect,

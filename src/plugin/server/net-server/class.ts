@@ -81,11 +81,12 @@ export class NetServer {
   constructor(
     private readonly mode: PluginMode,
     private readonly port: number,
+    private readonly host: string,
     private readonly connectModeHandler: (mode: PluginMode) => void,
     private readonly clientBuildStartHandler: () => void,
     private readonly clientBuildEndHandler: () => void,
   ) {
-    this.tryListen(port)
+    this.tryListen(port, host)
     this.server.on("error", this.onError)
     this.server.on("listening", this.onStartListening)
 
@@ -110,7 +111,10 @@ export class NetServer {
     targetSocket.eventManager.send(event, ...args)
   }
 
-  private tryListen(port: number): void {
-    this.server.listen(port)
+  private tryListen(port: number, host: string): void {
+    this.server.listen(
+      port,
+      host === "" ? undefined : host,
+    )
   }
 }

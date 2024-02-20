@@ -35,11 +35,18 @@ export interface IPluginDevOption {
   hotReload?: boolean
 
   /**
-   * TCP Port that will be used for hot reload server (communication between altv server and esbuild plugin).
+   * TCP port that will be used for hot reload server (communication between altv server and esbuild plugin).
    *
    * `8877` by default.
    */
   hotReloadServerPort?: number
+
+  /**
+   * TCP host that will be used for hot reload server (communication between altv server and esbuild plugin).
+   *
+   * Defined automatically by nodejs by default.
+   */
+  hotReloadServerHost?: string
 
   /**
    * Enables players reconnect emulation (clearing some player stuff on resourceStop and emitting playerConnect).

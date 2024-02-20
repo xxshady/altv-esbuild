@@ -39,6 +39,7 @@ export class ClientSetup extends SharedSetup {
         "plugin-client",
         net,
         this.options.dev.hotReloadServerPort,
+        this.options.dev.hotReloadServerHost,
         (socket) => {
           this.socket = socket
           this.eventManager = new EventManager(

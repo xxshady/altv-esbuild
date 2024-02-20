@@ -185,6 +185,7 @@ export class ServerSetup {
           "server-inject",
           _net,
           this.options.dev.hotReloadServerPort,
+          this.options.dev.hotReloadServerHost,
           (socket) => {
             this.socket = socket
             this.eventManager = this.initEventManager(socket)

@@ -28,6 +28,7 @@ export class SocketConnect {
     private readonly name: string,
     private readonly _net: typeof net,
     private readonly port: number,
+    private readonly host: string,
     private readonly connectHandler: (socket: net.Socket) => void,
   ) {
     this._socket = this.connect()
@@ -40,7 +41,10 @@ export class SocketConnect {
   private connect(): net.Socket {
     if (this._socket) this._socket.destroy()
 
-    const socket = this._net.connect(this.port)
+    const socket = this._net.connect(
+      this.port,
+      this.host === "" ? undefined : this.host,
+    )
 
     socket.on("connect", this.onConnect.bind(this, socket))
     socket.on("error", this.onError)
