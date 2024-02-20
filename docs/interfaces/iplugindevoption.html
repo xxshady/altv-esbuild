@@ -86,6 +86,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iplugindevoption.html#enabled" class="tsd-kind-icon">enabled</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iplugindevoption.html#enhancedrestartcommand" class="tsd-kind-icon">enhanced<wbr>Restart<wbr>Command</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iplugindevoption.html#hotreload" class="tsd-kind-icon">hot<wbr>Reload</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iplugindevoption.html#hotreloadserverhost" class="tsd-kind-icon">hot<wbr>Reload<wbr>Server<wbr>Host</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iplugindevoption.html#hotreloadserverport" class="tsd-kind-icon">hot<wbr>Reload<wbr>Server<wbr>Port</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iplugindevoption.html#moveexternalsontop" class="tsd-kind-icon">move<wbr>Externals<wbr>OnTop</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="iplugindevoption.html#playersreconnect" class="tsd-kind-icon">players<wbr>Reconnect</a></li>
@@ -107,7 +108,7 @@
 					<div class="tsd-signature tsd-kind-icon">client<wbr>Server<wbr>Instance<wbr>Validation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in main.d.ts:107</li>
+							<li>Defined in main.d.ts:113</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -125,7 +126,7 @@
 					<div class="tsd-signature tsd-kind-icon">connection<wbr>Complete<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in main.d.ts:61</li>
+							<li>Defined in main.d.ts:67</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -148,7 +149,7 @@
 					<div class="tsd-signature tsd-kind-icon">disconnect<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in main.d.ts:69</li>
+							<li>Defined in main.d.ts:75</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -182,7 +183,7 @@
 					<div class="tsd-signature tsd-kind-icon">enhanced<wbr>Restart<wbr>Command<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in main.d.ts:90</li>
+							<li>Defined in main.d.ts:96</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -214,6 +215,22 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="hotreloadserverhost" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> hot<wbr>Reload<wbr>Server<wbr>Host</h3>
+					<div class="tsd-signature tsd-kind-icon">hot<wbr>Reload<wbr>Server<wbr>Host<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in main.d.ts:30</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>TCP host that will be used for hot reload server (communication between altv server and esbuild plugin).</p>
+						</div>
+						<p>Defined automatically by nodejs by default.</p>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="hotreloadserverport" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> hot<wbr>Reload<wbr>Server<wbr>Port</h3>
 					<div class="tsd-signature tsd-kind-icon">hot<wbr>Reload<wbr>Server<wbr>Port<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
@@ -224,7 +241,7 @@
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>TCP Port that will be used for hot reload server (communication between altv server and esbuild plugin).</p>
+							<p>TCP port that will be used for hot reload server (communication between altv server and esbuild plugin).</p>
 						</div>
 						<p><code>8877</code> by default.</p>
 					</div>
@@ -235,7 +252,7 @@
 					<div class="tsd-signature tsd-kind-icon">move<wbr>Externals<wbr>OnTop<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in main.d.ts:82</li>
+							<li>Defined in main.d.ts:88</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -252,7 +269,7 @@
 					<div class="tsd-signature tsd-kind-icon">players<wbr>Reconnect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in main.d.ts:30</li>
+							<li>Defined in main.d.ts:36</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -268,7 +285,7 @@
 					<div class="tsd-signature tsd-kind-icon">players<wbr>Reconnect<wbr>Delay<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in main.d.ts:37</li>
+							<li>Defined in main.d.ts:43</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -285,7 +302,7 @@
 					<div class="tsd-signature tsd-kind-icon">players<wbr>Reconnect<wbr>Reset<wbr>Pos<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in main.d.ts:43</li>
+							<li>Defined in main.d.ts:49</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -301,7 +318,7 @@
 					<div class="tsd-signature tsd-kind-icon">restart<wbr>Command<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in main.d.ts:51</li>
+							<li>Defined in main.d.ts:57</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -318,7 +335,7 @@
 					<div class="tsd-signature tsd-kind-icon">server<wbr>Started<wbr>Event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in main.d.ts:98</li>
+							<li>Defined in main.d.ts:104</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -336,7 +353,7 @@
 					<div class="tsd-signature tsd-kind-icon">top<wbr>Level<wbr>Exception<wbr>Handling<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in main.d.ts:75</li>
+							<li>Defined in main.d.ts:81</li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -380,6 +397,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="iplugindevoption.html#hotreload" class="tsd-kind-icon">hot<wbr>Reload</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="iplugindevoption.html#hotreloadserverhost" class="tsd-kind-icon">hot<wbr>Reload<wbr>Server<wbr>Host</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
 								<a href="iplugindevoption.html#hotreloadserverport" class="tsd-kind-icon">hot<wbr>Reload<wbr>Server<wbr>Port</a>
