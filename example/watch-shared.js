@@ -12,7 +12,10 @@ export const watch = async ({
     format: "esm",
     plugins: [
       altvEsbuild({
-        dev: true, // enables hot reload automatically
+        // hot reload is enabled by default
+        dev: {
+          enhancedRestartCommand: true,
+        },
 
         // see docs for more info about these options:
         altvEnums: true,
