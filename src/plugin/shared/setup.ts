@@ -4,6 +4,7 @@ import { PLUGIN_NAME } from "../../shared/constants"
 import type { IPatchedBuildOptions } from "./types"
 import { codeVarName, Logger } from "./util"
 import fs from "fs"
+import path from "path"
 import { ALT_NATIVES_VAR, ALT_SHARED_VAR, ALT_VAR } from "./constants"
 
 export abstract class SharedSetup {
@@ -54,6 +55,17 @@ export abstract class SharedSetup {
     }
 
     this.bannerImportsCode += `const ${codeVarName("altvInject_pluginOptions")} = ${JSON.stringify(this.options)};\n`
+
+    if (this.options.dev.enhancedRestartCommand) {
+      let pluginDistDir = import.meta.url.slice("file:///".length)
+      pluginDistDir = path.join(pluginDistDir, "../../")
+      pluginDistDir = pluginDistDir.replaceAll("\\", "/")
+
+      // for example "C:/server_dir/node_modules/altv-esbuild/dist"
+      this._log.debug({ pluginDistDir })
+
+      this.bannerImportsCode += `const ${codeVarName("altvInject_pluginDistDir")} = "${pluginDistDir}";\n`
+    }
 
     const altIdx = buildOptions.external.indexOf("alt")
     const altSharedIdx = buildOptions.external.indexOf("alt-shared")

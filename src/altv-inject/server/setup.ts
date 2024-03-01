@@ -416,8 +416,9 @@ export class ServerSetup {
     if (!_alt.hasResource(RESOURCE_CONTROL_ALTV_NAME)) {
       this.log.debug("control resource is not started", RESOURCE_CONTROL_ALTV_NAME)
 
-      const pathForStarting = `../node_modules/altv-esbuild/dist/${RESOURCE_CONTROL_ALTV_NAME}`
-      this.log.debug("resource control path:", pathForStarting)
+      // for example "../node_modules/altv-esbuild/dist/__altv-esbuild-resource-control"
+      const resourceControlPath = this.resolveRelativePathOfResourceControl()
+      this.log.debug({ resourceControlPath })
 
       _alt.nextTick(() => {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -430,7 +431,7 @@ export class ServerSetup {
               commandName,
             )
           })
-        _alt.startResource(pathForStarting)
+        _alt.startResource(resourceControlPath)
       })
     }
     else
@@ -596,12 +597,16 @@ export class ServerSetup {
 
   private getFullResourceName(): string {
     const { path } = _alt.Resource.current // <server root>\resources\test\subfolder
-    const resourcesDir = `${_alt.rootDir}\\resources\\` // <server root>\resources
+    const resourcesDir = this.getResourcesDir()
 
     // returned path will be "test/subfolder"
     return path
       .slice(resourcesDir.length)
       .replaceAll("\\", "/")
+  }
+
+  private getResourcesDir(): string {
+    return `${_alt.rootDir}\\resources\\` // <server root>\resources
   }
 
   private initServerStartedEvent(): void {
@@ -650,5 +655,12 @@ export class ServerSetup {
 
     const varName = codeVarName("altvInject_instanceId")
     _fs.writeFileSync(clientPath, `\n\nglobalThis.${varName} = "${instanceId}"`, { flag: "a" })
+  }
+
+  private resolveRelativePathOfResourceControl(): string {
+    let path = _path.relative(this.getResourcesDir(), ___altvEsbuild_altvInject_pluginDistDir___)
+    path = _path.join(path, RESOURCE_CONTROL_ALTV_NAME)
+    path = path.replaceAll("\\", "/")
+    return path
   }
 }

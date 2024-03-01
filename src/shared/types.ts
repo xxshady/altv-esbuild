@@ -115,7 +115,10 @@ export interface IPluginDevOption {
   moveExternalsOnTop?: boolean
 
   /**
-   * Enables enhanced version of {@link restartCommand} option, that works even when script resource is stopped (serverside only).
+   * Enables enhanced version of {@link restartCommand} option, that works even when script resource is stopped
+   * (when resource is stopped this command only works on serverside).
+   *
+   * The command name is "res" if `true` specified, otherwise your passed value.
    *
    * @remarks Overrides {@link restartCommand} option.
    *
