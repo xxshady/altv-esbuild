@@ -56,12 +56,16 @@ export class NetServer {
     this.log.error("server error:", e)
   }
 
-  private readonly onSocketError = (mode: PluginMode, msg: string, e?: Error & { code?: string }): void => {
+  private readonly onSocketError = (
+    mode: PluginMode,
+    msg: string,
+    e?: Error & { code?: string },
+  ): void => {
     if (e?.code === "ECONNRESET") {
       this.log.debug(`disconnected socket mode: ${mode}`)
       return
     }
-    this.log.error(`socket mode: ${mode} error:`, e)
+    this.log.error(`socket mode: '${mode}' msg: '${msg}' error:`, e)
   }
 
   private readonly onSocketClose = (mode: PluginMode): void => {
