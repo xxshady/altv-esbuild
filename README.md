@@ -77,6 +77,20 @@ esbuild.build({
 
 ## Limitations
 
+### Imports of types, interfaces
+
+esbuild doesn't support importing types as values, you should use type-only imports `import type` or `import { type YourType } ` syntax.<br>
+typescript-eslint with [consistent-type-imports](https://typescript-eslint.io/rules/consistent-type-imports/) rule helps a lot with this.
+
+`types.ts`
+```ts
+export type SomeType = number
+```
+`script.ts`
+```ts
+import { type SomeType } from './types.ts'
+```
+
 ### alt:V
 
 [Connection queue](https://docs.altv.mp/articles/connection_queue.html) is not supported between hot reloads (or just resource restarts).<br>
