@@ -1,5 +1,6 @@
 import type { FilledPluginOptions, IPluginDevOption, IPluginOptions } from "@/shared"
 import { OPTIONS_DEFAULTS } from "./defaults"
+import assert from "assert"
 
 export const mergeOptions = ({
   mode,
@@ -39,6 +40,7 @@ export const mergeOptions = ({
                   filledDefault = -1
                   break
               }
+              assert.ok(filledDefault !== undefined)
 
               return [
                 key,

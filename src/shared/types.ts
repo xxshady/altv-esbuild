@@ -129,7 +129,7 @@ export interface IPluginDevOption {
    *
    * Empty by default.
    */
-  moveExternalsOnTopIgnore?: string[]
+  moveExternalsOnTopIgnore?: readonly string[]
 
   /**
    * Enables enhanced version of {@link restartCommand} option, that works even when script resource is stopped

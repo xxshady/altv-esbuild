@@ -190,7 +190,7 @@ export abstract class SharedSetup {
   }
 
   protected enableMoveExternalImportsOnTop(
-    ignore: string[],
+    ignore: readonly string[],
     { external }: IPatchedBuildOptions,
     additionalExternal?: string[],
     additionalTop?: string,
