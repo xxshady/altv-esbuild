@@ -115,6 +115,23 @@ export interface IPluginDevOption {
   moveExternalsOnTop?: boolean
 
   /**
+   * Which modules to not move to the top when {@link moveExternalsOnTop} is enabled.
+   *
+   * It's useful if you want to conditionally import something AND still use {@link moveExternalsOnTop} (because it's needed for {@link topLevelExceptionHandling})
+   * @example
+   * ```ts
+   * let mod
+   * if (something)
+   *   mod = await('a')
+   * else
+   *   mod = await('b')
+   * ```
+   *
+   * Empty by default.
+   */
+  moveExternalsOnTopIgnore?: string[]
+
+  /**
    * Enables enhanced version of {@link restartCommand} option, that works even when script resource is stopped
    * (when resource is stopped this command only works on serverside).
    *

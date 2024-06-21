@@ -81,7 +81,7 @@ export class ClientSetup extends SharedSetup {
       buildOptions.external.splice(nativesIdx, 1)
 
     if (this.options.dev.moveExternalsOnTop)
-      this.enableMoveExternalImportsOnTop(buildOptions)
+      this.enableMoveExternalImportsOnTop(this.options.dev.moveExternalsOnTopIgnore, buildOptions)
 
     this.endBannerJs(buildOptions)
     this.endFooterJs(buildOptions)

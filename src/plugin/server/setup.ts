@@ -143,6 +143,7 @@ export class ServerSetup extends SharedSetup {
       const customRequireVar = codeVarName("customRequire")
 
       this.enableMoveExternalImportsOnTop(
+        this.options.dev.moveExternalsOnTopIgnore,
         buildOptions,
         nodeBuiltins,
         (`import { createRequire as ${createRequireVar} } from 'module';

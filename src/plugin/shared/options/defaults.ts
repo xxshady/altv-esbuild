@@ -20,6 +20,7 @@ export const OPTIONS_DEFAULTS = {
     restartCommand: true,
     topLevelExceptionHandling: true,
     moveExternalsOnTop: true,
+    moveExternalsOnTopIgnore: [],
     enhancedRestartCommand: false,
     serverStartedEvent: true,
     clientServerInstanceValidation: false,

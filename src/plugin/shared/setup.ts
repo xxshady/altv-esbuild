@@ -190,6 +190,7 @@ export abstract class SharedSetup {
   }
 
   protected enableMoveExternalImportsOnTop(
+    ignore: string[],
     { external }: IPatchedBuildOptions,
     additionalExternal?: string[],
     additionalTop?: string,
@@ -197,7 +198,9 @@ export abstract class SharedSetup {
     additionalExternalStart?: string, // used for nodejs built-in modules whose names begin with "node:"
   ): void {
     const externalsOnTopNamespace = `${PLUGIN_NAME}:externals-on-top`
-    const externalRegExpString = [...external, ...(additionalExternal ?? [])].join("|")
+    external = external.filter(e => !ignore.includes(e))
+    const externalRegExpString = [...external, ...(additionalExternal ?? [])]
+      .join("|")
 
     /** { [external original name]: external var name } */
     const externalVarNames: Record<string, string> = {}
@@ -240,6 +243,8 @@ export abstract class SharedSetup {
         filter: new RegExp(`^(${externalRegExpString}|${additionalExternalStart}.+)$`),
       },
       ({ path }) => {
+        this._log.debug("build.onResolve", { path })
+
         if (additionalExternalStart && path.startsWith(additionalExternalStart)) {
           this._log.debug("import additionalExternalStart path:", path)
           return {
@@ -250,7 +255,7 @@ export abstract class SharedSetup {
         }
 
         const externalVarName = codeVarName(`externalOnTop_${path}`)
-        // log(`resolve external import ${path}`)
+        this._log.debug(`resolve external import ${path}`)
 
         if (!externalVarName) {
           const errorMessage = `external: ${path} var name not found`
