@@ -382,10 +382,13 @@ class SharedSetup {
 
           // static getter/setter
           else {
-            Object.defineProperty(WrappedBaseObjectChild, key, {
+            const attrs: PropertyDescriptor = {
               get: () => (BaseObjectChild as unknown as Record<string, unknown>)[key],
-              set: set?.bind(BaseObjectChild),
-            })
+            }
+            if (set)
+              attrs.set = set.bind(BaseObjectChild)
+
+            Object.defineProperty(WrappedBaseObjectChild, key, attrs)
           }
         }
         catch (e) {
