@@ -2,25 +2,25 @@
 # yarn lockfile v1
 
 
-"@altv/types-client@^15.0.13":
-  version "15.0.13"
-  resolved "https://registry.yarnpkg.com/@altv/types-client/-/types-client-15.0.13.tgz#f162e2c809a2f3bd35e84624853f19d9949fb94d"
-  integrity sha512-T6YcrcXPu6bB11jZY/my97s/e+XNiCvcy6vyP+HxPpi/0Q6utwoW5jRDkhZv0rjVFROftejFWrsQpPgyIku6uA==
+"@altv/types-client@^16.2.3":
+  version "16.2.3"
+  resolved "https://registry.yarnpkg.com/@altv/types-client/-/types-client-16.2.3.tgz#a819a34d4188aeeae73b4810a7f8ad6d8a80c43d"
+  integrity sha512-qpJBm80+T313VhmyMy2AloqgYQSrAHxeIAfzFv1zuMhiQFo1OUIQoGcr5uxaon4WgTd+6khwvA35G5tuWKqpZQ==
 
-"@altv/types-natives@^15.0.8":
-  version "15.0.8"
-  resolved "https://registry.yarnpkg.com/@altv/types-natives/-/types-natives-15.0.8.tgz#4c4957cfdd4dc553dd30a8253843680f369de25a"
-  integrity sha512-blJsp7j0TsmblRYK2GAQ+ftm2RUrjfdsEfGkjb/ny0cjYxFYzO1P9uobKoXpeUMJb7OFpiKrMlWk3yHbKvqi7Q==
+"@altv/types-natives@^16.2.0":
+  version "16.2.0"
+  resolved "https://registry.yarnpkg.com/@altv/types-natives/-/types-natives-16.2.0.tgz#ec36f6204e982daab039ad5a71a5544ec101195d"
+  integrity sha512-kZ6Or14I9DLPPbSAEEDxS+Pt+Efv1lsJSCFeYemnmoQEJtVT/XbCjkwYUd9HHzbcxkyAB87DVn1toQrAjYCSxg==
 
-"@altv/types-server@15.0.11":
-  version "15.0.11"
-  resolved "https://registry.yarnpkg.com/@altv/types-server/-/types-server-15.0.11.tgz#5f4e558bb4906cbd0f986ff9abe8542acb8b3e50"
-  integrity sha512-qcHXmEFbLeXCkVtO0+qLVAngCdsLLRpforumszGG9yAGuYuqcG+w9zEXESO+YxS7mppNrMHBdQw65NujkGw8zA==
+"@altv/types-server@16.2.1":
+  version "16.2.1"
+  resolved "https://registry.yarnpkg.com/@altv/types-server/-/types-server-16.2.1.tgz#55e59bdd4e9ca648f9c15d3705fabb55d9913ccf"
+  integrity sha512-Cm1gcPPtaO/cUmdfwTw9p61bIe6tL9F0MVJDy1Y+2QPERtZDBoqiUfYLKwT7AOXMyF3scG6kX/fkpwZels9d8A==
 
-"@altv/types-shared@^15.0.9":
-  version "15.0.9"
-  resolved "https://registry.yarnpkg.com/@altv/types-shared/-/types-shared-15.0.9.tgz#94343ea5027324440bc2dc98d0d8324521141a32"
-  integrity sha512-D2KCkJvLD+tE5/3UkKW2yJY7qjzJ3hCzfw9NWOY2VWRaFb1g8rX6hUVbdY+C/hCuaBsDc4wvuAsg76ZNP0HGhQ==
+"@altv/types-shared@^16.2.1":
+  version "16.2.1"
+  resolved "https://registry.yarnpkg.com/@altv/types-shared/-/types-shared-16.2.1.tgz#29367dec28a5efdc4d1ca73c2fc445ff048e6154"
+  integrity sha512-qQ6z58dqwmAV5UcDh5nWBaieOuhDaXNgzj63XJ3MJiR6z7ShI4onZszzEX9ALaLGdakPupWs+0pm/MJV7diZQQ==
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"
@@ -1753,10 +1753,15 @@ typedoc@0.21.0-beta.3:
     shiki "^0.9.3"
     typedoc-default-themes "^0.12.10"
 
-typescript@>=4.5.2, typescript@^4.9.4:
+typescript@>=4.5.2:
   version "4.9.4"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.4.tgz#a2a3d2756c079abda241d75f149df9d561091e78"
   integrity sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==
+
+typescript@^5.5.2:
+  version "5.5.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.5.2.tgz#c26f023cb0054e657ce04f72583ea2d85f8d0507"
+  integrity sha512-NcRtPEOsPFFWjobJEtfihkLCZCXZt/os3zf8nTxjVH3RvTSxjrCamJpbExGvYOF+tFHc3pA65qpdwPbzjohhew==
 
 uglify-js@^3.1.4:
   version "3.17.4"
