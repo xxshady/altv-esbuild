@@ -20,7 +20,7 @@ import type net from "net"
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import type alt from "alt-server"
 import { ControlledPromise, SocketConnect } from "@/shared/util"
-import { INSTANCE_ID_META_KEY } from "./constants"
+import { INSTANCE_ID_META_KEY, RESOURCE_RESTARTED_META_KEY } from "./constants"
 import type path from "path"
 import type fs from "fs"
 import type crypto from "crypto"
@@ -144,6 +144,8 @@ export class ServerSetup {
   private socketConnect?: SocketConnect
   private readonly playerReadyEvents = new Map<alt.Player, ControlledPromise<boolean>>()
 
+  private resourceRestarted = false
+
   constructor(private readonly options: FilledPluginOptions) {
     const { dev, bugFixes } = options
 
@@ -156,6 +158,9 @@ export class ServerSetup {
         this.syncedMetaKeys.add(key)
         original(key, value)
       }, 2)
+
+      this.resourceRestarted = _alt.getMeta(RESOURCE_RESTARTED_META_KEY) as boolean ?? false
+      this.initResourceRestartedMeta()
 
       this.hookBaseObjects()
       const clearPlayerMeta = this.hookAltPlayer()
@@ -303,16 +308,9 @@ export class ServerSetup {
   }
 
   private initPlayersReconnect({ dev: { playersReconnectDelay } }: FilledPluginOptions): void {
-    const resourceRestartedKey = `${PLUGIN_NAME}:resourceRestarted`
+    if (!this.resourceRestarted) return
 
-    this.log.debug("_alt.getMeta(resourceRestartedKey):", _alt.getMeta(resourceRestartedKey))
-
-    if (!_alt.getMeta(resourceRestartedKey)) {
-      this.log.debug("set resource restarted")
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-      sharedSetup.origAltSetMeta!(resourceRestartedKey, true)
-      return
-    }
+    this.log.debug("initPlayersReconnect")
 
     const players = _alt.Player.all
     if (!players.length) {
@@ -610,6 +608,8 @@ export class ServerSetup {
   }
 
   private initServerStartedEvent(): void {
+    if (!this.resourceRestarted) return
+
     this.log.debug("initServerStartedEvent")
 
     let timer: InstanceType<typeof alt.Utils.Timeout> | null = new _alt.Utils.Timeout(() => {
@@ -662,5 +662,15 @@ export class ServerSetup {
     path = _path.join(path, RESOURCE_CONTROL_ALTV_NAME)
     path = path.replaceAll("\\", "/")
     return path
+  }
+
+  private initResourceRestartedMeta(): void {
+    this.log.debug("_alt.getMeta(RESOURCE_RESTARTED_META_KEY):", _alt.getMeta(RESOURCE_RESTARTED_META_KEY))
+
+    if (_alt.getMeta(RESOURCE_RESTARTED_META_KEY)) return
+
+    this.log.debug("set resource restarted")
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    sharedSetup.origAltSetMeta!(RESOURCE_RESTARTED_META_KEY, true)
   }
 }
