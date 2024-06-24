@@ -345,6 +345,7 @@ export class ServerSetup {
 
             this.log.debug("waitForPlayerReadyEvent success player:", p.name, p.id)
 
+            sharedSetup.emitAltEvent<"server_baseObjectCreate">("baseObjectCreate", p)
             sharedSetup.emitAltEvent<"server_playerConnect">("playerConnect", p)
           })
           .catch(e => {
