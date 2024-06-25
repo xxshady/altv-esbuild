@@ -6,7 +6,6 @@ import type {
 } from "@/shared"
 import {
   RESOURCE_CONTROL_ALTV_NAME,
-  PLUGIN_NAME,
   EventManager,
 } from "@/shared"
 import type { AltRemoveUserEvent, BaseObjectClass } from "../shared"
@@ -171,7 +170,7 @@ export class ServerSetup {
 
         const streamOutPos = new _alt.Vector3((_alt.getServerConfig().mapBoundsMaxX ?? 100_000) + 2000)
         this.log.debug("despawnPlayers streamOutPos:", streamOutPos)
-        despawnPlayers = this.despawnPlayers.bind(this, streamOutPos)
+        despawnPlayers = this.resetPlayers.bind(this, streamOutPos)
       }
 
       sharedSetup.onResourceStop(
@@ -331,13 +330,6 @@ export class ServerSetup {
       for (const p of players) {
         if (!p.valid) continue
 
-        p.dimension = _alt.defaultDimension
-        p.streamed = true
-        p.collision = true
-        p.invincible = false
-        p.visible = true
-        p.frozen = false
-
         if (spawnAfterConnect) p.spawn(0, 0, 71)
 
         this.waitForPlayerReadyEvent(p)
@@ -359,20 +351,43 @@ export class ServerSetup {
     }, playersReconnectDelay)
   }
 
-  private despawnPlayers(streamOutPos: alt.Vector3): void {
-    this.log.debug("despawn players")
+  private resetPlayers(streamOutPos: alt.Vector3): void {
+    this.log.debug("resetting players")
 
     for (const p of _alt.Player.all) {
       if (!p.valid) continue
 
+      p.model = _alt.hash("ig_amandatownley")
       p.removeAllWeapons()
       p.clearBloodDamage()
-      // despawn doesn't call detach now (see alt:V issue https://github.com/altmp/altv-issues/issues/1456)
-      p.detach()
       p.despawn()
-      p.visible = false
+      p.netOwnershipDisabled = false
+      p.filter = null
+      p.dimension = _alt.defaultDimension
+      p.streamed = true
+      p.collision = true
+      p.invincible = false
+      p.visible = true
+
+      p.clearDecorations()
+      p.removeHeadBlendData()
+      p.removeHeadBlendPaletteColor()
+      p.clearTasks()
+
+      for (let i = 0; i <= 19; ++i)
+        p.removeFaceFeature(i)
+      for (let i = 0; i <= 12; ++i)
+        p.removeHeadOverlay(i)
+      for (let i = 1; i <= 11; ++i)
+        p.clearClothes(i)
+      for (let i = 0; i <= 7; ++i)
+        p.clearProp(i)
 
       if (this.options.dev.playersReconnectResetPos) p.pos = streamOutPos
+
+      // TODO: test fix
+      // // despawn doesn't call detach now (see alt:V issue https://github.com/altmp/altv-issues/issues/1456)
+      // p.detach()
     }
   }
 
