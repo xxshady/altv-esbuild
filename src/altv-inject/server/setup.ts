@@ -343,6 +343,10 @@ export class ServerSetup {
 
             sharedSetup.emitAltEvent<"server_baseObjectCreate">("baseObjectCreate", p)
             sharedSetup.emitAltEvent<"server_playerConnect">("playerConnect", p)
+
+            _alt.Player.all.filter(player => player !== p).forEach(player => {
+              (player as unknown as alt.Player).emitRaw(CLIENT_EVENTS.playerConnect, p)
+            })
           })
           .catch(e => {
             this.log.error(e.stack)
