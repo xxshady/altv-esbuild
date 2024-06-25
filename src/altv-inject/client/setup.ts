@@ -87,6 +87,7 @@ export class ClientSetup {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.origAltOnServer!(CLIENT_EVENTS.playerConnect, (player: alt.Player): void => {
       sharedSetup.setPlayerObjectPrototype(player)
+      sharedSetup.emitAltEvent<"client_baseObjectCreate">("baseObjectCreate", player)
     })
   }
 
