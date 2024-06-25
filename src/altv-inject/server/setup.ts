@@ -18,7 +18,7 @@ import {
 } from "../shared"
 import type net from "net"
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import type alt from "alt-server"
+import alt from "alt-server"
 import { ControlledPromise, SocketConnect } from "@/shared/util"
 import { INSTANCE_ID_META_KEY, RESOURCE_RESTARTED_META_KEY } from "./constants"
 import type path from "path"
@@ -325,6 +325,8 @@ export class ServerSetup {
 
     this.log.info(`start a timer for ~cl~${playersReconnectDelay}~w~ ms to reconnect players (${players.length})`)
 
+    const spawnAfterConnect = alt.getServerConfig()["spawnAfterConnect"] as boolean ?? false
+
     setTimeout(() => {
       for (const p of players) {
         if (!p.valid) continue
@@ -335,6 +337,8 @@ export class ServerSetup {
         p.invincible = false
         p.visible = true
         p.frozen = false
+
+        if (spawnAfterConnect) p.spawn(0, 0, 71)
 
         this.waitForPlayerReadyEvent(p)
           .then((res) => {
