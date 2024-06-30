@@ -1,8 +1,5 @@
 import * as alt from 'alt-server'
 
-// altvEnums feature https://xxshady.github.io/altv-esbuild/interfaces/ipluginoptions.html#altvenums
-import { RadioStation } from 'altv-enums' 
-
 alt.on('playerConnect', (player) => {
   alt.log('~gl~[playerConnect]~w~', 'player:~cl~', player.name)
   
@@ -19,10 +16,9 @@ alt.on('playerConnect', (player) => {
   alt.setTimeout(() => {
     // this vehicle will be automatically destroyed on hot reload restart
     const veh = new alt.Vehicle('sultan3', 0, 5, 71, 0, 0, 0)
-    veh.activeRadioStation = RadioStation.BlaineCountyRadio
     player.setIntoVehicle(veh, 1)
   }, 1000)
 })
 
 // try to change this line and save the file
-alt.log('it works?', RadioStation.BlaineCountyRadio)
+alt.log('it works?', 1)

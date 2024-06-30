@@ -30,7 +30,7 @@ export abstract class SharedSetup {
             "../../altv-enums/dist/enums.js",
             import.meta.url,
           ),
-        ).toString(),
+        ).toString() + `\n${ALT_VAR}.logWarning('[altv-esbuild] altvEnums feature is deprecated, use built-in JS enums instead: https://github.com/altmp/altv-js-module/pull/319')`,
       )
     }
   }

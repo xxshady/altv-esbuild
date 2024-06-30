@@ -203,6 +203,9 @@ export interface IPluginOptions {
   bugFixes?: boolean | IPluginFixesOption
 
   /**
+   * @deprecated Now this is a useless option because
+   * [it was added](https://github.com/altmp/altv-js-module/pull/319) into the alt:V JS module.
+   *
    * Enables built-in "altv-enums" module that exports enums from
    * alt-shared, alt-server, alt-client.
    *
