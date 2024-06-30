@@ -80,7 +80,7 @@ class SharedSetup {
       this.origAltOn("resourceStop", this.resourceStopEvent)
 
       if (options.enhancedAltLog) {
-        this.log.warn("enhancedAltLog is deprecated, because was integrated into alt:V JS module: https://github.com/altmp/altv-js-module/pull/170#issuecomment-1273613155")
+        this.log.warn("enhancedAltLog is deprecated, because was it integrated into alt:V JS module: https://github.com/altmp/altv-js-module/pull/170#issuecomment-1273613155")
         this.hookAltLogging()
       }
     }
