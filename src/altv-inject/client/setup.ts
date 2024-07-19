@@ -26,7 +26,7 @@ export class ClientSetup {
   private readonly clearPlayerMeta?: () => void
 
   private readonly onResourceStop = (): void => {
-    this.clearGame()
+    this.resetGame()
     sharedSetup.destroyBaseObjects()
     this.clearPlayerMeta?.()
   }
@@ -158,7 +158,7 @@ export class ClientSetup {
     })
   }
 
-  private clearGame(): void {
+  private resetGame(): void {
     const player = _alt.Player.local
     native.freezeEntityPosition(player, false)
     native.setEntityVisible(player, true, false)
@@ -176,6 +176,7 @@ export class ClientSetup {
     native.setFrontendActive(false) // force exit pause menu
     _alt.setCamFrozen(false)
     native.setBigmapActive(false, false)
+    native.setFollowPedCamViewMode(1)
   }
 
   private initPlayerMetaCleanup(): () => void {
