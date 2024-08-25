@@ -423,14 +423,25 @@ class SharedSetup {
   }
 
   public defineMetaSetter(proto: Record<symbol, unknown>, originalMethodKey: symbol, storeKey: symbol) {
-    return function(this: typeof proto, key: string, value: unknown): void {
-      if (arguments.length < 2)
-        throw new Error("2 arguments expected");
+    return function(this: typeof proto, ...args: unknown[]): void {
+      if (!(args.length === 2 || args.length === 1))
+        throw new Error("2 or 1 argument expected")
 
-      (this[originalMethodKey] as (key: string, value: unknown) => void)(key, value)
+      this[storeKey] ??= {}
 
-      this[storeKey] ??= {};
-      (this[storeKey] as Record<string, unknown>)[key] = value
+      // multiple meta as object
+      if (typeof args[0] === "object" && args[0] !== null)
+        Object.assign(this[storeKey] as Record<string, unknown>, args[0])
+      // or key, value
+      else {
+        if (args.length !== 2)
+          throw new Error("Expected 2 arguments")
+
+        const [key, value] = args as [string, unknown]
+        (this[storeKey] as Record<string, unknown>)[key] = value
+      }
+
+      (this[originalMethodKey] as (...args: unknown[]) => void)(...args)
     }
   }
 
