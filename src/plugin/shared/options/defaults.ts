@@ -31,6 +31,6 @@ export const OPTIONS_DEFAULTS = {
     playerPrototype: true,
   },
   altvEnums: false,
-  enhancedAltLog: true,
+  enhancedAltLog: false,
   altDefaultImport: false,
 } as const satisfies FilledPluginOptions
