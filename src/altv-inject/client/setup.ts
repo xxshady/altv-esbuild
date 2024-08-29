@@ -24,7 +24,7 @@ export class ClientSetup {
   private readonly origAltOnServer?: (event: string, handler: (...args: any[]) => void) => void
   private readonly log = new Logger("client")
   private readonly clearPlayerMeta?: () => void
-  private readonly baseObjectsCreateEmitted = new Set<alt.BaseObject>()
+  private readonly baseObjectsCreateEmitted = new WeakSet<alt.BaseObject>()
 
   private readonly onResourceStop = (): void => {
     this.resetGame()
