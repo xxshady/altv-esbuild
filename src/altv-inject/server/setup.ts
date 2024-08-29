@@ -173,6 +173,11 @@ export class ServerSetup {
         despawnPlayers = this.resetPlayers.bind(this, streamOutPos)
       }
 
+      if (dev.baseObjectCreateEventEmulation) {
+        if (!dev.playersReconnect)
+          throw new Error("altv-esbuild dev.baseObjectCreateEventEmulation requires dev.playersReconnect to be enabled")
+      }
+
       sharedSetup.onResourceStop(
         this.onResourceStop.bind(
           this,
@@ -341,7 +346,9 @@ export class ServerSetup {
 
             this.log.debug("waitForPlayerReadyEvent success player:", p.name, p.id)
 
-            sharedSetup.emitAltEvent<"server_baseObjectCreate">("baseObjectCreate", p)
+            if (this.options.dev.baseObjectCreateEventEmulation)
+              sharedSetup.emitAltEvent<"server_baseObjectCreate">("baseObjectCreate", p)
+
             sharedSetup.emitAltEvent<"server_playerConnect">("playerConnect", p)
 
             _alt.Player.all.filter(player => player !== p).forEach(player => {

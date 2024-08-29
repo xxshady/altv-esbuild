@@ -24,6 +24,7 @@ export const OPTIONS_DEFAULTS = {
     enhancedRestartCommand: false,
     serverStartedEvent: true,
     clientServerInstanceValidation: false,
+    baseObjectCreateEventEmulation: true,
   },
   bugFixes: {
     webViewFlickering: true,

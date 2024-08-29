@@ -161,6 +161,13 @@ export interface IPluginDevOption {
    * `false` by default.
    */
   clientServerInstanceValidation?: boolean
+
+  /**
+   * Enables baseObjectCreate event emulation for players. On server-side requires {@link playersReconnect}
+   *
+   * `true` by default if `dev` enabled.
+   */
+  baseObjectCreateEventEmulation?: boolean
 }
 
 export interface IPluginFixesOption {

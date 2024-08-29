@@ -24,6 +24,7 @@ export class ClientSetup {
   private readonly origAltOnServer?: (event: string, handler: (...args: any[]) => void) => void
   private readonly log = new Logger("client")
   private readonly clearPlayerMeta?: () => void
+  private readonly baseObjectsCreateEmitted = new Set<alt.BaseObject>()
 
   private readonly onResourceStop = (): void => {
     this.resetGame()
@@ -62,6 +63,9 @@ export class ClientSetup {
       this.initClientReady(options)
       this.clearPlayerMeta = this.initPlayerMetaCleanup()
 
+      if (dev.baseObjectCreateEventEmulation)
+        this.initBaseObjectCreateEvent()
+
       sharedSetup.onResourceStop(this.onResourceStop)
     }
   }
@@ -86,8 +90,8 @@ export class ClientSetup {
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this.origAltOnServer!(CLIENT_EVENTS.playerConnect, (player: alt.Player): void => {
+      this.log.debug("CLIENT_EVENTS.playerConnect", player.name, player.id)
       sharedSetup.setPlayerObjectPrototype(player)
-      sharedSetup.emitAltEvent<"client_baseObjectCreate">("baseObjectCreate", player)
     })
   }
 
@@ -199,5 +203,25 @@ export class ClientSetup {
           player.deleteMeta(key)
       }
     }
+  }
+
+  private initBaseObjectCreateEvent(): void {
+    _alt.Player.all.forEach(p => {
+      if (p === _alt.Player.local) return
+      this.emitBaseObjectCreateIfNotAlready(p)
+    })
+
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.origAltOnServer!(CLIENT_EVENTS.playerConnect, (player: alt.Player): void => {
+      this.log.debug("player connected, emitting baseObjectCreate", player.name, player.id)
+      this.emitBaseObjectCreateIfNotAlready(player)
+    })
+  }
+
+  private emitBaseObjectCreateIfNotAlready(player: alt.Player): void {
+    if (this.baseObjectsCreateEmitted.has(player)) return
+    this.baseObjectsCreateEmitted.add(player)
+
+    sharedSetup.emitAltEvent<"client_baseObjectCreate">("baseObjectCreate", player)
   }
 }
