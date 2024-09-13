@@ -61,12 +61,11 @@ esbuild.build({
         // if `DEV_MODE` is false it will also be automatically set to false too
         enhancedRestartCommand: true, 
       },
-      altvEnums: true,
     }),
   ],
   
   external: [
-    // none of the following is required, the plugin handles all alt:V modules automatically
+    // none of the following is required, this plugin handles all alt:V modules automatically
     // "alt-server",
     // "alt-client",
     // "alt-shared",
