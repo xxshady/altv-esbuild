@@ -689,10 +689,18 @@ export class ServerSetup {
   }
 
   private resolveRelativePathOfResourceControl(): string {
-    let path = _path.relative(this.getResourcesDir(), ___altvEsbuild_altvInject_pluginDistDir___)
+    const resourcesDir = this.normalizePath(this.getResourcesDir())
+
+    // eslint-disable-next-line camelcase
+    let pluginDistDir = ___altvEsbuild_altvInject_pluginDistDir___
+    if (process.platform === "linux" && !pluginDistDir.startsWith("/"))
+      pluginDistDir = "/" + pluginDistDir
+
+    this.log.debug("resolveRelativePathOfResourceControl", { resourcesDir, pluginDistDir })
+
+    let path = _path.relative(resourcesDir, pluginDistDir)
     path = _path.join(path, RESOURCE_CONTROL_ALTV_NAME)
-    path = path.replaceAll("\\", "/")
-    return path
+    return this.normalizePath(path)
   }
 
   private initResourceRestartedMeta(): void {
@@ -703,5 +711,9 @@ export class ServerSetup {
     this.log.debug("set resource restarted")
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     sharedSetup.origAltSetMeta!(RESOURCE_RESTARTED_META_KEY, true)
+  }
+
+  private normalizePath(path: string): string {
+    return path.replaceAll("\\", "/")
   }
 }
