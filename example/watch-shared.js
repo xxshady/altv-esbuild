@@ -17,9 +17,6 @@ export const watch = async ({
           enhancedRestartCommand: true,
         },
 
-        // see docs for more info about these options:
-        altvEnums: true,
-
         ...altvEsbuildOptions,
       })
     ],
