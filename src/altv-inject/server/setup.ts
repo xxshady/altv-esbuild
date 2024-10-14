@@ -31,6 +31,7 @@ let _net!: typeof net
 let _path!: typeof path
 let _fs!: typeof fs
 let _crypto!: typeof crypto
+let _process!: typeof process
 
 if (_alt.isServer) {
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
@@ -41,6 +42,8 @@ if (_alt.isServer) {
   _fs = await (async () => await import("fs"))()
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   _crypto = await (async () => await import("crypto"))()
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+  _process = await (async () => await import("process"))()
 }
 
 export class ServerSetup {
@@ -693,7 +696,7 @@ export class ServerSetup {
 
     // eslint-disable-next-line camelcase
     let pluginDistDir = ___altvEsbuild_altvInject_pluginDistDir___
-    if (process.platform === "linux" && !pluginDistDir.startsWith("/"))
+    if (_process.platform === "linux" && !pluginDistDir.startsWith("/"))
       pluginDistDir = "/" + pluginDistDir
 
     this.log.debug("resolveRelativePathOfResourceControl", { resourcesDir, pluginDistDir })
