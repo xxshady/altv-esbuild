@@ -12,5 +12,6 @@ ctxWrapper({
     "path",
     "fs",
     "crypto",
+    "process",
   ],
 })
