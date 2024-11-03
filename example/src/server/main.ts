@@ -21,4 +21,14 @@ alt.on('playerConnect', (player) => {
 })
 
 // try to change this line and save the file
-alt.log('it works?', 1)
+alt.log('it works?', 1, {
+  d: alt.Object
+})
+
+
+const v = new alt.Vehicle('sultan', 0, 0, 0, 0, 0, 0)
+alt.log({
+  v,
+  all: alt.Vehicle.all,
+})
+

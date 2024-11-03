@@ -507,20 +507,9 @@ export class ServerSetup {
 
       const BaseObjectClass = _alt[key]
       if (
-        this.isAltVirtualEntityGroupClass(BaseObjectClass) ||
-        !this.isBaseObjectClass(BaseObjectClass)
+        !this.isBaseObjectClass(BaseObjectClass) ||
+        this.isBaseObjectClassNeedsToBeSkipped(BaseObjectClass)
       ) continue
-
-      let isClassAbstract = false
-      try {
-        new BaseObjectClass()
-        // this shit works by altv js module bug
-        isClassAbstract = true
-      }
-      catch (e) {
-        if ((e as Error)?.message?.includes("abstract")) isClassAbstract = true
-      }
-      if (isClassAbstract) continue
 
       (_alt[key] as unknown) = sharedSetup.wrapBaseObjectChildClass(BaseObjectClass)
 
@@ -528,18 +517,27 @@ export class ServerSetup {
     }
   }
 
-  private isAltVirtualEntityGroupClass(value: unknown): value is new () => alt.Blip {
-    // eslint-disable-next-line @typescript-eslint/ban-types
-    return (value as Function).name === "VirtualEntityGroup"
+  private isBaseObjectClassNeedsToBeSkipped(value: Function): boolean {
+    const SKIP_CLASSES = [
+      "VirtualEntityGroup",
+      "WorldObject",
+      "Entity",
+      "Blip",
+      "Colshape",
+
+      // TODO: fix: alt.Vehicle.all returns undefined
+      "Vehicle",
+
+      // Player class is bugged, see function initPlayerPrototypeTempFix
+      "Player",
+    ]
+
+    return SKIP_CLASSES.includes((value as Function).name)
   }
 
   // eslint-disable-next-line @typescript-eslint/ban-types
   private isBaseObjectClass(value: unknown): value is BaseObjectClass {
-    return (
-      ((value as { prototype?: unknown }).prototype instanceof _alt.BaseObject) &&
-      // Player class is bugged, see function initPlayerPrototypeTempFix
-      value !== _alt.Player
-    )
+    return (value as { prototype?: unknown }).prototype instanceof _alt.BaseObject
   }
 
   private onBuildStart(mode: PluginMode): void {
