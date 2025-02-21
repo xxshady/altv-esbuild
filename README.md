@@ -1,3 +1,7 @@
+# This project is suspended
+
+Currently on hold due to unclear situation with alt:V.
+
 # altv-esbuild
 
 [![ingame demo](https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXJxejQ5dGE5cHE1ZzA2OWxqOXRiYmVmbGk2d20xZzg2cGRnZ3gzdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Qq64W7EXWNcppAd1fC/giphy.gif)](https://imgur.com/a/vWBZsoe)
